@@ -14,29 +14,35 @@ session_start();
 
 <body>
     <div class="signup-container">
-        <div class="form-container">
-            <h1>Sign Up for JUMPA</h1>
+        <div class="signup-form-container">
+            <div class="login-img">
+                <img src="assets/images/jumpa-logo-with-word.png" alt="Jumpa Logo" class="login-logo">
+            </div>
             <form action="php/signup_process.php" method="post">
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-2">
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                     <label for="username">Username</label>
                 </div>
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-2">
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                     <label for="password">Password</label>
                 </div>
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-2">
                     <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
                     <label for="confirmpassword">Confirm Password</label>
                 </div>
-                <button type="submit" class="btn btn-danger w-100">Sign Up</button>
-                <p class="text-center mt-3">Or sign up with:</p>
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-google btn-danger">Google</button>
-                    <button class="btn btn-facebook btn-primary">Facebook</button>
+                <button type="submit" class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5">Sign Up</button>
+                <p class="text-center mt-2">Or sign up with:</p>
+                <div class="external-signin-links">
+                    <div class="google-img">
+                        <img src="assets/images/1298745_google_brand_branding_logo_network_icon.svg" alt="google-image">
+                    </div>
+                    <div class="facebook-img">
+                        <img src="assets/images/5296499_fb_facebook_facebook logo_icon.svg" alt="facebook-image">
+                    </div>
                 </div>
-                <div class="mt-3 text-center">
-                    <a href="login.php">Already have an account? Log in</a>
+                <div class="mt-2 text-center">
+                    <a href="index.php">Already have an account? Log in</a>
                 </div>
             </form>
 
@@ -47,7 +53,7 @@ session_start();
             }
             ?>
         </div>
-        <div class="image-container"></div>
+        <div class="signup-image-container"></div>
     </div>
 </body>
 </html>

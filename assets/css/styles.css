@@ -201,40 +201,45 @@ footer .footer-container {
 }
 
 /* LOGIN */
-.login-container {
+.login-container, .signup-container {
     display: flex;
     height: 100vh;
+    margin: 0 auto;
+    overflow-y: hidden;
 }
-.form-container {
-    width: 50%;
-    padding: 50px;
+.login-form-container, .signup-form-container {
+    width: 60vw;
+    padding: 0 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.image-container {
-    width: 50%;
-    background: url('path/to/image.jpg') no-repeat center center;
-    background-size: cover;
-}
-.btn-google, .btn-facebook {
-    width: 48%;
 }
 
-/* SIGNUP */
-.signup-container {
+.login-img {
     display: flex;
-    height: 100vh;
-}
-.form-container {
-    width: 50%;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
-.image-container {
-    width: 50%;
-    background: url('path/to/image.jpg') no-repeat center center;
-    background-size: cover;
+
+.login-logo {
+    width: 10rem;
+    height: 10rem;
+}
+
+.login-image-container, .signup-image-container {
+    width: 40vw;
+    background: url('../images/undraw_access_account_re_8spm.svg') no-repeat center center;
+    background-size: contain;
+}
+
+.external-signin-links {
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.google-img, .facebook-img {
+    width: 2.5rem;
+    height: 2.5rem;
 }
