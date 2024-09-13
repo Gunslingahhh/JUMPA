@@ -18,7 +18,7 @@
                 <div class="login-img">
                     <img src="assets/images/jumpa-logo-with-word.png" alt="Jumpa Logo" class="login-logo">
                 </div>
-                <form action="php/signin_process.php" method="get" id="sign-in">
+                <form action="php/signin_process.php" method="POST" id="sign-in">
                     <div class="form-floating mb-2">
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                         <label for="username">Username</label>
@@ -47,6 +47,11 @@
                     echo "<div class='alert alert-danger mt-2'>" . $_SESSION['error'] . "</div>";
                     unset($_SESSION['error']);
                 }
+
+                if (isset($_SESSION['message'])) {
+                    echo "<div class='alert alert-success mt-2'>" . $_SESSION['message'] . "</div>";
+                    unset($_SESSION['message']); // Clear the error message
+                    }
                 ?>
             </div>
             <div class="login-image-container"></div>

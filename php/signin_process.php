@@ -25,11 +25,11 @@ if ($result->num_rows > 0) {
     $_SESSION['user_id'] = $user_id;
 
     // Redirect to the welcome page
-    header("Location: ../public/index.html");
+    header("Location: home.php");
     exit();
 } else {
     // Credentials are invalid, set an error message and redirect back to the login page
-    $_SESSION['error'] = 'Salah maklumat log masuk. Sila cuba lagi.';
+    $_SESSION['error'] = 'Incorrect username or password. Please try again.';
     header("Location: ../index.php");
     exit();
 }

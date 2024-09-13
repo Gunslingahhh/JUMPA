@@ -31,7 +31,7 @@ session_start();
                     <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
                     <label for="confirmpassword">Confirm Password</label>
                 </div>
-                <button type="submit" class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5">Sign Up</button>
+                <button type="submit" name="signup-submit" class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5">Sign Up</button>
                 <p class="text-center mt-2">Or sign up with:</p>
                 <div class="external-signin-links">
                     <div class="google-img">

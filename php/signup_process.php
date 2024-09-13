@@ -4,29 +4,42 @@
 
     include "connection.php";
 
-    if(isset($post['submit'])){
-        $username=$post['username'];
-        $password=$post['password'];
-
-        $stmt=$conn->prepare("INSERT INTO user(user_username, user_password) VALUES (?,?)");
-        if ($stmt === false) {
-            die("Error preparing statement: " . $conn->error);
+    if(isset($_POST['signup-submit'])){
+        $username=$_POST['username'];
+        $password=$_POST['password'];
+        
+        // Validate password confirmation
+        if ($_POST['password'] !== $_POST['confirmpassword']) {
+            $_SESSION['error'] = "Passwords do not match.";
+            header("Location: ../index.php");
+            exit();
         }
 
+        // Check if username already exists
+        $stmt = $conn->prepare("SELECT * FROM user WHERE user_username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $_SESSION['error'] = "Username already exists.";
+            header("Location: ../index.php");
+            exit();
+        }
+        // Insert user data into the database
+        $stmt = $conn->prepare("INSERT INTO user(user_username, user_password) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $password);
-
         if ($stmt->execute()) {
-            // Registration successful, redirect to login page
-            $_SESSION['message'] = 'Pengguna telah didaftar. Sila log masuk';
-            header("Location: ../public/index.html");
+            $_SESSION['message'] = "Registration successful!";
+            header("Location: ../index.php");
             exit();
         } else {
-            // Registration failed, show an error message
-            echo "Error: " . $stmt->error;
+            $_SESSION['error'] = "Error registering user: " . $stmt->error;
+            header("Location: ../index.php");
+            exit();
         }
-        // Close the statement
+
         $stmt->close();
-    }
-    // Close the database connection
-    $conn->close();
+}
+
+$conn->close();
 ?>
