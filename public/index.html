@@ -3,32 +3,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jumpa</title>
-    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <!-- <img src="../assets/images/jumpa-logo.png" alt="Jumpa Logo" class="jumpa-logo" /> -->
-            </div>
-
-            <div class="login-signup">
-                <div class="login">
-                    <p class="login-p">
-                        <a href="../index.php" class="login-link">Login</a>
-                    </p>
+    <header class="py-2 border-bottom">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-between nav-content mx-5 pt-2">
+                <!-- Logo -->
+                <div class="col-auto">
+                    <div class="logo">
+                        <img src="../assets/images/jumpa-logo.png" alt="Jumpa Logo" class="jumpa-logo" />
+                    </div>
                 </div>
-                <p class="login/signup"> / </p>
-                <div class="signup">
-                    <p class="signup-p">
-                        <a href="../signup.php" class="signup-link">Signup</a>
-                    </p>
+                
+                <div class="col-auto">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="login">
+                            <p class="login-p">
+                                <a href="../index.php" class="login-link">Login</a>
+                            </p>
+                        </div>
+                        <p class="login/signup"> / </p>
+                        <div class="signup">
+                            <p class="signup-p">
+                                <a href="../signup.php" class="signup-link">Signup</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Categories Navigation -->
+    <div class="categories-container mt-2 mb-3 px-3 py-1 border-bottom">
+        <div class="categories d-flex justify-content-center">
+            <a href="#" class="text-dark">Home Repair & Maintenance</a>
+            <a href="#" class="text-dark">Cleaning Services</a>
+            <a href="#" class="text-dark">Delivery & Errands</a>
+            <a href="#" class="text-dark">Landscaping & Gardening</a>
+            <a href="#" class="text-dark">Handyman Services</a>
+            <a href="#" class="text-dark">Moving & Packing</a>
+            <a href="#" class="text-dark">Furniture Assembly</a>
+            <a href="#" class="text-dark">Plumbing & Electrical</a>
+            <a href="#" class="text-dark">Painting & Decorating</a>
+            <a href="#" class="text-dark">Pet Care & Dog Walking</a>
+            <a href="#" class="text-dark">Event Planning & Staffing</a>
+            <a href="#" class="text-dark">Photography & Videography</a>
+            <a href="#" class="text-dark">House Sitting & Caretaking</a>
+            <a href="#" class="text-dark">Tutoring & Lessons</a>
+            <a href="#" class="text-dark">Fitness Training & Coaching</a>
+            <a href="#" class="text-dark">Hair & Beauty Services</a>
+            <a href="#" class="text-dark">Car Repair & Maintenance</a>
+            <a href="#" class="text-dark">IT Support & Tech Help</a>
+            <a href="#" class="text-dark">Graphic Design & Branding</a>
+            <a href="#" class="text-dark">Web & App Development</a>
+            <a href="#" class="text-dark">Content Writing & Copywriting</a>
+            <a href="#" class="text-dark">Social Media Management</a>
+            <a href="#" class="text-dark">Marketing & Sales Support</a>
+            <a href="#" class="text-dark">Virtual Assistance & Admin</a>
+            <a href="#" class="text-dark">Translation & Interpretation</a>
+            <a href="#" class="text-dark">Business Consulting</a>
+            <a href="#" class="text-dark">Real Estate Assistance</a>
+            <a href="#" class="text-dark">Event & Party Rentals</a>
+            <a href="#" class="text-dark">Interior Design & Home Staging</a>
+            <a href="#" class="text-dark">Childcare & Babysitting</a>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main>
@@ -133,5 +176,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="../assets/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
