@@ -22,15 +22,6 @@ if (!isset($_SESSION['username'])) {
     <?php
         include "topnav.php";
     ?>
-
-<<<<<<< HEAD
-    <div id="homepage_container" class="center">
-        <?php
-            echo "User ID: " . $_SESSION['user_id'] . "<br>";
-            echo "Username: " . $_SESSION['username'];
-        ?>
-    </div>
-=======
     <!-- Main Content -->
     <main>
         <!-- Main Banner -->
@@ -139,6 +130,6 @@ if (!isset($_SESSION['username'])) {
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
->>>>>>> f6a784e08425531f436c63a378947813c8146ddf
+
 </body>
 </html>
