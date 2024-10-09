@@ -27,13 +27,8 @@ if (!isset($_SESSION['username'])) {
     <div id="homepage_container" class="center">
         <?php
             echo "User ID: " . $_SESSION['user_id'] . "<br>";
-            echo "Welcome back, " . $_SESSION['username'];
+            echo "Username: " . $_SESSION['username'];
         ?>
-        <br>
-        <button>Create Post</button>
-        <button>Messages</button>
-        <button>Job Board</button>
-        <button>Payments</button>
     </div>
 =======
     <!-- Main Content -->
