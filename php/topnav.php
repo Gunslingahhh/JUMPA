@@ -17,9 +17,11 @@
                 <div class="row align-items-center justify-content-evenly nav-content mx-5 py-2">
                     <!-- Logo -->
                     <div class="col-auto">
-                        <div class="logo">
-                            <img src="../assets/images/jumpa-logo.png" alt="Jumpa Logo" class="jumpa-logo" />
-                        </div>
+                        <a href="home.php">
+                            <div class="logo">
+                                <img src="../assets/images/jumpa-logo.png" alt="Jumpa Logo" class="jumpa-logo" />
+                            </div>
+                        </a>
                     </div>
 
                     <!-- Horizontal Navigation -->
