@@ -68,9 +68,6 @@ if (!isset($_SESSION['username'])) {
 
         <main>
             <section class="createprofilemain">
-                <h1 class="createprofiletitle">
-                    Post a Task
-                </h1>
                 <?php
                         if (isset($_SESSION['message'])) {
                             echo "<div class='alert alert-primary mt-3'>" . $_SESSION['message'] . "</div>";
@@ -79,6 +76,9 @@ if (!isset($_SESSION['username'])) {
                     ?>
                 <div class="profile-form mt-3 mx-auto">
                     <form id="profileForm" action="createpost_process.php" method="post">
+                        <h1 class="createprofiletitle">
+                            Post a Task
+                        </h1>
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Task title</label>
                             <input type="text" class="form-control" name="tasktitle" id="tasktitle" required>
