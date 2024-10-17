@@ -27,7 +27,7 @@
                     <!-- Horizontal Navigation -->
                     <div class="col-md col-sm-12 d-flex align-items-center justify-content-start sub-navbar">
                         <a href="employeedashboard.php">Dashboard</a>
-                        <a href="#">Create Post</a>
+                        <a href="createpost.php">Create Post</a>
                         <div class="dropdown d-inline">
                             <a href="#" class="dropdown-toggle no-arrow" id="messagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Messages
