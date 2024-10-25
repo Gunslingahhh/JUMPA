@@ -66,7 +66,7 @@ if (!isset($_SESSION['username'])) {
             </div>
         </header>
 
-        <main>
+        <main id="profilemainid">
             <section class="createprofilemain">
                 <?php
                         if (isset($_SESSION['message'])) {

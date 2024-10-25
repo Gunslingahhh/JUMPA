@@ -66,7 +66,7 @@ if (!isset($_SESSION['username'])) {
             </div>
         </header>
 
-        <main>
+        <main id="profilemainid">
             <section class="createprofilemain">
                 <h1 class="createprofiletitle">
                     Create Your Employee Profile
