@@ -102,7 +102,14 @@ if (!isset($_SESSION['username'])) {
                         foreach ($bids as $bidder) {
                             echo "
                             <li class='list-group-item d-flex align-items-center'>
-                                <img src='{$bidder['img']}' class='rounded-circle me-3' alt='{$bidder['name']}' style='width: 60px; height: 60px; object-fit: cover;'>
+                                <form action='bidder_profile.php' method='GET'>
+                                    <input type='hidden' name='name' value='{$bidder['name']}'>
+                                    <input type='hidden' name='bid' value='{$bidder['bid']}'>
+                                    <input type='hidden' name='img' value='{$bidder['img']}'>
+                                    <button type='submit' class='btn btn-link p-0'>
+                                        <img src='{$bidder['img']}' class='rounded-circle me-3' alt='{$bidder['name']}' style='width: 60px; height: 60px; object-fit: cover;'>
+                                    </button>
+                                </form>
                                 <div class='flex-grow-1'>
                                     <h5 class='mb-1'>{$bidder['name']}</h5>
                                     <p class='mb-0'>Bid for RM{$bidder['bid']}</p>
