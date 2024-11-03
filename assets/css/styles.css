@@ -486,6 +486,10 @@ footer .footer-container {
     margin: 10px;
 }
 
+.gig-card:hover{
+    cursor: pointer;
+}
+
 .gig-img {
     width: 20px;
     height: 20px;
