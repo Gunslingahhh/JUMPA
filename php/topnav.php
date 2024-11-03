@@ -37,7 +37,7 @@
                                 <li><a class="dropdown-item" href="#">Notifications</a></li>
                             </ul>
                         </div>
-                        <a href="jobboard.php">Job Board</a>
+                        <a href="old_jobboard.php">Job Board</a>
                         <!-- Payments Dropdown -->
                         <div class="dropdown d-inline">
                             <a href="#" class="dropdown-toggle no-arrow" id="paymentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

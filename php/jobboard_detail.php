@@ -27,7 +27,7 @@ include "connection.php";
     <?php
         include "topnav.php";
 
-        $id = $_GET['id'];
+        $id = $_GET['task_id'];
 
         $detail_check = $conn->prepare("SELECT * FROM task WHERE task_id = $id");
         $detail_check->execute();

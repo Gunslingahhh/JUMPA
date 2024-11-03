@@ -37,12 +37,12 @@ include "connection.php";
                     $detail_result = $detail_check->get_result();
 
                     while ($user_row = $detail_result->fetch_assoc()) {
-                        echo "<tr onclick='window.location.href = \"jobboard_detail.php?id=" . $user_row['task_id'] . "\";'>";
-                        echo "<td>Title: " . $user_row['task_title'] . "</td><br>";
-                        echo "<td>Description: " . $user_row['task_description'] . "</td><br>";
-                        echo "<td>Date: " . $user_row['task_date'] . "</td><br>";
-                        echo "<td>Location: " . $user_row['task_location'] . "</td>";
-                        echo "</tr></a>";
+                        echo "<div onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\";' class='col-md-4 gig-card'>";
+                        echo "<p>Title: " . $user_row['task_title'] . "</p><br>";
+                        echo "<p>Description: " . $user_row['task_description'] . "</p><br>";
+                        echo "<p>Date: " . $user_row['task_date'] . "</p><br>";
+                        echo "<p>Location: " . $user_row['task_location'] . "</p>";
+                        echo "</div>";
                     }
                 ?>
             </tbody>
