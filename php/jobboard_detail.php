@@ -53,8 +53,7 @@ include "connection.php";
     <!-- Main Content -->
     <main>
     <div class="employee-dashboard">
-        <table class="table">
-            <tbody>
+        <div class="table gig-card">
                 <p><b>Title: </b><?php echo($tasktitle) ?></p>
                 <p><b>Description: </b><?php echo($taskdescription) ?></p>
                 <p><b>Date: </b><?php echo($taskdate) ?></p>
@@ -62,15 +61,14 @@ include "connection.php";
                 <p><b>Location: </b><?php echo($tasklocation) ?></p>
                 <p><b>Tools Required: </b><?php echo($toolsrequired) ?></p>
                 <p><b>Pax: </b><?php echo($pax) ?></p>
-                <p><b>Price: </b><?php echo($price) ?></p>
+                <p><b>Price: RM</b><?php echo($price) ?></p>
                 <p><b>Dress code: </b><?php echo($dresscode) ?></p>
                 <p><b>Gender: </b><?php echo($gender) ?></p>
                 <p><b>Nationality: </b><?php echo($nationality) ?></p>
                 <p><b>Age range: </b><?php echo($agerange) ?></p>
                 <p><b>Muslim friendly?: </b><?php echo($muslimfriendly) ?></p>
                 <p><b>User id: </b><?php echo($userid) ?></p>
-            </tbody>
-        </table>
+        </div>
     </div>
     </main>
 
