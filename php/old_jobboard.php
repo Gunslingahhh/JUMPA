@@ -29,6 +29,7 @@ include "connection.php";
     <!-- Main Content -->
     <main>
     <div class="employee-dashboard">
+        <h4 class="mb-4 d-flex justify-content-center">Job Board</h4>
         <table class="table">
             <tbody>
                 <?php
@@ -37,10 +38,10 @@ include "connection.php";
                     $detail_result = $detail_check->get_result();
 
                     while ($user_row = $detail_result->fetch_assoc()) {
-                        echo "<div onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\";' class='col-md-4 gig-card'>";
-                        echo "<p>Title: " . $user_row['task_title'] . "</p><br>";
-                        echo "<p>Description: " . $user_row['task_description'] . "</p><br>";
-                        echo "<p>Date: " . $user_row['task_date'] . "</p><br>";
+                        echo "<div onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\";' class='col-md-6 mx-auto gig-card'>";
+                        echo "<p>Title: " . $user_row['task_title'] . "</p>";
+                        echo "<p>Description: " . $user_row['task_description'] . "</p>";
+                        echo "<p>Date: " . $user_row['task_date'] . "</p>";
                         echo "<p>Location: " . $user_row['task_location'] . "</p>";
                         echo "</div>";
                     }

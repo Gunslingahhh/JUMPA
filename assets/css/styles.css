@@ -430,7 +430,6 @@ footer .footer-container {
 /* Employee Dashboard */
 .employee-dashboard {
     background-color: #f0f0f0;
-    /* margin: 0 3rem; */
     padding: 3rem;
 }
 
@@ -528,4 +527,11 @@ footer .footer-container {
 .whatsapp-icon {
     color: green;
     font-size: 3rem;
+}
+
+table tbody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
