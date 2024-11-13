@@ -81,12 +81,12 @@ if (!isset($_SESSION['username'])) {
 
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="fullname" required>
+                            <input type="text" class="form-control" id="fullname" name="fullname" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-control" id="gender" required>
+                            <select class="form-control" id="gender" name="gender" required>
                                 <option value="" disabled selected>Select your gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -96,27 +96,27 @@ if (!isset($_SESSION['username'])) {
 
                         <div class="mb-3">
                             <label for="age" class="form-label">Age</label>
-                            <input type="number" class="form-control" id="age" min="0" required>
+                            <input type="number" class="form-control" name="age" id="age" min="0" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="contact" class="form-label">Contact Number</label>
-                            <input type="tel" class="form-control" id="contact" pattern="[0-9]{10}" required>
+                            <input type="tel" class="form-control" id="contact" name="contact" pattern="[0-9]{10}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="race" class="form-label">Race</label>
-                            <input type="text" class="form-control" id="race" required>
+                            <input type="text" class="form-control" id="race" name="race" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="religion" class="form-label">Religion</label>
-                            <input type="text" class="form-control" id="religion" required>
+                            <input type="text" class="form-control" id="religion" name="religion" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="language" class="form-label">Language</label>
-                            <input type="text" class="form-control" id="language" required>
+                            <input type="text" class="form-control" id="language" name="language" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

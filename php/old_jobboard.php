@@ -38,10 +38,10 @@ include "connection.php";
                     $detail_result = $detail_check->get_result();
 
                     while ($user_row = $detail_result->fetch_assoc()) {
-                        echo "<div onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\";' class='col-md-6 mx-auto gig-card'>";
-                        echo "<p>Title: " . $user_row['task_title'] . "</p>";
-                        echo "<p>Description: " . $user_row['task_description'] . "</p>";
-                        echo "<p>Date: " . $user_row['task_date'] . "</p>";
+                        echo "<div onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\";' class='col-md-4 gig-card'>";
+                        echo "<h3 class='recommended-gig-title'>Title: " . $user_row['task_title'] . "</h3><br>";
+                        echo "<p>Description: " . $user_row['task_description'] . "</p><br>";
+                        echo "<p>Date: " . $user_row['task_date'] . "</p><br>";
                         echo "<p>Location: " . $user_row['task_location'] . "</p>";
                         echo "</div>";
                     }
