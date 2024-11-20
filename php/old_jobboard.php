@@ -29,6 +29,7 @@ include "connection.php";
     <!-- Main Content -->
     <main>
     <div class="employee-dashboard">
+        <h4 class="mb-4 d-flex justify-content-center">Job Board</h4>
         <table class="table">
             <tbody>
                 <?php
