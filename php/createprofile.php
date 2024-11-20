@@ -75,8 +75,14 @@ if (!isset($_SESSION['username'])) {
                     <form id="profileForm" action="createprofile_process.php" method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
                             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">IC / Passport Number</label>
+                            <input type="text" class="form-control" id="icnumber" name="icnumber" aria-describedby="emailHelp" required>
+                            <div id="icHelp" class="form-text">We'll never share your IC / Passport number with anyone else.</div>
                         </div>
 
                         <div class="mb-3">

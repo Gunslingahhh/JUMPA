@@ -17,6 +17,8 @@
         $nationality = $_POST['nationality'];
         $agerange = $_POST['agerange'];
         $muslimfriendly = $_POST['muslimfriendly'];
+        $foodProvision = $_POST['foodprovision'];
+        $transportProvision = $_POST['transportprovision'];
         $userid = $_SESSION['user_id'];
 
         $stmt = $conn->prepare("INSERT INTO task(
@@ -33,9 +35,11 @@
             task_nationality, 
             task_ageRange, 
             task_muslimFriendly, 
-            user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            task_foodProvision, 
+            task_transportProvision, 
+            user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        $stmt->bind_param("ssssssiisssssi", 
+        $stmt->bind_param("ssssssiisssssiii", 
                             $tasktitle, 
                             $taskdescription, 
                             $taskdate, 
@@ -48,7 +52,9 @@
                             $gender, 
                             $nationality, 
                             $agerange, 
-                            $muslimfriendly, 
+                            $muslimfriendly,
+                            $foodProvision,
+                            $transportProvision,
                             $userid);
 
         if ($stmt->execute()) {

@@ -144,12 +144,36 @@ if (!isset($_SESSION['username'])) {
 
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Muslim friendly?</label>
-                            <input type="radio" class="form-check-input" name="muslimfriendly" value="Yes" id="muslimfriendly1" required>
+                            <input type="radio" class="form-check-input" name="muslimfriendly" value="1" id="muslimfriendly1" required>
                             <label class="form-check-label" for="muslimfriendly1">
                                 Yes
                             </label>
-                            <input type="radio" class="form-check-input" name="muslimfriendly" value="No" id="muslimfriendly2" required>
+                            <input type="radio" class="form-check-input" name="muslimfriendly" value="0" id="muslimfriendly2" required>
                             <label class="form-check-label" for="muslimfriendly2">
+                                No
+                            </label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Food Provided?</label>
+                            <input type="radio" class="form-check-input" name="foodprovision" value="1" id="foodprovision1" required>
+                            <label class="form-check-label" for="foodprovision1">
+                                Yes
+                            </label>
+                            <input type="radio" class="form-check-input" name="foodprovision" value="0" id="foodprovision2" required>
+                            <label class="form-check-label" for="foodprovision2">
+                                No
+                            </label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Transport Provided?</label>
+                            <input type="radio" class="form-check-input" name="transportprovision" value="1" id="transportprovision1" required>
+                            <label class="form-check-label" for="transportprovision1">
+                                Yes
+                            </label>
+                            <input type="radio" class="form-check-input" name="transportprovision" value="0" id="transportprovision2" required>
+                            <label class="form-check-label" for="transportprovision2">
                                 No
                             </label>
                         </div>

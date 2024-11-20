@@ -8,7 +8,6 @@
         $salt = bin2hex(random_bytes(16));
         $password = hash('sha256',$_POST['password'] . $salt);
         $confirmpassword = hash('sha256',$_POST['confirmpassword'] . $salt);
-        $icnumber = hash('sha256',$_POST['icnumber']);
         
         // Validate password confirmation
         if ($password !== $confirmpassword) {
@@ -27,18 +26,6 @@
             header("Location: ../index.php");
             exit();
         }
-
-        // Check if IC Number already exists
-        $icCheckerStmt = $conn->prepare("SELECT user_ic FROM user WHERE user_ic = ?");
-        $icCheckerStmt->bind_param("s", $icnumber);
-        $icCheckerStmt->execute();
-        $icCheckerResult = $icCheckerStmt->get_result();
-        if ($icCheckerResult->num_rows > 0){
-            $_SESSION['error'] = "This IC number is already registered.";
-            header("Location: ../index.php");
-            exit();
-        }
-
 
         // Insert user data into the database
         $stmt = $conn->prepare("INSERT INTO user(user_username, user_password, user_salt, user_ic) VALUES (?, ?, ?, ?)");

@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 include "connection.php";
 
-
+$userName=$_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +47,8 @@ include "connection.php";
             $nationality = $user_row['task_nationality'];
             $agerange = $user_row['task_ageRange'];
             $muslimfriendly = $user_row['task_muslimFriendly'];
+            $foodProvision = $user_row['task_foodProvision'];
+            $transportProvision = $user_row['task_transportProvision'];
             $userid = $user_row['user_id'];
         }
     ?>
@@ -67,7 +69,27 @@ include "connection.php";
                 <p><b>Nationality: </b><?php echo($nationality) ?></p>
                 <p><b>Age range: </b><?php echo($agerange) ?></p>
                 <p><b>Muslim friendly?: </b><?php echo($muslimfriendly) ?></p>
+                <p><b>Food provided?: </b><?php echo($foodProvision) ?></p>
+                <p><b>Transport provided?: </b><?php echo($transportProvision) ?></p>
                 <p><b>User id: </b><?php echo($userid) ?></p>
+                <?php
+                    $sql = $conn->prepare("SELECT user_id FROM user WHERE user_username = ?");
+                    $sql->bind_param("s", $userName);
+                    $sql->execute();
+
+                    $sql_result=$sql->get_result();
+
+                    if ($sql_result->num_rows>0){
+                        $session_row=$sql_result->fetch_assoc();
+                        $session_id=$session_row['user_id'];
+
+                        if ($session_id != $userid){
+                            echo "<div class='btn btn-primary'>Bid</div>";
+                        }
+                    }else{
+                        echo "Nothing";
+                    }
+                ?>
         </div>
     </div>
     </main>
