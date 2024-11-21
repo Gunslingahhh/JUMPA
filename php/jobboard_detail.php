@@ -73,20 +73,10 @@ $userName=$_SESSION['username'];
                 <p><b>Transport provided?: </b><?php echo($transportProvision) ?></p>
                 <p><b>User id: </b><?php echo($userid) ?></p>
                 <?php
-                    $sql = $conn->prepare("SELECT user_id FROM user WHERE user_username = ?");
-                    $sql->bind_param("s", $userName);
-                    $sql->execute();
-
-                    $sql_result=$sql->get_result();
-
-                    if ($sql_result->num_rows>0){
-                        $session_row=$sql_result->fetch_assoc();
-                        $session_id=$session_row['user_id'];
-
-                        if ($session_id != $userid){
-                            echo "<div class='btn btn-primary'>Bid</div>";
-                        }
-                    }else{
+                    if ($_SESSION['user_id'] != $userid){
+                        echo "<div class='btn btn-primary'>Bid</div>";
+                    }
+                    else{
                         echo "Nothing";
                     }
                 ?>
