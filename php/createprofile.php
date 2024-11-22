@@ -23,11 +23,9 @@
                 <div class="row align-items-center justify-content-evenly nav-content mx-5 py-2">
                     <!-- Logo -->
                     <div class="col-auto">
-                        <a href="home.php">
                             <div class="logo">
                                 <img src="../assets/images/jumpa-logo.png" alt="Jumpa Logo" class="jumpa-logo" />
                             </div>
-                        </a>
                     </div>
                     
                     <!-- Search Bar -->
@@ -53,9 +51,6 @@
                                     <?php echo $_SESSION['username'];?>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item logout-link text-dark dropdown-profile" href="home.php">Home</a><hr class="dropdown-divider">
-                                        <li><a class="dropdown-item username-nav text-dark dropdown-profile" href="createprofile.php">Profile</a></li>
-                                        <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item logout-link text-dark dropdown-profile" href="logout.php">Log out</a></li>
                                     </ul>
                                 </div>
@@ -69,7 +64,7 @@
         <main id="profilemainid">
             <section class="createprofilemain">
                 <h1 class="createprofiletitle">
-                    Create Your Employee Profile
+                    Complete Your Profile
                 </h1>
                 <div class="profile-form mt-3 mx-auto">
                     <form id="profileForm" action="createprofile_process.php" method="post">

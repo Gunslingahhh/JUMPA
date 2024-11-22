@@ -19,6 +19,7 @@ if ($result->num_rows > 0) {
     // Credentials are valid, fetch user_id and set session variables
     $row = $result->fetch_assoc();
     $user_id = $row['user_id'];
+    $user_ic = $row['user_ic'];
     $salt = $row['user_salt'];
     $password = hash('sha256',$_POST['password'] . $salt);
 
@@ -32,9 +33,16 @@ if ($result->num_rows > 0) {
         $_SESSION['username'] = $username;
         $_SESSION['user_id'] = $user_id;
 
-        // Redirect to the welcome page
-        header("Location: home.php");
-        exit();
+        if ($user_ic == ""){
+            // Redirect to the welcome page
+            header("Location: createprofile.php");
+            exit();
+        }
+        else{
+            header("Location: home.php");
+            exit();
+        }
+        
     }
     else{
         $_SESSION['error'] = 'Incorrect username or password. Please try again.';
