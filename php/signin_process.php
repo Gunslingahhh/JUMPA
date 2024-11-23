@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
 
         if ($user_ic == ""){
             // Redirect to the welcome page
-            header("Location: createprofile.php");
+            header("Location: completeprofile.php");
             exit();
         }
         else{

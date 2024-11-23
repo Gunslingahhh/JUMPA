@@ -21,7 +21,7 @@
         $icCheckerResult = $icCheckerStmt->get_result();
         if ($icCheckerResult->num_rows > 0){
             $_SESSION['message'] = "This IC number is already registered.";
-            header("Location: createprofile.php");
+            header("Location: completeprofile.php");
         }
         else{
             $sql = "UPDATE user
@@ -51,6 +51,6 @@
     }
     else{
         $_SESSION['message'] = "Session ID not declared.";
-        header("Location: createprofile.php");
+        header("Location: completeprofile.php");
     }
 ?>

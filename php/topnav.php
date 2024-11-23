@@ -76,7 +76,7 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item logout-link text-dark dropdown-profile" href="home.php">Home</a><hr class="dropdown-divider">
-                                        <li><a class="dropdown-item username-nav text-dark dropdown-profile" href="createprofile.php">Profile</a></li>
+                                        <li><a class="dropdown-item username-nav text-dark dropdown-profile" href="editprofile.php">Profile</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item logout-link text-dark dropdown-profile" href="logout.php">Log out</a></li>
                                     </ul>

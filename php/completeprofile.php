@@ -67,7 +67,7 @@
                     Complete Your Profile
                 </h1>
                 <div class="profile-form mt-3 mx-auto">
-                    <form id="profileForm" action="createprofile_process.php" method="post">
+                    <form id="profileForm" action="completeprofile_process.php" method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
