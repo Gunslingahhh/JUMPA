@@ -535,3 +535,12 @@ table tbody {
     align-items: center;
     justify-content: center;
 }
+
+#profile-picture{
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid black;
+}
