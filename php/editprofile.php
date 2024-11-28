@@ -91,19 +91,19 @@
             <section class="createprofilemain">
                 <h1 class="createprofiletitle">Edit Your Profile</h1>
                 <img id="profile-picture" src="<?php echo $user_photo; ?>"><br>
-                <p>Username: <?php echo $user_username; ?></p>
-                <p>Email: <?php echo $user_email; ?></p>
-                <p>Fullname: <?php echo $user_fullname; ?></p>
-                <p>Gender: <?php echo $user_gender; ?></p>
-                <p>Age: <?php echo $user_age; ?></p>
-                <p>ContactNumber: <?php echo $user_contactNumber; ?></p>
-                <p>Photo: <?php echo $user_photo; ?></p>
-                <p>Qualification: <?php echo $user_qualification; ?></p>
-                <p>Certificate: <?php echo $user_certificate; ?></p>
-                <p>Race: <?php echo $user_race; ?></p>
-                <p>Religion: <?php echo $user_religion; ?></p>
-                <p>Language: <?php echo $user_language; ?></p>
-                <p>WorkingExperienceWithJumpa: <?php echo $user_workingExperienceWithJumpa; ?></p>
+                <p>Username: <input type="text" class="form-control" value="<?php echo $user_username; ?>" disabled></p>
+                <p>Email: <input type="text" class="form-control" value="<?php echo $user_email; ?>" disabled></p>
+                <p>Fullname: <input type="text" class="form-control" value="<?php echo $user_fullname; ?>" disabled></p>
+                <p>Gender: <input type="text" class="form-control" value="<?php echo $user_gender; ?>" disabled></p>
+                <p>Age: <input type="text" class="form-control" value="<?php echo $user_age; ?>" disabled></p>
+                <p>ContactNumber: <input type="text" class="form-control" value="<?php echo $user_contactNumber; ?>" disabled></p>
+                <p>Photo: <input type="text" class="form-control" value="<?php echo $user_photo; ?>" disabled></p>
+                <p>Qualification: <input type="text" class="form-control" value="<?php echo $user_qualification; ?>" disabled></p>
+                <p>Certificate: <input type="text" class="form-control" value="<?php echo $user_certificate; ?>" disabled></p>
+                <p>Race: <input type="text" class="form-control" value="<?php echo $user_race; ?>" disabled></p>
+                <p>Religion: <input type="text" class="form-control" value="<?php echo $user_religion; ?>" disabled></p>
+                <p>Language: <input type="text" class="form-control" value="<?php echo $user_language; ?>" disabled></p>
+                <p>WorkingExperienceWithJumpa: <input type="text" class="form-control" value="<?php echo $user_workingExperienceWithJumpa; ?>" disabled></p>
             </section>
         </main>
 
