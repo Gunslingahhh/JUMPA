@@ -11,13 +11,25 @@
     include "connection.php";
 
     $user_id=$_SESSION['user_id'];
-    $sql = "SELECT user_photo FROM user WHERE user_id = $user_id";
+    $sql = "SELECT user_username, user_email, user_fullname, user_gender, user_age, user_contactNumber, user_photo, user_qualification, user_certificate, user_race, user_religion, user_language, user_workingExperienceWithJumpa FROM user WHERE user_id = $user_id";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
+    $user_username = $row['user_username'];
+    $user_email = $row['user_email'];
+    $user_fullname = $row['user_fullname'];
+    $user_gender = $row['user_gender'];
+    $user_age = $row['user_age'];
+    $user_contactNumber = $row['user_contactNumber'];
     $user_photo = $row['user_photo'];
+    $user_qualification = $row['user_qualification'];
+    $user_certificate = $row['user_certificate'];
+    $user_race = $row['user_race'];
+    $user_religion = $row['user_religion'];
+    $user_language = $row['user_language'];
+    $user_workingExperienceWithJumpa = $row['user_workingExperienceWithJumpa'];
 ?>
 
 <html>
@@ -78,8 +90,20 @@
         <main id="profilemainid">
             <section class="createprofilemain">
                 <h1 class="createprofiletitle">Edit Your Profile</h1>
-                <img id="profile-picture" src="<?php echo $user_photo; ?>">
-                <?php echo $user_photo; ?>
+                <img id="profile-picture" src="<?php echo $user_photo; ?>"><br>
+                <p>Username: <?php echo $user_username; ?></p>
+                <p>Email: <?php echo $user_email; ?></p>
+                <p>Fullname: <?php echo $user_fullname; ?></p>
+                <p>Gender: <?php echo $user_gender; ?></p>
+                <p>Age: <?php echo $user_age; ?></p>
+                <p>ContactNumber: <?php echo $user_contactNumber; ?></p>
+                <p>Photo: <?php echo $user_photo; ?></p>
+                <p>Qualification: <?php echo $user_qualification; ?></p>
+                <p>Certificate: <?php echo $user_certificate; ?></p>
+                <p>Race: <?php echo $user_race; ?></p>
+                <p>Religion: <?php echo $user_religion; ?></p>
+                <p>Language: <?php echo $user_language; ?></p>
+                <p>WorkingExperienceWithJumpa: <?php echo $user_workingExperienceWithJumpa; ?></p>
             </section>
         </main>
 
