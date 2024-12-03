@@ -90,20 +90,34 @@
         <main id="profilemainid">
             <section class="createprofilemain">
                 <h1 class="createprofiletitle">Edit Your Profile</h1>
-                <img id="profile-picture" src="<?php echo $user_photo; ?>"><br>
-                <p>Username: <input type="text" class="form-control" value="<?php echo $user_username; ?>" disabled></p>
-                <p>Email: <input type="text" class="form-control" value="<?php echo $user_email; ?>" disabled></p>
-                <p>Fullname: <input type="text" class="form-control" value="<?php echo $user_fullname; ?>" disabled></p>
-                <p>Gender: <input type="text" class="form-control" value="<?php echo $user_gender; ?>" disabled></p>
-                <p>Age: <input type="text" class="form-control" value="<?php echo $user_age; ?>" disabled></p>
-                <p>ContactNumber: <input type="text" class="form-control" value="<?php echo $user_contactNumber; ?>" disabled></p>
-                <p>Photo: <input type="text" class="form-control" value="<?php echo $user_photo; ?>" disabled></p>
-                <p>Qualification: <input type="text" class="form-control" value="<?php echo $user_qualification; ?>" disabled></p>
-                <p>Certificate: <input type="text" class="form-control" value="<?php echo $user_certificate; ?>" disabled></p>
-                <p>Race: <input type="text" class="form-control" value="<?php echo $user_race; ?>" disabled></p>
-                <p>Religion: <input type="text" class="form-control" value="<?php echo $user_religion; ?>" disabled></p>
-                <p>Language: <input type="text" class="form-control" value="<?php echo $user_language; ?>" disabled></p>
-                <p>WorkingExperienceWithJumpa: <input type="text" class="form-control" value="<?php echo $user_workingExperienceWithJumpa; ?>" disabled></p>
+                <?php
+                    if (isset($_SESSION['message'])) {
+                        echo "<div class='alert alert-primary mt-3'>" . $_SESSION['message'] . "</div>";
+                        unset($_SESSION['message']);
+                    }
+                ?>
+                <form action="userphoto_process.php" method="POST" enctype="multipart/form-data">    
+                    <img id="user-photo" src="<?php echo $user_photo; ?>">
+                    <input type="file" id="user-photo-filename" name="user-photo-filename" accept="image/jpeg, image/png, image/jpg" style="display: none;">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+                <br>
+                <form action="editprofile.php">
+                    <p>Username: <input type="text" class="form-control" value="<?php echo $user_username; ?>" disabled></p>
+                    <p>Email: <input type="text" class="form-control" value="<?php echo $user_email; ?>" disabled></p>
+                    <p>Fullname: <input type="text" class="form-control" value="<?php echo $user_fullname; ?>" disabled></p>
+                    <p>Gender: <input type="text" class="form-control" value="<?php echo $user_gender; ?>" disabled></p>
+                    <p>Age: <input type="text" class="form-control" value="<?php echo $user_age; ?>" disabled></p>
+                    <p>ContactNumber: <input type="text" class="form-control" value="<?php echo $user_contactNumber; ?>" disabled></p>
+                    <p>Photo: <input type="text" class="form-control" value="<?php echo $user_photo; ?>" disabled></p>
+                    <p>Qualification: <input type="text" class="form-control" value="<?php echo $user_qualification; ?>"></p>
+                    <p>Certificate: <input type="text" class="form-control" value="<?php echo $user_certificate; ?>"></p>
+                    <p>Race: <input type="text" class="form-control" value="<?php echo $user_race; ?>" disabled></p>
+                    <p>Religion: <input type="text" class="form-control" value="<?php echo $user_religion; ?>" disabled></p>
+                    <p>Language: <input type="text" class="form-control" value="<?php echo $user_language; ?>"></p>
+                    <p>WorkingExperienceWithJumpa: <input type="text" class="form-control" value="<?php echo $user_workingExperienceWithJumpa; ?>"></p>
+                    <button type="submit" class="btn btn-primary">Submit</button><br>
+                </form>
             </section>
         </main>
 
