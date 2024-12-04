@@ -102,20 +102,20 @@
                     <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
                 <br>
-                <form action="editprofile.php">
-                    <p>Username: <input type="text" class="form-control" value="<?php echo $user_username; ?>" disabled></p>
-                    <p>Email: <input type="text" class="form-control" value="<?php echo $user_email; ?>" disabled></p>
-                    <p>Fullname: <input type="text" class="form-control" value="<?php echo $user_fullname; ?>" disabled></p>
-                    <p>Gender: <input type="text" class="form-control" value="<?php echo $user_gender; ?>" disabled></p>
-                    <p>Age: <input type="text" class="form-control" value="<?php echo $user_age; ?>" disabled></p>
-                    <p>ContactNumber: <input type="text" class="form-control" value="<?php echo $user_contactNumber; ?>" disabled></p>
-                    <p>Photo: <input type="text" class="form-control" value="<?php echo $user_photo; ?>" disabled></p>
-                    <p>Qualification: <input type="text" class="form-control" value="<?php echo $user_qualification; ?>"></p>
-                    <p>Certificate: <input type="text" class="form-control" value="<?php echo $user_certificate; ?>"></p>
-                    <p>Race: <input type="text" class="form-control" value="<?php echo $user_race; ?>" disabled></p>
-                    <p>Religion: <input type="text" class="form-control" value="<?php echo $user_religion; ?>" disabled></p>
-                    <p>Language: <input type="text" class="form-control" value="<?php echo $user_language; ?>"></p>
-                    <p>WorkingExperienceWithJumpa: <input type="text" class="form-control" value="<?php echo $user_workingExperienceWithJumpa; ?>"></p>
+                <form action="editprofile_process.php" method="POST">
+                    <p>Username: <input name="user_username" type="text" class="form-control" value="<?php echo $user_username; ?>" disabled></p>
+                    <p>Email: <input name="user_email" type="text" class="form-control" value="<?php echo $user_email; ?>" disabled></p>
+                    <p>Fullname: <input name="user_fullname" type="text" class="form-control" value="<?php echo $user_fullname; ?>" disabled></p>
+                    <p>Gender: <input name="user_gender" type="text" class="form-control" value="<?php echo $user_gender; ?>" disabled></p>
+                    <p>Age: <input name="user_age" type="text" class="form-control" value="<?php echo $user_age; ?>" disabled></p>
+                    <p>ContactNumber: <input name="user_contactNumber" type="text" class="form-control" value="<?php echo $user_contactNumber; ?>" disabled></p>
+                    <p>Photo: <input name="user_photo" type="text" class="form-control" value="<?php echo $user_photo; ?>" disabled></p>
+                    <p>Qualification: <input name="user_qualification" type="text" class="form-control" value="<?php echo $user_qualification; ?>"></p>
+                    <p>Certificate: <input name="user_certificate" type="text" class="form-control" value="<?php echo $user_certificate; ?>"></p>
+                    <p>Race: <input name="user_race" type="text" class="form-control" value="<?php echo $user_race; ?>" disabled></p>
+                    <p>Religion: <input name="user_religion" type="text" class="form-control" value="<?php echo $user_religion; ?>" disabled></p>
+                    <p>Language: <input name="user_language" type="text" class="form-control" value="<?php echo $user_language; ?>"></p>
+                    <p>WorkingExperienceWithJumpa: <input name="user_workingExperienceWithJumpa" type="text" class="form-control" value="<?php echo $user_workingExperienceWithJumpa; ?>"></p>
                     <button type="submit" class="btn btn-primary">Submit</button><br>
                 </form>
             </section>

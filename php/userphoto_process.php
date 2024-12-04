@@ -54,4 +54,6 @@
             }
         }
     }
+    $stmt->close();
+    $conn->close();
 ?>
