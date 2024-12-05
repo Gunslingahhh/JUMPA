@@ -54,34 +54,66 @@ $userName=$_SESSION['username'];
     ?>
     <!-- Main Content -->
     <main>
-    <div class="employee-dashboard">
-        <div class="table gig-card">
-                <p><b>Title: </b><?php echo($tasktitle) ?></p>
-                <p><b>Description: </b><?php echo($taskdescription) ?></p>
-                <p><b>Date: </b><?php echo($taskdate) ?></p>
-                <p><b>Duration: </b><?php echo($taskduration) ?></p>
-                <p><b>Location: </b><?php echo($tasklocation) ?></p>
-                <p><b>Tools Required: </b><?php echo($toolsrequired) ?></p>
-                <p><b>Pax: </b><?php echo($pax) ?></p>
-                <p><b>Price: RM</b><?php echo($price) ?></p>
-                <p><b>Dress code: </b><?php echo($dresscode) ?></p>
-                <p><b>Gender: </b><?php echo($gender) ?></p>
-                <p><b>Nationality: </b><?php echo($nationality) ?></p>
-                <p><b>Age range: </b><?php echo($agerange) ?></p>
-                <p><b>Muslim friendly?: </b><?php echo($muslimfriendly) ?></p>
-                <p><b>Food provided?: </b><?php echo($foodProvision) ?></p>
-                <p><b>Transport provided?: </b><?php echo($transportProvision) ?></p>
-                <p><b>User id: </b><?php echo($userid) ?></p>
-                <?php
-                    if ($_SESSION['user_id'] != $userid){
-                        echo "<div class='btn btn-primary'>Bid</div>";
-                    }
-                    else{
-                        echo "Nothing";
-                    }
-                ?>
+        <div class="employee-dashboard">
+            <div class="table gig-card">
+                    <p><b>Title: </b><?php echo($tasktitle) ?></p>
+                    <p><b>Description: </b><?php echo($taskdescription) ?></p>
+                    <p><b>Date: </b><?php echo($taskdate) ?></p>
+                    <p><b>Duration: </b><?php echo($taskduration) ?></p>
+                    <p><b>Location: </b><?php echo($tasklocation) ?></p>
+                    <p><b>Tools Required: </b><?php echo($toolsrequired) ?></p>
+                    <p><b>Pax: </b><?php echo($pax) ?></p>
+                    <p><b>Price: RM</b><?php echo($price) ?></p>
+                    <p><b>Dress code: </b><?php echo($dresscode) ?></p>
+                    <p><b>Gender: </b><?php echo($gender) ?></p>
+                    <p><b>Nationality: </b><?php echo($nationality) ?></p>
+                    <p><b>Age range: </b><?php echo($agerange) ?></p>
+                    <p><b>Muslim friendly?: </b><?php echo($muslimfriendly) ?></p>
+                    <p><b>Food provided?: </b><?php echo($foodProvision) ?></p>
+                    <p><b>Transport provided?: </b><?php echo($transportProvision) ?></p>
+                    <p><b>User id: </b><?php echo($userid) ?></p>
+                    <table class="table table-striped">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col" class="col-2">Profile Picture</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Amount bid</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <?php
+                        if ($_SESSION['user_id'] != $userid){
+                            echo "
+                                <form>
+                                    <div class='row'>
+                                        <div class='col-sm-6'>
+                                            <div class='card text-center'>
+                                            <div class='card-body'>
+                                                <p class='card-title'>Starting bid</p>
+                                                <h5 class='card-text'>RM " . $price . "</h5>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class='col-sm-6'>
+                                            <div class='card text-center'>
+                                            <div class='card-body'>
+                                                <p class='card-title'>Starting bid</p>
+                                                <h5 class='card-text'>Starting bid</h5>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>Place your bid<input name='bidding_amount' type='number' class='form-control' min='" . $price . "' value='" . $price . "'></p>
+                                    <input class='btn btn-primary' type='submit' value='Place your bid'></input>
+                                </form>";
+                        }
+                        else{
+                            //Do nothing
+                        }
+                    ?>
+                </div>
+            </div>
         </div>
-    </div>
     </main>
 
     <?php include 'footer.php'; ?>
