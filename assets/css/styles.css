@@ -529,12 +529,12 @@ footer .footer-container {
     font-size: 3rem;
 }
 
-table tbody {
+/* table tbody {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+} */
 
 #user-photo{
     object-fit: cover;
