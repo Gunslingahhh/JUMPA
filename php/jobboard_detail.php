@@ -72,77 +72,83 @@ $userName=$_SESSION['username'];
                 <p><b>Food provided?: </b><?php echo($foodProvision) ?></p>
                 <p><b>Transport provided?: </b><?php echo($transportProvision) ?></p>
                 <p><b>User id: </b><?php echo($userid) ?></p>
+                <h3>Bidders</h3>
                 <table class="table table-striped">
-                    <thead class="thead">
-                        <tr>
-                            <th scope="col" class="col-2">Profile Picture</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Amount bid</th>
-                        </tr>
-                    </thead>
+                    <tbody>
+                        <?php
+                            $sql = "SELECT u.user_photo, u.user_fullname, b.bidding_amount
+                            FROM bidding b
+                            INNER JOIN user u ON b.user_id = u.user_id
+                            WHERE b.task_id = ?";
+
+                            $stmt=$conn->prepare($sql);
+                            $stmt->bind_param("i",$id);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            while ($row = $result->fetch_assoc()){
+                                echo "
+                                    <tr>
+                                        <div class='card mb-2'>
+                                            <div class='card-body'>
+                                            <img src='{$row['user_photo']}' alt='Profile Picture' class='rounded-circle' width='50' height='50'>
+                                            {$row['user_fullname']}
+                                            RM {$row['bidding_amount']}
+                                            </div>
+                                        </div>
+                                    </tr>
+                                ";
+                            }
+                        ?>
+                    </tbody>
                 </table>
             </div>
                 
                             <?php
                                 if ($_SESSION['user_id'] != $userid) {
-                                    $sql = "SELECT u.user_photo, u.user_fullname, b.bidding_amount
-                                            FROM bidding b
-                                            INNER JOIN user u ON b.user_id = u.user_id
-                                            WHERE b.task_id = ?";
-
-                                    $stmt=$conn->prepare($sql);
-                                    $stmt->bind_param("i",$id);
-
-                                    if ($stmt->execute()) {
                                         echo "
                                         <div class='d-flex justify-content-center'>
-                    <div class='card w-75'>
-                        <div class='card-body'>
-                                    <form>
-                                        <div class='row d-flex justify-content-center'>
-                                            <div class='col-md-6 mb-3'>
-                                                <div class='card'>
-                                                    <div class='card-body text-center'>
-                                                        <h5 class='card-title'>Starting Bid</h5>
-                                                        <p class='card-text'>RM {$price}</p>
-                                                    </div>
+                                            <div class='card w-75'>
+                                                <div class='card-body'>
+                                                            <form>
+                                                                <div class='row d-flex justify-content-center'>
+                                                                    <div class='col-md-6 mb-3'>
+                                                                        <div class='card'>
+                                                                            <div class='card-body text-center'>
+                                                                                <h5 class='card-title'>Starting Bid</h5>
+                                                                                <p class='card-text'>RM {$price}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class='col-md-6'>
+                                                                        <div class='card'>
+                                                                            <div class='card-body text-center'>
+                                                                                <h5 class='card-title'>Latest Bid</h5>
+                                                                                <p class='card-text'>RM {$price}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class='col-md-6'>
+                                                                        <div class='card'>
+                                                                            <div class='card-body text-center'>
+                                                                                <h5 class='card-title'>Your Bid</h5>
+                                                                                <div class='input-group mb-3 d-flex justify-content-center'>
+                                                                                    <span class='input-group-text'>RM</span>
+                                                                                    <input type='number' class='form-control-sm text-center' name='bidding_amount' min='{$price}' value='{$price}'>
+                                                                                </div>
+                                                                                <button type='submit' class='btn btn-primary'>Place Your Bid</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                 </div>
                                             </div>
-                                            <div class='col-md-6'>
-                                                <div class='card'>
-                                                    <div class='card-body text-center'>
-                                                        <h5 class='card-title'>Latest Bid</h5>
-                                                        <p class='card-text'>RM {$price}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class='col-md-6'>
-                                                <div class='card'>
-                                                    <div class='card-body text-center'>
-                                                        <h5 class='card-title'>Your Bid</h5>
-                                                        <div class='input-group mb-3 d-flex justify-content-center'>
-                                                            <span class='input-group-text'>RM</span>
-                                                            <input type='number' class='form-control-sm text-center' name='bidding_amount' min='{$price}' value='{$price}'>
-                                                        </div>
-                                                        <button type='submit' class='btn btn-primary'>Place Your Bid</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                        </div>
-                    </div>
-                </div>
                                     ";
                                         exit();
                                     } else {
                                         //do nothing
                                     }
-
-                                    
-                                } else {
-                                    // Do nothing
-                                }
                             ?>
         </div>
     </main>
