@@ -27,8 +27,11 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         <label for="password">Password</label>
                     </div>
-                    <button type="submit" class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5">Sign In</button>
-                    <p class="text-center mt-2">Or sign in with:</p>
+                    <button type="submit" class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5 sign-in-button">Sign In</button>
+
+                    <!-- Signing in with google - under construction -->
+
+                    <p class="text-center sign-in-p">Or sign in with:</p>
                     <div class="external-signin-links">
                         <div class="google-img">
                             <img src="assets/images/1298745_google_brand_branding_logo_network_icon.svg" alt="google-image">
@@ -56,28 +59,5 @@
             </div>
             <div class="login-image-container"></div>
         </div>
-
-        <?php
-            // Display the error message if set
-            // if (isset($_SESSION['error'])) {
-            //     echo '<p class="center" style="top:250px;font-size: 16px; font-weight: bolder;position: absolute;color:red;">' . $_SESSION['error'] . '</p>';
-            //     unset($_SESSION['error']); // Clear the error message
-            // }
-        ?>
-
-        <?php
-            // Display the error message if set
-            // if (isset($_SESSION['message'])) {
-            //     echo '<p class="center" style="font-size: 16px; font-weight: bolder;position: absolute;color:white;">' . $_SESSION['message'] . '</p>';
-            //     unset($_SESSION['message']); // Clear the error message
-            // }
-        ?>
-
-        <!-- <form action="php/signup_process.php" method="get" id="sign-up" class="center">
-            <input type="text" name="username" placeholder="Username" class="input-field">
-            <input type="password" name="password" placeholder="Password" class="input-field">
-            <input type="password" name="confirmpassword" placeholder="Confirm Password" class="input-field">
-            <input type="submit" value="Sign Up!" class="input-field">
-        </form> -->
     </body>
 </html>
