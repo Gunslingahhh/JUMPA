@@ -8,10 +8,43 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Retrieve bidder details from the URL parameters
-$bidder_name = isset($_GET['name']) ? $_GET['name'] : 'Unknown';
-$bid_amount = isset($_GET['bid']) ? $_GET['bid'] : 'Unknown';
-$bidder_image = isset($_GET['img']) ? $_GET['img'] : '../assets/images/default-profile.png';
+include "connection.php";
+
+// Retrieve bidder ID from the URL
+$bidder_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
+
+// Validate bidder ID
+if ($bidder_id <= 0) {
+    echo "Invalid Bidder ID.";
+    exit();
+}
+
+// Fetch bidder details
+$sql = "
+    SELECT 
+        u.user_fullname, 
+        u.user_photo, 
+        u.user_contactNumber, 
+        u.user_email, 
+        u.user_gender, 
+        u.user_age, 
+        MAX(b.bidding_amount) AS highest_bid, 
+        b.bidding_time 
+    FROM user u
+    INNER JOIN bidding b ON u.user_id = b.user_id
+    WHERE u.user_id = ?
+";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $bidder_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo "Bidder not found.";
+    exit();
+}
+
+$bidder = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +55,6 @@ $bidder_image = isset($_GET['img']) ? $_GET['img'] : '../assets/images/default-p
     <title>Bidder Profile</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
@@ -34,30 +66,26 @@ $bidder_image = isset($_GET['img']) ? $_GET['img'] : '../assets/images/default-p
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <!-- Profile Card -->
-                <div class="bidder-profile-card text-center p-4">
+                <div class="card text-center p-4">
                     <h4 class="mb-4">Employee Contact</h4>
 
-                    <!-- Bidder Image and Contact -->
-                    <img src="<?php echo $bidder_image; ?>" alt="Bidder Image" class="mb-3">
-                    <h5><?php echo $bidder_name; ?></h5>
+                    <!-- Bidder Image -->
+                    <img src="<?php echo htmlspecialchars($bidder['user_photo']); ?>" alt="Bidder Image" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; margin: 0 auto;">
 
-                    <!-- Task Info -->
-                    <div class="mb-4 text-start">
-                        <p><strong>Task title:</strong> Fix door</p>
-                        <p><strong>Task date/time:</strong> 24/05 08:00</p>
-                        <p><strong>Price:</strong> RM50</p>
-                    </div>
-
-                    <!-- Contact Number -->
-                    <p class="mb-4">
-                    <i class="fa fa-whatsapp" style="font-size:24px;color:green"></i>
-                        +60818181811
-                    </p>
+                    <!-- Bidder Details -->
+                    <h5><?php echo htmlspecialchars($bidder['user_fullname']); ?></h5>
+                    <p><strong>Contact:</strong> <?php echo htmlspecialchars($bidder['user_contactNumber']); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($bidder['user_email']); ?></p>
+                    <p><strong>Gender:</strong> <?php echo htmlspecialchars($bidder['user_gender']); ?></p>
+                    <p><strong>Age:</strong> <?php echo htmlspecialchars($bidder['user_age']); ?></p>
+                    <hr>
+                    <p><strong>Bidding Amount:</strong> RM <?php echo htmlspecialchars($bidder['highest_bid']); ?></p>
+                    <p><strong>Bidding Time:</strong> <?php echo htmlspecialchars($bidder['bidding_time']); ?></p>
 
                     <!-- Action Buttons -->
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-red">Report an issue</button>
-                        <button class="btn btn-red">Job done</button>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-danger">Report an Issue</button>
+                        <button class="btn btn-success">Mark as Completed</button>
                     </div>
                 </div>
             </div>
@@ -69,7 +97,5 @@ $bidder_image = isset($_GET['img']) ? $_GET['img'] : '../assets/images/default-p
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- FontAwesome for WhatsApp icon -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
