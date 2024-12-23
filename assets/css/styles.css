@@ -649,10 +649,11 @@ button {
 .gig-card {
     background-color: #f5f5f5;
     color: black;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom:  var(--padding-base);
+    padding: var(--padding-base);
+    border-radius: var(--padding-base);
+    margin-bottom: var(--padding-base);
     text-align: left;
+    width: auto;
 }
 
 .gig-card-img {
@@ -683,7 +684,7 @@ button {
     margin: 10px;
 }
 
-.gig-card:hover{
+.gig-card:hover {
     cursor: pointer;
 }
 
@@ -692,9 +693,38 @@ button {
     height: 20px;
 }
 
+/* Responsive Design */
 @media(max-width: 768px) {
     .gig-row {
         flex-direction: column;
+    }
+
+    .footer-logo img {
+        width: 6rem;
+    }
+}
+
+@media(max-width: 576px) {
+    .gig-card {
+        padding: var(--gap-small);
+        text-align: center;
+    }
+
+    .gig-card-img {
+        height: 120px;
+    }
+
+    .employee-dashboard {
+        padding: var(--gap-small);
+    }
+
+    .section-title, .recommended-gig-title, .recent-gig-title {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-weight: bold;
+        text-align: center;
     }
 }
 
@@ -894,12 +924,8 @@ button {
 
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
-    .bidding-info-card {
-        padding: 15px;
-    }
-
-    .task-details-card {
-        padding: var(--gap-small) var(--gap-medium);
+    .task-details-card, .bidding-info-card, .bidding-form-card {
+        padding: var(--gap-medium) var(--gap-medium);
     }
 
     .bidding-info-card table th,
@@ -943,9 +969,8 @@ button {
 
 /* Responsive Design */
 @media (max-width: 992px) {
-    .bidding-info-card,
-    .bidding-form-card {
-        padding: 15px;
+    .task-details-card, .bidding-info-card, .bidding-form-card {
+        padding: var(--gap-medium) var(--gap-medium);
     }
 
     .task-details-card h5,
@@ -956,11 +981,6 @@ button {
 }
 
 @media (max-width: 768px) {
-    .bidding-info-card,
-    .bidding-form-card {
-        padding: 10px;
-    }
-
     .task-details-card h5,
     .bidding-info-card h5,
     .bidding-form-card h5 {
@@ -978,10 +998,6 @@ button {
     
     .bidding-info-card table th, .bidding-info-card table td {
         padding: 10px;
-    }
-    
-    .bidding-info-card {
-        padding: 15px;
     }
 }
 

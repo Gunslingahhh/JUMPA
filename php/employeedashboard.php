@@ -29,9 +29,9 @@ if (!isset($_SESSION['username'])) {
         <div class="employee-dashboard">
 
             <!-- Recommended Gigs -->
-            <h2 class="section-title">Recommended Gigs</h2>
+            <h4 class="mt-3 mb-4 text-center">Recommended Gigs</h4>
             <div class="row gig-row">
-                <div class="col-md-4 gig-card">
+                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
                     <p class="time-posted">Posted 2 weeks ago</p>
                     <h3 class="recommended-gig-title">Cut my house grass</h3>
                     <img src="../assets/images/cut-grass.jpeg" alt="Cut grass" class="gig-card-img">
@@ -46,7 +46,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 
-                <div class="col-md-4 gig-card">
+                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
                     <p class="time-posted">Posted 2 weeks ago</p>
                     <h3 class="recommended-gig-title">Wash clothes</h3>
                     <img src="../assets/images/laundry.jpeg" alt="Washing clothes" class="gig-card-img">
@@ -61,7 +61,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 
-                <div class="col-md-4 gig-card">
+                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
                     <p class="time-posted">Posted Yesterday</p>
                     <h3 class="recommended-gig-title">Market helper</h3>
                     <img src="../assets/images/market.jpeg" alt="Market helper" class="gig-card-img">
@@ -80,15 +80,15 @@ if (!isset($_SESSION['username'])) {
             <!-- Recent Gigs -->
             <h2 class="section-title mt-3">Your Recent Gigs</h2>
             <div class="row gig-row">
-                <div class="col-md-4 gig-card">
+                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
                     <h3 class="recent-gig-title">None</h3>
                     <img src="../assets/images/bidding.png" alt="Bid for jobs now!">
                     <p>Bid for jobs now!</p>
                 </div>
-                <div class="col-md-4 gig-card">
+                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
                     <h3></h3>
                 </div>
-                <div class="col-md-4 gig-card">
+                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
                     <h3></h3>
                 </div>
             </div>
