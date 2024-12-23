@@ -359,6 +359,120 @@ main {
     color: #535353;
 }
 
+/* Large screens (max-width: 1200px) */
+@media (max-width: 1200px) {
+    .main-banner {
+        height: 70vh;
+        background-size: 15rem 15rem;
+        padding: var(--gap-medium);
+    }
+
+    .main-banner-header-p, .simple-quick-secure {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .jumpa-xxl-logo {
+        width: 12rem;
+    }
+
+    .hire-skilled-worker, .do-work-get-paid, .security, .verification {
+        padding: 5rem 15%;
+    }
+}
+
+/* Medium screens (max-width: 992px) */
+@media (max-width: 992px) {
+    .main-banner {
+        flex-direction: column;
+        height: 70vh;
+        padding: var(--gap-small);
+        background-size: 12rem 12rem;
+    }
+
+    .hire-skilled-worker, .do-work-get-paid, .security, .verification {
+        flex-direction: column;
+        padding: 4rem 10%;
+    }
+
+    .hire-skilled-worker-text, .do-work-get-paid-text, .security-text, .verification-text {
+        width: 100%;
+    }
+
+    .hire-skilled-worker-images, .do-work-get-paid-images, .security-images, .verification-images {
+        width: 100%;
+        margin-top: var(--gap-small);
+    }
+
+    .hire-button, .work-pay-button {
+        padding: var(--gap-small) var(--gap-medium);
+    }
+
+    .main-banner-header-p, .simple-quick-secure {
+        font-size: 0.9rem;
+    }
+
+    .jumpa-xxl-logo {
+        width: 10rem;
+    }
+
+    .hire-skilled-worker, .do-work-get-paid, .security, .verification {
+        padding: var(--gap-large);
+    }
+}
+
+/* Small screens (max-width: 768px) */
+@media (max-width: 768px) {
+    .main-banner {
+        height: 70vh;
+        text-align: center;
+        padding: var(--gap-small);
+        background-size: 10rem 10rem;
+    }
+
+    .hire-skilled-worker, .do-work-get-paid, .security, .verification {
+        padding: var(--gap-large);
+    }
+
+    .hire-skilled-worker-images img, .do-work-get-paid-images img, .security-images img, .verification-images img {
+        width: 15rem;
+        margin: auto;
+    }
+
+    .hire-button, .work-pay-button {
+        padding: var(--gap-small) var(--gap-medium);
+    }
+}
+
+/* Extra small screens (max-width: 576px) */
+@media (max-width: 576px) {
+    .main-banner {
+        height: 70vh;
+        padding: var(--gap-small);
+        background-size: 8rem 8rem;
+    }
+
+    .hire-skilled-worker-images img, .do-work-get-paid-images img, .security-images img, .verification-images img {
+        width: 100%;
+    }
+
+    .main-banner-header-p, .simple-quick-secure {
+        font-size: 0.8rem;
+    }
+
+    .jumpa-xxl-logo {
+        width: 8rem;
+    }
+
+    .hire-skilled-worker, .do-work-get-paid, .security, .verification {
+        padding: var(--gap-large);
+    }
+
+    .hire-button, .work-pay-button {
+        padding: var(--gap-small) var(--gap-medium);
+    }
+}
+
 /* Footer */
 footer {
     padding: 20px 0;
