@@ -23,6 +23,7 @@ if (!isset($_SESSION['username'])) {
         ?>
 
         <main id="profilemainid">
+            <h4 class="mt-3 mb-4 text-center">Post a Task</h4>
             <section class="createprofilemain">
                 <?php
                         if (isset($_SESSION['message'])) {
@@ -30,113 +31,90 @@ if (!isset($_SESSION['username'])) {
                             unset($_SESSION['message']);
                         }
                     ?>
-                <div class="profile-form mt-3 mx-auto">
-                    <form id="profileForm" action="createpost_process.php" method="post">
-                        <h1 class="createprofiletitle">
-                            Post a Task
-                        </h1>
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Task title</label>
+                <div class="profile-form mt-3">
+                    <form id="profileForm" action="createpost_process.php" method="post" class="createpost-form">
+                        <div class="form-row">
+                            <label for="tasktitle" class="form-label">Task Title</label>
                             <input type="text" class="form-control" name="tasktitle" id="tasktitle" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Task Description</label>
-                            <input type="text" class="form-control" name="taskdescription" id="taskdescription" required>
+                        <div class="form-row">
+                            <label for="taskdescription" class="form-label">Task Description</label>
+                            <textarea class="form-control" name="taskdescription" id="taskdescription" rows="4" required></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Task Date</label>
+                        <div class="form-row">
+                            <label for="taskdate" class="form-label">Task Date</label>
                             <input type="date" class="form-control" name="taskdate" id="taskdate" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Task Duration</label>
+                        <div class="form-row">
+                            <label for="taskduration" class="form-label">Task Duration</label>
                             <input type="text" class="form-control" name="taskduration" id="taskduration" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Task Location</label>
+                        <div class="form-row">
+                            <label for="tasklocation" class="form-label">Task Location</label>
                             <input type="text" class="form-control" name="tasklocation" id="tasklocation" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Tools required</label>
+                        <div class="form-row">
+                            <label for="toolsrequired" class="form-label">Tools Required</label>
                             <input type="text" class="form-control" name="toolsrequired" id="toolsrequired" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Pax</label>
+                        <div class="form-row">
+                            <label for="pax" class="form-label">Pax</label>
                             <input type="number" class="form-control" name="pax" id="pax" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Price</label>
+                        <div class="form-row">
+                            <label for="price" class="form-label">Price</label>
                             <input type="number" class="form-control" name="price" id="price" required>
                         </div>
-                        <h1 class="createprofiletitle">
-                            Additional Information
-                        </h1>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Dress Code</label>
+                        <p class="additional-info">Additional Information</p>
+
+                        <div class="form-row">
+                            <label for="dresscode" class="form-label">Dress Code</label>
                             <input type="text" class="form-control" name="dresscode" id="dresscode" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Gender</label>
+                        <div class="form-row">
+                            <label for="gender" class="form-label">Gender</label>
                             <input type="text" class="form-control" name="gender" id="gender" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Nationality</label>
+                        <div class="form-row">
+                            <label for="nationality" class="form-label">Nationality</label>
                             <input type="text" class="form-control" name="nationality" id="nationality" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Age Range</label>
+                        <div class="form-row">
+                            <label for="agerange" class="form-label">Age Range</label>
                             <input type="text" class="form-control" name="agerange" id="agerange" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Muslim friendly?</label>
-                            <input type="radio" class="form-check-input" name="muslimfriendly" value="1" id="muslimfriendly1" required>
-                            <label class="form-check-label" for="muslimfriendly1">
-                                Yes
-                            </label>
-                            <input type="radio" class="form-check-input" name="muslimfriendly" value="0" id="muslimfriendly2" required>
-                            <label class="form-check-label" for="muslimfriendly2">
-                                No
-                            </label>
-                        </div>
+                        <fieldset class="form-group">
+                            <legend>Muslim Friendly</legend>
+                            <label><input type="radio" name="muslimfriendly" value="1" required> Yes</label>
+                            <label><input type="radio" name="muslimfriendly" value="0" required> No</label>
+                        </fieldset>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Food Provided?</label>
-                            <input type="radio" class="form-check-input" name="foodprovision" value="1" id="foodprovision1" required>
-                            <label class="form-check-label" for="foodprovision1">
-                                Yes
-                            </label>
-                            <input type="radio" class="form-check-input" name="foodprovision" value="0" id="foodprovision2" required>
-                            <label class="form-check-label" for="foodprovision2">
-                                No
-                            </label>
-                        </div>
+                        <fieldset class="form-group">
+                            <legend>Food Provided</legend>
+                            <label><input type="radio" name="foodprovision" value="1" required> Yes</label>
+                            <label><input type="radio" name="foodprovision" value="0" required> No</label>
+                        </fieldset>
 
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Transport Provided?</label>
-                            <input type="radio" class="form-check-input" name="transportprovision" value="1" id="transportprovision1" required>
-                            <label class="form-check-label" for="transportprovision1">
-                                Yes
-                            </label>
-                            <input type="radio" class="form-check-input" name="transportprovision" value="0" id="transportprovision2" required>
-                            <label class="form-check-label" for="transportprovision2">
-                                No
-                            </label>
-                        </div>
+                        <fieldset class="form-group">
+                            <legend>Transport Provided</legend>
+                            <label><input type="radio" name="transportprovision" value="1" required> Yes</label>
+                            <label><input type="radio" name="transportprovision" value="0" required> No</label>
+                        </fieldset>
+
                         <button type="submit" name="createpost-submit" class="btn btn-primary">Submit</button>
-                    </form>
-                
-                    
+                    </form>                    
                 </div>
 
             </section>
