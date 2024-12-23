@@ -488,8 +488,7 @@ footer {
 footer .footer-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: var(--gap-medium);
     padding: 0 20px;
