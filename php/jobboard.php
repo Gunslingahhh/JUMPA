@@ -21,7 +21,7 @@ include "connection.php";
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
-<body>
+<body class="jobboard-body">
     <?php
         include "topnav.php";
     ?>
@@ -108,7 +108,7 @@ include "connection.php";
             </div>
         </div>
     </main>
-    <?php /*include 'footer.php';*/ ?>
+    <?php include 'footer.php'; ?>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

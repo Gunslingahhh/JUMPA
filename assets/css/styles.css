@@ -349,61 +349,141 @@ main {
 
 /* Footer */
 footer {
-    background-color: #691c1c;
-    color: white;
-    padding: 0 20px;
-    text-align: center;
+    padding: 20px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    width: 100%;
+    z-index: 1;
+    overflow: hidden;
+    background: #691c1c;
+    color: #ffffff;
 }
 
 footer .footer-container {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.footer-container h1, .footer-container h4 {
-    font-size: 1.8rem;
+.footer-logo {
+    text-align: center;
+    flex: 1 1 100%;
+}
+
+.footer-logo img.jumpa-footer-logo {
+    width: 8rem;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.footer-logo p {
+    font-size: 0.9rem;
+    margin: 5px 0;
 }
 
 .footer-links {
     display: flex;
-    gap: 5rem;
+    flex: 1 1 45%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .footer-links ul {
     list-style: none;
+    padding: 0;
 }
 
 .footer-links ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin: 10px 0;
     display: block;
 }
 
-.social ul {
-    list-style: none;
+.footer-links h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: rgb(225, 225, 225);
 }
 
-.social ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    margin: 10px 0;
-    display: block;
+.social {
+    text-align: center;
+    flex: 1 1 100%;
 }
 
-.jumpa-footer-logo {
-    width: 10rem;
-    height: 10rem;
-    padding: 1rem;
+.social h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: rgb(225, 225, 225);
 }
 
 .footer-social-links {
     display: flex;
-    margin: 1rem;
+    justify-content: center;
     gap: 1rem;
+}
+
+.footer-social-links img {
+    width: 30px;
+    height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .footer-container {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex: 1 1 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links ul {
+        margin: 10px 0;
+    }
+
+    .footer-logo img.jumpa-footer-logo {
+        width: 7rem;
+    }
+
+    .footer-social-links {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        font-size: 14px;
+    }
+
+    .footer-logo img.jumpa-footer-logo {
+        width: 6rem;
+    }
+
+    .footer-links h4 {
+        font-size: 1rem;
+    }
+
+    .footer-links ul li a {
+        font-size: 0.85rem;
+    }
+
+    .social h4 {
+        font-size: 1rem;
+    }
+
+    .footer-social-links img {
+        width: 25px;
+    }
 }
 
 /* Create Profile */
@@ -439,7 +519,7 @@ footer .footer-container {
 /* Employee Dashboard */
 .employee-dashboard {
     background-color: #f0f0f0;
-    padding: 0 3rem;
+    padding: 3rem;
 }
 
 .section-title, .recommended-gig-title, .recent-gig-title {
@@ -555,9 +635,252 @@ footer .footer-container {
     cursor: pointer;
 }
 
-/* Task Details */
-/* --------------UNDER CONSTRUCTION----------------- */
+/* Task, Bidding, and Form Cards */
+.task-details-card {
+    padding: 4rem;
+}
 
+.details-p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.details-p > div {
+    flex: 1 1 45%;
+    min-width: 200px;
+}
+
+.task-details-card, 
+.bidding-info-card, 
+.bidding-form-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    margin: 10px 0;
+    overflow: visible;
+    word-wrap: break-word;
+}
+
+.task-details-card h5, 
+.bidding-info-card h5, 
+.bidding-form-card h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Task Details Styling */
+
+.task-details-card p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.task-details-card p strong {
+    color: #333;
+}
+
+/* Bidding Table */
+.bidding-info-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bidding-info-card table th,
+.bidding-info-card table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.bidding-info-card table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.bidding-info-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Bidding Form Styling */
+/* General Table Styling */
+.bidding-info-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.bidding-info-card h5 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333333;
+}
+
+/* Table Styling */
+.bidding-info-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bidding-info-card table th,
+.bidding-info-card table td {
+    text-align: left;
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+.bidding-info-card table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    text-align: center;
+}
+
+.bidding-info-card table td {
+    text-align: center; /* Center-align the content for consistency */
+}
+
+/* Profile Image Styling */
+.bidding-info-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto; /* Center-align images */
+    display: block;
+}
+
+/* Adjusting Font Sizes for Consistency */
+.bidding-info-card table td {
+    font-size: 0.95rem;
+    color: #555555;
+}
+
+.bidding-info-card table th {
+    font-size: 1rem;
+    color: #444444;
+}
+
+/* Add Spacing Between Rows */
+.bidding-info-card table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Hover Effect for Rows */
+.bidding-info-card table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .bidding-info-card {
+        padding: 15px;
+    }
+
+    .task-details-card {
+        padding: 1rem 2rem;
+    }
+
+    .bidding-info-card table th,
+    .bidding-info-card table td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+}
+
+
+.bidding-form-card .starting-bid-card, 
+.bidding-form-card .latest-bid-card, 
+.bidding-form-card .your-bid-card {
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.bidding-form-card .starting-bid-card-body,
+.bidding-form-card .latest-bid-card-body,
+.bidding-form-card .your-bid-card-body {
+    text-align: center;
+}
+
+.bidding-form-card .input-group-text {
+    font-size: 1rem;
+}
+
+.bidding-form-card .form-control {
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.bidding-form-card .btn-primary {
+    font-size: 1rem;
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .bidding-info-card,
+    .bidding-form-card {
+        padding: 15px;
+    }
+
+    .task-details-card h5,
+    .bidding-info-card h5,
+    .bidding-form-card h5 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .bidding-info-card,
+    .bidding-form-card {
+        padding: 10px;
+    }
+
+    .task-details-card h5,
+    .bidding-info-card h5,
+    .bidding-form-card h5 {
+        font-size: 1rem;
+    }
+
+    .bidding-form-card .btn-primary {
+        width: 100%;
+    }
+
+    .employee-dashboard .col-flex {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+    
+    .bidding-info-card table th, .bidding-info-card table td {
+        padding: 10px;
+    }
+    
+    .bidding-info-card {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .employee-dashboard .col-flex {
+        flex: 1 1 50%;
+    }
+}
 
 /* Section Headings */
 h4, h5 {
@@ -594,13 +917,6 @@ h4, h5 {
     color: green;
     font-size: 3rem;
 }
-
-/* table tbody {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-} */
 
 #user-photo{
     object-fit: cover;
@@ -791,5 +1107,11 @@ h4, h5 {
         justify-content: space-evenly;
         gap: 0rem;
         padding-left: 0rem;
+    }
+}
+
+@media only screen and (max-width: 389px) {
+    * {
+        font-size: 0.8rem;
     }
 }

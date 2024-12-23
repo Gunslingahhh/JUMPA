@@ -26,77 +26,75 @@ if (!isset($_SESSION['username'])) {
 
     <!-- Main Content -->
     <main>
-    <div class="employee-dashboard">
+        <div class="employee-dashboard">
 
-        <!-- Recommended Gigs -->
-        <h2 class="section-title">Recommended Gigs</h2>
-        <div class="row gig-row">
-            <div class="col-md-4 gig-card">
-                <p class="time-posted">Posted 2 weeks ago</p>
-                <h3 class="recommended-gig-title">Cut my house grass</h3>
-                <img src="../assets/images/cut-grass.jpeg" alt="Cut grass" class="gig-card-img">
-                <div class="time">
-                    <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 1300 - 1600</p>
+            <!-- Recommended Gigs -->
+            <h2 class="section-title">Recommended Gigs</h2>
+            <div class="row gig-row">
+                <div class="col-md-4 gig-card">
+                    <p class="time-posted">Posted 2 weeks ago</p>
+                    <h3 class="recommended-gig-title">Cut my house grass</h3>
+                    <img src="../assets/images/cut-grass.jpeg" alt="Cut grass" class="gig-card-img">
+                    <div class="time">
+                        <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 1300 - 1600</p>
+                    </div>
+                    <div class="location">
+                        <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Bangsar, KL</p>
+                    </div>
+                    <div class="price">
+                        <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM90</p>
+                    </div>
                 </div>
-                <div class="location">
-                    <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Bangsar, KL</p>
+                
+                <div class="col-md-4 gig-card">
+                    <p class="time-posted">Posted 2 weeks ago</p>
+                    <h3 class="recommended-gig-title">Wash clothes</h3>
+                    <img src="../assets/images/laundry.jpeg" alt="Washing clothes" class="gig-card-img">
+                    <div class="time">
+                        <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 1600 - 1700</p>
+                    </div>
+                    <div class="location">
+                        <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Seri Kembangan, KL</p>
+                    </div>
+                    <div class="price">
+                        <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM50</p>
+                    </div>
                 </div>
-                <div class="price">
-                    <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM90</p>
+                
+                <div class="col-md-4 gig-card">
+                    <p class="time-posted">Posted Yesterday</p>
+                    <h3 class="recommended-gig-title">Market helper</h3>
+                    <img src="../assets/images/market.jpeg" alt="Market helper" class="gig-card-img">
+                    <div class="time">
+                        <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 0700 - 0900</p>
+                    </div>
+                    <div class="location">
+                        <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Kajang, Selangor</p>
+                    </div>
+                    <div class="price">
+                        <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM30</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="col-md-4 gig-card">
-                <p class="time-posted">Posted 2 weeks ago</p>
-                <h3 class="recommended-gig-title">Wash clothes</h3>
-                <img src="../assets/images/laundry.jpeg" alt="Washing clothes" class="gig-card-img">
-                <div class="time">
-                    <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 1600 - 1700</p>
+
+            <!-- Recent Gigs -->
+            <h2 class="section-title mt-3">Your Recent Gigs</h2>
+            <div class="row gig-row">
+                <div class="col-md-4 gig-card">
+                    <h3 class="recent-gig-title">None</h3>
+                    <img src="../assets/images/bidding.png" alt="Bid for jobs now!">
+                    <p>Bid for jobs now!</p>
                 </div>
-                <div class="location">
-                    <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Seri Kembangan, KL</p>
+                <div class="col-md-4 gig-card">
+                    <h3></h3>
                 </div>
-                <div class="price">
-                    <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM50</p>
-                </div>
-            </div>
-            
-            <div class="col-md-4 gig-card">
-                <p class="time-posted">Posted Yesterday</p>
-                <h3 class="recommended-gig-title">Market helper</h3>
-                <img src="../assets/images/market.jpeg" alt="Market helper" class="gig-card-img">
-                <div class="time">
-                    <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 0700 - 0900</p>
-                </div>
-                <div class="location">
-                    <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Kajang, Selangor</p>
-                </div>
-                <div class="price">
-                    <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM30</p>
+                <div class="col-md-4 gig-card">
+                    <h3></h3>
                 </div>
             </div>
         </div>
-
-        <!-- Recent Gigs -->
-        <h2 class="section-title mt-3">Your Recent Gigs</h2>
-        <div class="row gig-row">
-            <div class="col-md-4 gig-card">
-                <h3 class="recent-gig-title">None</h3>
-                <img src="../assets/images/bidding.png" alt="Bid for jobs now!">
-                <p>Bid for jobs now!</p>
-            </div>
-            <div class="col-md-4 gig-card">
-                <h3></h3>
-            </div>
-            <div class="col-md-4 gig-card">
-                <h3></h3>
-            </div>
-        </div>
-    </div>
     </main>
-
     <?php include 'footer.php'; ?>
-
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
