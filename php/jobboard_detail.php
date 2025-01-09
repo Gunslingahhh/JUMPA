@@ -3,8 +3,8 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../index.php");
     exit();
 }
 
@@ -28,6 +28,7 @@ $userName=$_SESSION['username'];
         include "topnav.php";
 
         $id = $_GET['task_id'];
+        $user_id = $_SESSION['user_id'];
 
         $detail_check = $conn->prepare("SELECT * FROM task WHERE task_id = $id");
         $detail_check->execute();
@@ -118,6 +119,18 @@ $userName=$_SESSION['username'];
                         </div>
                     </div>
 
+                    <?php
+                    if (isset($_SESSION['error'])) {
+                        echo "<div class='alert alert-danger mt-2 text-center'>" . $_SESSION['error'] . "</div>";
+                        unset($_SESSION['error']);
+                    }
+
+                    if (isset($_SESSION['message'])) {
+                        echo "<div class='alert alert-success mt-2 text-center'>" . $_SESSION['message'] . "</div>";
+                        unset($_SESSION['message']); // Clear the error message
+                        }
+                    ?>
+
                     <!-- Bidding Information Column -->
                     <div class="col-12 mb-4">
                         <div class="bidding-info-card">
@@ -128,11 +141,12 @@ $userName=$_SESSION['username'];
                                         <th scope="col">Profile Picture</th>
                                         <th scope="col">Full Name</th>
                                         <th scope="col">Amount Bid</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT u.user_photo, u.user_fullname, b.bidding_amount, u.user_id
+                                    $sql = "SELECT b.bidding_id, u.user_photo, u.user_fullname, b.bidding_amount, u.user_id
                                             FROM bidding b
                                             INNER JOIN user u ON b.user_id = u.user_id
                                             WHERE b.task_id = ?";
@@ -141,16 +155,16 @@ $userName=$_SESSION['username'];
                                     if ($stmt->execute()) {
                                         $result = $stmt->get_result();
                                         while ($row = $result->fetch_assoc()) {
-                                            echo "<tr>";
-                                            echo "<td>
-                                                <a href='bidder_profile.php?user_id=" . urlencode($row['user_id']) . 
-                                                    "&user_fullname=" . urlencode($row['user_fullname']) . "'>
-                                                <img src='" . htmlspecialchars($row['user_photo']) . "' class='rounded-circle' style='width: 50px; height: 50px;'>
-                                                </a>
-                                            </td>";
-                                            echo "<td>" . htmlspecialchars($row['user_fullname']) . "</td>";
-                                            echo "<td>RM " . htmlspecialchars($row['bidding_amount']) . "</td>";
+                                            echo "<form method='POST' action='bidder_profile.php?user_id={$row['user_id']}&task_id={$id}&bidding_id={$row['bidding_id']}'>";
+                                            echo "<tr>"; // Added onclick and style
+                                            echo "<td><img src='{$row['user_photo']}' alt='Profile Picture' class='rounded-circle' width='50' height='50'></td>";
+                                            echo "<td>{$row['user_fullname']}</td>";
+                                            echo "<td>RM {$row['bidding_amount']}</td>";
+                                            if ($_SESSION['user_id'] == $userid){
+                                            echo "<td><button type='submit' class='btn btn-danger'>Accept</button></td>";
+                                            }
                                             echo "</tr>";
+                                            echo "</form>";
                                         }
                                     }
                                     ?>
@@ -160,11 +174,17 @@ $userName=$_SESSION['username'];
                     </div>
 
                     <!-- Bidding Form Column -->
-                    <?php if ($_SESSION['user_id'] != $userid): ?>
+                    <?php 
+                    $biddingForm = $conn->prepare("SELECT bidding_id FROM bidding WHERE user_id=? AND task_id=?");
+                    $biddingForm->bind_param("ii", $user_id, $id);
+                    $biddingForm->execute();
+                    $biddingFormResult = $biddingForm->get_result();
+
+                    if ($user_id != $userid && $biddingFormResult->num_rows < 1) {?>
                     <div class="col-12">
                         <div class="bidding-form-card">
                             <h5 class="mb-3">Place Your Bid</h5>
-                            <form method="POST" action="place_bid.php">
+                            <form method="POST" action="place_bid.php?task_id=<?php echo htmlspecialchars($id); ?>">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="starting-bid-card">
@@ -198,7 +218,9 @@ $userName=$_SESSION['username'];
                             </form>
                         </div>
                     </div>
-                    <?php endif; ?>
+                    <?php }else{
+                        //Do nothing
+                    }?>
                 </div>
             </div>
         </div>

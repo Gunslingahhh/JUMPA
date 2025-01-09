@@ -3,8 +3,8 @@
     session_start();
 
     // Check if the user is logged in
-    if (!isset($_SESSION['username'])) {
-        header("Location: index.php");
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../index.php");
         exit();
     }
 ?>
@@ -71,13 +71,12 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">IC / Passport Number</label>
                             <input type="text" class="form-control" id="icnumber" name="icnumber" aria-describedby="emailHelp" required>
-                            <div id="icHelp" class="form-text">We'll never share your IC / Passport number with anyone else.</div>
+                            <div id="icHelp" class="form-text">Your identity number will be used for admin users only in case of criminal activity. This data will be protected by the rights of PDPA Act 2010.</div>
                         </div>
 
                         <div class="mb-3">
@@ -89,9 +88,9 @@
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-control" id="gender" name="gender" required>
                                 <option value="" disabled selected>Select your gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
 

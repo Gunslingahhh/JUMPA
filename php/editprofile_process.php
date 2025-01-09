@@ -16,14 +16,6 @@
                 SET user_qualification = ?, user_certificate = ?, user_language = ?, user_workingExperienceWithJumpa = ?
                 WHERE user_id = ?";
 
-        $data = array(
-            $user_qualification,
-            $user_certificate,
-            $user_language,
-            $user_workingExperienceWithJumpa,
-            $user_id
-        );
-
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssi", 
                             $user_qualification, 

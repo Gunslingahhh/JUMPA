@@ -3,8 +3,8 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../index.php");
     exit();
 }
 
@@ -66,7 +66,16 @@ $bidder = $result->fetch_assoc();
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <!-- Profile Card -->
-                <div class="card text-center p-4">
+                <div class="card text-center p-4 ">
+
+                    <?php 
+                        $user_id = $_GET['user_id'];
+                        $task_id = $_GET['task_id'];
+                        $bidding_id = $_GET['bidding_id'];
+
+                        $sql = $conn->prepare("INSERT INTO job(user_id, task_id, bidding_id) VALUES (?, ?, ?)");
+                    ?>
+
                     <h4 class="mb-4">Employee Contact</h4>
 
                     <!-- Bidder Image -->
@@ -74,7 +83,11 @@ $bidder = $result->fetch_assoc();
 
                     <!-- Bidder Details -->
                     <h5><?php echo htmlspecialchars($bidder['user_fullname']); ?></h5>
-                    <p><strong>Contact:</strong> <?php echo htmlspecialchars($bidder['user_contactNumber']); ?></p>
+                    <div class="d-flex justify-content-center mb-3">
+                        <a href="https://wa.me/<?php echo htmlspecialchars($bidder['user_contactNumber']);?>" class="btn btn-success" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-whatsapp me-2"></i>Chat on WhatsApp
+                        </a>
+                    </div>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($bidder['user_email']); ?></p>
                     <p><strong>Gender:</strong> <?php echo htmlspecialchars($bidder['user_gender']); ?></p>
                     <p><strong>Age:</strong> <?php echo htmlspecialchars($bidder['user_age']); ?></p>
