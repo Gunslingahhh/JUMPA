@@ -53,7 +53,7 @@
                     }
                 ?>
                 <form action="userphoto_process.php" method="POST" enctype="multipart/form-data" class="upload-form">    
-                    <img id="user-photo" src="<?php echo $user_photo; ?>">
+                    <img id="user-photo" role="button" width="120px" height="120px" src="<?php echo $user_photo; ?>">
                     <input type="file" id="user-photo-filename" name="user-photo-filename" accept="image/jpeg, image/png, image/jpg" style="display: none;">
                     <button type="submit" class="btn btn-primary">Upload</button>
                 </form>

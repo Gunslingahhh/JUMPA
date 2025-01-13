@@ -11,12 +11,27 @@ if (!isset($_SESSION['user_id'])) {
 include "connection.php";
 
 // Retrieve bidder ID from the URL
-$bidder_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
+$bidding_id = filter_var($_GET['bidding_id'], FILTER_VALIDATE_INT);
+$task_id = filter_var($_GET['task_id'], FILTER_VALIDATE_INT);
+$user_id = filter_var($_GET['user_id'], FILTER_VALIDATE_INT);
 
-// Validate bidder ID
-if ($bidder_id <= 0) {
-    echo "Invalid Bidder ID.";
-    exit();
+//Task status from 0 to 1
+$changeStatus = $conn->prepare("UPDATE task SET task_status='1' WHERE task_id = ?");
+$changeStatus->bind_param("i",$task_id);
+
+if($changeStatus->execute()){
+    $acceptJob = $conn->prepare("INSERT INTO job(user_id, task_id, bidding_id) VALUES (?, ?, ?)");
+    $acceptJob->bind_param("iii", $user_id, $task_id, $bidding_id);
+
+    if ($acceptJob->execute()){
+        $_SESSION['message'] = "Job accepted!";
+        header("Location: jobboard.php");
+        exit();
+    }else{
+        
+    }
+}else{
+
 }
 
 // Fetch bidder details
@@ -28,21 +43,17 @@ $sql = "
         u.user_email, 
         u.user_gender, 
         u.user_age, 
-        MAX(b.bidding_amount) AS highest_bid, 
+        b.bidding_amount, 
         b.bidding_time 
     FROM user u
     INNER JOIN bidding b ON u.user_id = b.user_id
-    WHERE u.user_id = ?
+    WHERE b.bidding_id = ?
 ";
+
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $bidder_id);
+$stmt->bind_param("i", $bidding_id) ;
 $stmt->execute();
 $result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-    echo "Bidder not found.";
-    exit();
-}
 
 $bidder = $result->fetch_assoc();
 ?>
@@ -68,18 +79,10 @@ $bidder = $result->fetch_assoc();
                 <!-- Profile Card -->
                 <div class="card text-center p-4 ">
 
-                    <?php 
-                        $user_id = $_GET['user_id'];
-                        $task_id = $_GET['task_id'];
-                        $bidding_id = $_GET['bidding_id'];
-
-                        $sql = $conn->prepare("INSERT INTO job(user_id, task_id, bidding_id) VALUES (?, ?, ?)");
-                    ?>
-
                     <h4 class="mb-4">Employee Contact</h4>
 
                     <!-- Bidder Image -->
-                    <img src="<?php echo htmlspecialchars($bidder['user_photo']); ?>" alt="Bidder Image" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; margin: 0 auto;">
+                    <img src="<?php echo htmlspecialchars($bidder['user_photo']); ?>" alt="Bidder Image" class="img-fluid rounded-circle mb-3 border-dark border-1" style="width: 150px; height: 150px; margin: 0 auto;">
 
                     <!-- Bidder Details -->
                     <h5><?php echo htmlspecialchars($bidder['user_fullname']); ?></h5>
@@ -92,7 +95,7 @@ $bidder = $result->fetch_assoc();
                     <p><strong>Gender:</strong> <?php echo htmlspecialchars($bidder['user_gender']); ?></p>
                     <p><strong>Age:</strong> <?php echo htmlspecialchars($bidder['user_age']); ?></p>
                     <hr>
-                    <p><strong>Bidding Amount:</strong> RM <?php echo htmlspecialchars($bidder['highest_bid']); ?></p>
+                    <p><strong>Bidding Amount:</strong> RM <?php echo htmlspecialchars($bidder['bidding_amount']); ?></p>
                     <p><strong>Bidding Time:</strong> <?php echo htmlspecialchars($bidder['bidding_time']); ?></p>
 
                     <!-- Action Buttons -->

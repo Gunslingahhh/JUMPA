@@ -38,10 +38,7 @@ include "connection.php";
                     <button class="nav-link active" id="priority-tab" data-bs-toggle="tab" data-bs-target="#priority" type="button" role="tab">Priority</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="active-tab" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab">Active</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="delivered-tab" data-bs-toggle="tab" data-bs-target="#delivered" type="button" role="tab">Delivered</button>
+                    <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">Pending</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab">Completed</button>
@@ -68,7 +65,7 @@ include "connection.php";
                             </thead>
                             <tbody>
                                 <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task");
+                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='0'");
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
 
@@ -86,24 +83,100 @@ include "connection.php";
                     </div>
                 </div>
 
-                <div class="tab-pane fade mb-3" id="active" role="tabpanel" aria-labelledby="active-tab">
-                    <h5 class="mt-3 mb-3">Active Jobs</h5>
-                    <p class="text-danger">No late Jobs at the moment.</p>
-                </div>
-
-                <div class="tab-pane fade mb-3" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
+                <div class="tab-pane fade mb-3" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                     <h5 class="mt-3 mb-3">Delivered Jobs</h5>
-                    <p class="text-danger">No delivered Jobs at the moment.</p>
+                    <div class="table-responsive">
+                        <table class="table priority-Jobs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='1'");
+                                $detail_check->execute();
+                                $detail_result = $detail_check->get_result();
+
+                                while ($user_row = $detail_result->fetch_assoc()) {
+                                    echo "<tr onclick='window.location.href = \"bidder_profile.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="tab-pane fade mb-3" id="completed" role="tabpanel" aria-labelledby="completed-tab">
                     <h5 class="mt-3 mb-3">Completed Jobs</h5>
-                    <p>All tasks have been successfully completed!</p>
+                    <div class="table-responsive">
+                        <table class="table priority-Jobs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='2'");
+                                $detail_check->execute();
+                                $detail_result = $detail_check->get_result();
+
+                                while ($user_row = $detail_result->fetch_assoc()) {
+                                    echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="tab-pane fade mb-3" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
                     <h5 class="mt-3 mb-3">Cancelled Jobs</h5>
-                    <p class="text-muted">No cancelled Jobs at the moment.</p>
+                    <div class="table-responsive">
+                        <table class="table priority-Jobs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='3'");
+                                $detail_check->execute();
+                                $detail_result = $detail_check->get_result();
+
+                                while ($user_row = $detail_result->fetch_assoc()) {
+                                    echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

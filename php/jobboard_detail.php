@@ -146,7 +146,7 @@ $userName=$_SESSION['username'];
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT b.bidding_id, u.user_photo, u.user_fullname, b.bidding_amount, u.user_id
+                                    $sql = "SELECT b.bidding_id, u.user_photo, u.user_fullname, u.user_contactNumber, u.user_email, u.user_gender, u.user_age, b.bidding_amount, b.bidding_time, u.user_id
                                             FROM bidding b
                                             INNER JOIN user u ON b.user_id = u.user_id
                                             WHERE b.task_id = ?";
@@ -155,16 +155,42 @@ $userName=$_SESSION['username'];
                                     if ($stmt->execute()) {
                                         $result = $stmt->get_result();
                                         while ($row = $result->fetch_assoc()) {
-                                            echo "<form method='POST' action='bidder_profile.php?user_id={$row['user_id']}&task_id={$id}&bidding_id={$row['bidding_id']}'>";
+                                            echo "<form method='POST' action='bidder_profile.php?'>";
                                             echo "<tr>"; // Added onclick and style
-                                            echo "<td><img src='{$row['user_photo']}' alt='Profile Picture' class='rounded-circle' width='50' height='50'></td>";
+                                            echo "<td><img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='30px' height='30px'></td>";
                                             echo "<td>{$row['user_fullname']}</td>";
                                             echo "<td>RM {$row['bidding_amount']}</td>";
                                             if ($_SESSION['user_id'] == $userid){
-                                            echo "<td><button type='submit' class='btn btn-danger'>Accept</button></td>";
+                                                echo "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>Accept</button></td>";
                                             }
                                             echo "</tr>";
                                             echo "</form>";
+
+                                            echo "
+                                            <div class='modal fade' id='" . $row['bidding_id'] . "' tabindex='-1' aria-labelledby='" . $row['bidding_id'] . "Label' aria-hidden='true'>
+                                                <div class='modal-dialog modal-dialog-centered'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header text-center'>
+                                                            <h1 class='modal-title fs-4 fw-bold' id='" . $row['bidding_id'] . "Label'>Accept this bid?</h1>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body'>
+                                                            <img src='{$row['user_photo']}' id='modal-photo' class='rounded-circle mb-2'>
+                                                            <p><span class='fw-bold'>Name:</span> {$row['user_fullname']}</p>
+                                                            <p><span class='fw-bold'>Contact Number:</span> {$row['user_contactNumber']}</p>
+                                                            <p><span class='fw-bold'>E-mail:</span> {$row['user_email']}</p>
+                                                            <p><span class='fw-bold'>Gender:</span> {$row['user_gender']}</p>
+                                                            <p><span class='fw-bold'>Age:</span> {$row['user_age']}</p>
+                                                            <p><span class='fw-bold'>Bidding amount:</span> RM {$row['bidding_amount']}</p>
+                                                            <p><span class='fw-bold'>Bidding time:</span> {$row['bidding_time']}</p>
+                                                        </div>
+                                                        <div class='modal-footer justify-content-center'>
+                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancel</button>
+                                                            <a href='accept_bid.php?bidding_id={$row['bidding_id']}&task_id={$id}&user_id={$row['user_id']}' class='btn btn-danger'>Accept bid</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>";
                                         }
                                     }
                                     ?>
