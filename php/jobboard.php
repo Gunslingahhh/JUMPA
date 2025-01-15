@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+$user_id=$_SESSION['user_id'];
 include "connection.php";
 ?>
 
@@ -31,6 +32,17 @@ include "connection.php";
         <div class="container">
             <!-- Page Title -->
             <h4 class="mb-4 text-center">Job Board</h4>
+            <?php 
+                if (isset($_SESSION['error'])) {
+                    echo "<div class='alert alert-danger mt-2 text-center'>" . $_SESSION['error'] . "</div>";
+                    unset($_SESSION['error']);
+                }
+
+                if (isset($_SESSION['message'])) {
+                    echo "<div class='alert alert-success mt-2 text-center'>" . $_SESSION['message'] . "</div>";
+                    unset($_SESSION['message']); // Clear the error message
+                }
+            ?>
 
             <!-- Tabs Navigation -->
             <ul class="nav nav-tabs custom-nav-tabs" id="JobsTabs" role="tablist">
@@ -97,12 +109,15 @@ include "connection.php";
                             </thead>
                             <tbody>
                                 <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='1'");
+                                $detail_check = $conn->prepare("SELECT * FROM task t 
+                                                                INNER JOIN job j ON t.task_id = j.task_id
+                                                                WHERE t.task_status='1' AND t.user_id=?");
+                                $detail_check->bind_param("i", $user_id);
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr onclick='window.location.href = \"bidder_profile.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
@@ -128,13 +143,16 @@ include "connection.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='2'");
+                            <?php
+                                $detail_check = $conn->prepare("SELECT * FROM task t 
+                                                                INNER JOIN job j ON t.task_id = j.task_id
+                                                                WHERE t.task_status='2' AND t.user_id=?");
+                                $detail_check->bind_param("i", $user_id);
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
@@ -160,13 +178,16 @@ include "connection.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='3'");
+                            <?php
+                                $detail_check = $conn->prepare("SELECT * FROM task t 
+                                                                INNER JOIN job j ON t.task_id = j.task_id
+                                                                WHERE t.task_status='3' AND t.user_id=?");
+                                $detail_check->bind_param("i", $user_id);
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";

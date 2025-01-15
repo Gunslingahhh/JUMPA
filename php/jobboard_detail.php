@@ -155,7 +155,6 @@ $userName=$_SESSION['username'];
                                     if ($stmt->execute()) {
                                         $result = $stmt->get_result();
                                         while ($row = $result->fetch_assoc()) {
-                                            echo "<form method='POST' action='bidder_profile.php?'>";
                                             echo "<tr>"; // Added onclick and style
                                             echo "<td><img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='30px' height='30px'></td>";
                                             echo "<td>{$row['user_fullname']}</td>";
@@ -164,7 +163,6 @@ $userName=$_SESSION['username'];
                                                 echo "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>Accept</button></td>";
                                             }
                                             echo "</tr>";
-                                            echo "</form>";
 
                                             echo "
                                             <div class='modal fade' id='" . $row['bidding_id'] . "' tabindex='-1' aria-labelledby='" . $row['bidding_id'] . "Label' aria-hidden='true'>

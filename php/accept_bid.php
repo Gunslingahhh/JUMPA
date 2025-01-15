@@ -12,17 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['bidding_id']) && isset($
     $jobInsert->bind_param("iii", $user_id, $task_id, $bidding_id);
 
     if ($jobInsert->execute()){
-        echo "Success!";
-        $statusUpdate = $conn->prepare("UPDATE task SET task_status='2' WHERE task_id=?");
+        $statusUpdate = $conn->prepare("UPDATE task SET task_status='1' WHERE task_id=?");
         $statusUpdate->bind_param("i", $task_id);
 
         if($statusUpdate->execute()){
-            echo "Status updated!";
+            $_SESSION["message"] = "You have accepted the employee.";
+            header("Location: jobboard.php");
         }else{
-            echo "Status not updated!";
+            $_SESSION["error"] = "There is something wrong with you request. Please try again.";
+            header("Location: jobboard.php");
         }
     }else{
-        echo "Fail!";
+        //Do nothing
     }
 }
 ?>
