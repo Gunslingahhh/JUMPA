@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['bidding_id']) && isset($
             $_SESSION["message"] = "You have accepted the employee.";
             header("Location: jobboard.php");
         }else{
-            $_SESSION["error"] = "There is something wrong with you request. Please try again.";
+            $_SESSION["error"] = "There is something wrong with your request. Please try again.";
             header("Location: jobboard.php");
         }
     }else{
