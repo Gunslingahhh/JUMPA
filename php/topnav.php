@@ -46,13 +46,13 @@
                         </li> -->
                     </ul>
                     <!-- Search Bar -->
-                    <form class="d-flex nav-search-bar">
+                    <!-- <form class="d-flex nav-search-bar">
                         <input type="text" class="form-control me-2" name="search-bar" id="nav-search" placeholder="How can we help?">
-                    </form>
+                    </form> -->
                     <!-- Notifications, Messages, User Info -->
                     <div class="d-flex align-items-center gap-3">
-                        <img src="../assets/images/icons8-bell.png" alt="Notifications Icon" width="32" class="notifications-img">
-                        <img src="../assets/images/icons8-messages.png" alt="Messages Icon" width="32" class="messages-img">
+                        <!-- <img src="../assets/images/icons8-bell.png" alt="Notifications Icon" width="32" class="notifications-img">
+                        <img src="../assets/images/icons8-messages.png" alt="Messages Icon" width="32" class="messages-img"> -->
                         <div class="nav-item dropdown profile-dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?php echo $_SESSION['username'];?>
