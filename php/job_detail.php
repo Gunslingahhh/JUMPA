@@ -30,75 +30,95 @@ $userName=$_SESSION['username'];
         $id = $_GET['task_id'];
         $user_id = $_SESSION['user_id'];
 
-        $detail_check = $conn->prepare("SELECT * FROM task t
-                                        INNER JOIN job j ON t.task_id = j.task_id
-                                        INNER JOIN user u ON u.user_id = j.user_id
-                                        INNER JOIN bidding b on b.bidding_id = j.bidding_id
-                                        WHERE t.task_status = '1' AND t.user_id = ?;");
+        $detail_check = $conn->prepare("SELECT * FROM task 
+                                        WHERE task_status = '1' AND user_id = ?;");
         
         $detail_check->bind_param("i", $user_id);
         $detail_check->execute();
         $detail_result = $detail_check->get_result();
 
         while ($user_row = $detail_result->fetch_assoc()) {
-        echo "
-            <div class='employee-dashboard pb-0'>            
-                <div class='container'>
-                    <h4 class='mb-4 text-center'>Job Details</h4>
-                    <div class='row full-height'>
-                        <div class='col-12 mb-4'>
-                            <div class='container task-details-card'>
-                                <h5 class='mb-4'>Employee Details</h5>
-                                <div class='row details-p'>
-                                    <div class='col-lg-3 col-md-6 col-sm-12'>
-                                        <img src='{$user_row['user_photo']}' id='modal-photo' class='rounded-circle mb-2'>
-                                        <p><strong>Name: </strong> " . htmlspecialchars($user_row['user_fullname']) . "</p>
-                                        <p><strong>Contact Number: </strong> " . htmlspecialchars($user_row['user_contactNumber']) . "</p>
-                                        <p><strong>E-mail: </strong> " . htmlspecialchars($user_row['user_email']) . "</p>
-                                        <p><strong>Gender: </strong> " . htmlspecialchars($user_row['user_gender']) . "</p>
-                                        <p><strong>Age: </strong> " . htmlspecialchars($user_row['user_age']) . "</p>
-                                        <p><strong>Bidding amount: RM </strong> " . htmlspecialchars($user_row['bidding_amount']) . "</p>
-                                        <p><strong>Bidding time: </strong> " . htmlspecialchars($user_row['bidding_time']) . "</p>
+            echo "
+            <main>
+                <div class='employee-dashboard pb-0'>            
+                    <div class='container w-75'>
+                        <h4 class='mb-4 text-center'>Job Details</h4>
+                        <div class='row full-height'>
+                            <div class='col-12 mb-4'>
+                                <div class='container task-details-card'>
+                                    <h5 class='mb-4 text-center'>Task Details</h5>
+                                    <div class='row details-p'>
+                                        <div class='col-lg-3 col-md-6 col-sm-12'>
+                                            <p><strong>Title:</strong> " . htmlspecialchars($user_row['task_title']) . "</p>
+                                            <p><strong>Description:</strong> " . htmlspecialchars($user_row['task_description']) . "</p>
+                                            <p><strong>Date:</strong> " . htmlspecialchars($user_row['task_date']) . "</p>
+                                            <p><strong>Duration:</strong> " . htmlspecialchars($user_row['task_duration']) . "</p>
+                                            <p><strong>Location:</strong> " . htmlspecialchars($user_row['task_location']) . "</p>
+                                            <p><strong>Tools Required:</strong> " . htmlspecialchars($user_row['task_toolsRequired']) . "</p>
+                                            <p><strong>Pax:</strong> " . htmlspecialchars($user_row['task_pax']) . "</p>
+                                            <p><strong>Price: </strong> RM " . htmlspecialchars($user_row['task_price']) . "</p>
+                                            <p><strong>Dress Code:</strong> " . htmlspecialchars($user_row['task_dressCode']) . "</p>
+                                            <p><strong>Gender:</strong> " . htmlspecialchars($user_row['task_gender']) . "</p>
+                                            <p><strong>Nationality:</strong> " . htmlspecialchars($user_row['task_nationality']) . "</p>
+                                            <p><strong>Age Range:</strong> " . htmlspecialchars($user_row['task_ageRange']) . "</p>
+                                            <p><strong>Muslim Friendly:</strong> " . htmlspecialchars($user_row['task_muslimFriendly'] == 1 ? "Yes" : "No") . "</p>
+                                            <p><strong>Food Provided?:</strong> " . htmlspecialchars($user_row['task_foodProvision'] == 1 ? "Yes" : "No") . "</p>
+                                            <p><strong>Transport Provided?:</strong> " . htmlspecialchars($user_row['task_transportProvision'] == 1 ? "Yes" : "No") . "</p>
+                                        </div>
                                     </div>
+                                </div>"; ?>
+                                <div class="container task-details-card">
+                                    <h5 class="mb-4 text-center">Employee</h5>
+                                    <div class="row details-p">
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead class="table-light">
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php
+                                                        $sql = $conn->prepare("SELECT u.user_photo, u.user_fullname, b.bidding_amount
+                                                                                FROM user u
+                                                                                INNER JOIN job j ON j.user_id = u.user_id
+                                                                                INNER JOIN bidding b ON b.bidding_id = j.bidding_id
+                                                                                WHERE j.task_id=?");
+
+                                                        $sql->bind_param("i", $id);
+                                                        if ($sql->execute()) {
+                                                            $result = $sql->get_result();
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                echo "<tr role='button'>"; // Added onclick and style
+                                                                echo "
+                                                                <td>
+                                                                    <div class='rounded-circle' style='width: 40px; height: 40px; overflow: hidden; display: flex; justify-content: center; align-items: center;'>
+                                                                        <img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='40px' height='40px'>
+                                                                    </div>
+                                                                </td>";
+                                                                echo "<td>{$row['user_fullname']}</td>";
+                                                                echo "<td>RM {$row['bidding_amount']}</td>";
+                                                                echo "</tr>";
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='d-flex justify-content-center mt-5'>
+                                    <a href='cancel_job.php?task_id=<?php echo $id?>' class='btn btn-danger me-5'>Cancel Job</a>
+                                    <a href='complete_job.php?task_id=<?php echo $id?>' class='btn btn-success ms-5'>Mark as complete</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class='employee-dashboard pt-0'>            
-                <div class='container'>
-                    <div class='row full-height'>
-                        <div class='col-12 mb-4'>
-                            <div class='container task-details-card'>
-                                <h5 class='mb-4'>Task Details</h5>
-                                <div class='row details-p'>
-                                    <div class='col-lg-3 col-md-6 col-sm-12'>
-                                        <p><strong>Title:</strong> " . htmlspecialchars($user_row['task_title']) . "</p>
-                                        <p><strong>Description:</strong> " . htmlspecialchars($user_row['task_description']) . "</p>
-                                        <p><strong>Date:</strong> " . htmlspecialchars($user_row['task_date']) . "</p>
-                                        <p><strong>Duration:</strong> " . htmlspecialchars($user_row['task_duration']) . "</p>
-                                        <p><strong>Location:</strong> " . htmlspecialchars($user_row['task_location']) . "</p>
-                                        <p><strong>Tools Required:</strong> " . htmlspecialchars($user_row['task_toolsRequired']) . "</p>
-                                        <p><strong>Pax:</strong> " . htmlspecialchars($user_row['task_pax']) . "</p>
-                                        <p><strong>Price:</strong> " . htmlspecialchars($user_row['task_price']) . "</p>
-                                        <p><strong>Dress Code:</strong> " . htmlspecialchars($user_row['task_dressCode']) . "</p>
-                                        <p><strong>Gender:</strong> " . htmlspecialchars($user_row['task_gender']) . "</p>
-                                        <p><strong>Nationality:</strong> " . htmlspecialchars($user_row['task_nationality']) . "</p>
-                                        <p><strong>Age Range:</strong> " . htmlspecialchars($user_row['task_ageRange']) . "</p>
-                                        <p><strong>Muslim Friendly:</strong> " . htmlspecialchars($user_row['task_muslimFriendly']) . "</p>
-                                        <p><strong>Food Provision:</strong> " . htmlspecialchars($user_row['task_foodProvision']) . "</p>
-                                        <p><strong>Transport Provision:</strong> " . htmlspecialchars($user_row['task_transportProvision']) . "</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>";
+            </main>
+    <?php 
         }
     ?>
+    
     <?php include 'footer.php'; ?>
 
     <!-- Scripts -->
