@@ -66,7 +66,7 @@ include "connection.php";
                 <div class="tab-pane fade show active mb-3" id="priority" role="tabpanel" aria-labelledby="priority-tab">
                     <h5 class="mt-3 mb-3">Priority Jobs</h5>
                     <div class="table-responsive">
-                        <table class="table priority-Jobs-table">
+                        <table class="table table-hover priority-Jobs-table">
                             <thead class="table-light">
                                 <tr>
                                     <th>Title</th>
@@ -96,9 +96,9 @@ include "connection.php";
                 </div>
 
                 <div class="tab-pane fade mb-3" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                    <h5 class="mt-3 mb-3">Delivered Jobs</h5>
+                    <h5 class="mt-3 mb-3">Pending Jobs</h5>
                     <div class="table-responsive">
-                        <table class="table priority-Jobs-table">
+                        <table class="table table-hover priority-Jobs-table">
                             <thead class="table-light">
                                 <tr>
                                     <th>Title</th>
@@ -109,9 +109,29 @@ include "connection.php";
                             </thead>
                             <tbody>
                                 <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task t 
-                                                                INNER JOIN job j ON t.task_id = j.task_id
-                                                                WHERE t.task_status='1' AND t.user_id=?");
+                                $detail_check = $conn->prepare("SELECT
+                                                                    t.task_id,
+                                                                    t.task_title,
+                                                                    t.task_description,
+                                                                    t.task_date,
+                                                                    t.task_location,
+                                                                    (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ) AS related_user_ids
+                                                                FROM
+                                                                    task t
+                                                                WHERE
+                                                                    t.task_status = 1 AND FIND_IN_SET(?, (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ));");
                                 $detail_check->bind_param("i", $user_id);
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
@@ -144,15 +164,35 @@ include "connection.php";
                             </thead>
                             <tbody>
                             <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task t 
-                                                                INNER JOIN job j ON t.task_id = j.task_id
-                                                                WHERE t.task_status='2' AND t.user_id=?");
+                                $detail_check = $conn->prepare("SELECT
+                                                                    t.task_id,
+                                                                    t.task_title,
+                                                                    t.task_description,
+                                                                    t.task_date,
+                                                                    t.task_location,
+                                                                    (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ) AS related_user_ids
+                                                                FROM
+                                                                    task t
+                                                                WHERE
+                                                                    t.task_status = 2 AND FIND_IN_SET(?, (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ));");
                                 $detail_check->bind_param("i", $user_id);
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<tr>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
@@ -179,15 +219,35 @@ include "connection.php";
                             </thead>
                             <tbody>
                             <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task t 
-                                                                INNER JOIN job j ON t.task_id = j.task_id
-                                                                WHERE t.task_status='3' AND t.user_id=?");
+                                $detail_check = $conn->prepare("SELECT
+                                                                    t.task_id,
+                                                                    t.task_title,
+                                                                    t.task_description,
+                                                                    t.task_date,
+                                                                    t.task_location,
+                                                                    (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ) AS related_user_ids
+                                                                FROM
+                                                                    task t
+                                                                WHERE
+                                                                    t.task_status = 3 AND FIND_IN_SET(?, (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ));");
                                 $detail_check->bind_param("i", $user_id);
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<tr>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
