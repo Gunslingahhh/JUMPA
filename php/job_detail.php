@@ -107,17 +107,54 @@ $userName=$_SESSION['username'];
                                     </div>
                                 </div>
                                 <div class='d-flex justify-content-center mt-5'>
-                                    <a href='cancel_job.php?task_id=<?php echo $id?>' class='btn btn-danger me-5'>Cancel Job</a>
-                                    <a href='complete_job.php?task_id=<?php echo $id?>' class='btn btn-success ms-5'>Mark job as complete</a>
+                                    <button type="button" class="btn btn-danger me-5" data-bs-toggle="modal" data-bs-target="#cancelJobModal">Cancel Job</button>
+                                    <button type="button" class="btn btn-success ms-5" data-bs-toggle="modal" data-bs-target="#completeJobModal">Mark job as complete</button>
+                                </div>
+
+                                <div class='modal fade' id='cancelJobModal' tabindex='-1' aria-labelledby='cancelJobModalLabel' aria-hidden='true'>
+                                    <div class='modal-dialog modal-dialog-centered'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h5 class='modal-title' id='cancelJobModalLabel'>Cancel this job?</h5>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                <p>Are you sure you want to cancel this job?</p>
+                                                <p class="text-danger">This action cannot be undone!</p>
+                                            </div>
+                                            <div class='modal-footer justify-content-center'>
+                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>
+                                                <a href='cancel_job.php?task_id=<?php echo htmlspecialchars($id); ?>' class='btn btn-danger'>Yes, cancel this job.</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class='modal fade' id='completeJobModal' tabindex='-1' aria-labelledby='completeJobModalLabel' aria-hidden='true'>
+                                    <div class='modal-dialog modal-dialog-centered'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h5 class='modal-title' id='completeJobModalLabel'>Mark job as complete?</h5>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                <p>Are you sure you want to mark this job as complete?</p>
+                                            </div>
+                                            <div class='modal-footer justify-content-center'>
+                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>
+                                                <a href='complete_job.php?task_id=<?php echo htmlspecialchars($id); ?>' class='btn btn-success'>Yes, mark as complete.</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
-    <?php 
-        }
-    ?>
+        <?php 
+            }
+        ?>
     
     <?php include 'footer.php'; ?>
 
