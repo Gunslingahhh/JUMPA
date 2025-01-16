@@ -108,7 +108,7 @@ $userName=$_SESSION['username'];
                                 </div>
                                 <div class='d-flex justify-content-center mt-5'>
                                     <a href='cancel_job.php?task_id=<?php echo $id?>' class='btn btn-danger me-5'>Cancel Job</a>
-                                    <a href='complete_job.php?task_id=<?php echo $id?>' class='btn btn-success ms-5'>Mark as complete</a>
+                                    <a href='complete_job.php?task_id=<?php echo $id?>' class='btn btn-success ms-5'>Mark job as complete</a>
                                 </div>
                             </div>
                         </div>
