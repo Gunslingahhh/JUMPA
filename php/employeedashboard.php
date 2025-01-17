@@ -47,10 +47,7 @@ include "connection.php";
             <!-- Tabs Navigation -->
             <ul class="nav nav-tabs custom-nav-tabs" id="JobsTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="priority-tab" data-bs-toggle="tab" data-bs-target="#priority" type="button" role="tab">Priority</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">Pending</button>
+                    <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">Pending</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab">Completed</button>
@@ -62,40 +59,7 @@ include "connection.php";
 
             <!-- Tab Content -->
             <div class="tab-content" id="JobsTabsContent">
-                <!-- Priority Tab -->
-                <div class="tab-pane fade show active mb-3" id="priority" role="tabpanel" aria-labelledby="priority-tab">
-                    <h5 class="mt-3 mb-3">Priority Jobs</h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover priority-Jobs-table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='0'");
-                                $detail_check->execute();
-                                $detail_result = $detail_check->get_result();
-
-                                while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade mb-3" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                <div class="tab-pane show active fade mb-3" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                     <h5 class="mt-3 mb-3">Pending Jobs</h5>
                     <div class="table-responsive">
                         <table class="table table-hover priority-Jobs-table">
