@@ -4,9 +4,12 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../index.php");
+    header("Location: index.php");
     exit();
 }
+
+$user_id=$_SESSION['user_id'];
+include "connection.php";
 ?>
 
 <!DOCTYPE html>
@@ -19,77 +22,242 @@ if (!isset($_SESSION['user_id'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
-<body>
+<body class="jobboard-body">
     <?php
         include "topnav.php";
     ?>
 
     <!-- Main Content -->
-    <main>
-        <div class="employee-dashboard">
+    <main class="employee-dashboard">
+        <div class="container">
+            <!-- Page Title -->
+            <h4 class="mb-4 text-center">Job Board</h4>
+            <?php 
+                if (isset($_SESSION['error'])) {
+                    echo "<div class='alert alert-danger mt-2 text-center'>" . $_SESSION['error'] . "</div>";
+                    unset($_SESSION['error']);
+                }
 
-            <!-- Recommended Gigs -->
-            <h4 class="mt-3 mb-4 text-center">Recommended Gigs</h4>
-            <div class="row gig-row">
-                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
-                    <p class="time-posted">Posted 2 weeks ago</p>
-                    <h3 class="recommended-gig-title">Cut my house grass</h3>
-                    <img src="../assets/images/cut-grass.jpeg" alt="Cut grass" class="gig-card-img">
-                    <div class="time">
-                        <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 1300 - 1600</p>
-                    </div>
-                    <div class="location">
-                        <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Bangsar, KL</p>
-                    </div>
-                    <div class="price">
-                        <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM90</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
-                    <p class="time-posted">Posted 2 weeks ago</p>
-                    <h3 class="recommended-gig-title">Wash clothes</h3>
-                    <img src="../assets/images/laundry.jpeg" alt="Washing clothes" class="gig-card-img">
-                    <div class="time">
-                        <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 1600 - 1700</p>
-                    </div>
-                    <div class="location">
-                        <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Seri Kembangan, KL</p>
-                    </div>
-                    <div class="price">
-                        <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM50</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
-                    <p class="time-posted">Posted Yesterday</p>
-                    <h3 class="recommended-gig-title">Market helper</h3>
-                    <img src="../assets/images/market.jpeg" alt="Market helper" class="gig-card-img">
-                    <div class="time">
-                        <p class="gig-time"><img src="../assets/images/time.png" alt="Time" class="gig-img" /> 0700 - 0900</p>
-                    </div>
-                    <div class="location">
-                        <p class="gig-location"><img src="../assets/images/location.png" alt="location" class="gig-img"> Kajang, Selangor</p>
-                    </div>
-                    <div class="price">
-                        <p class="gig-price"><img src="../assets/images/price.png" alt="price" class="gig-img" /> RM30</p>
-                    </div>
-                </div>
-            </div>
+                if (isset($_SESSION['message'])) {
+                    echo "<div class='alert alert-success mt-2 text-center'>" . $_SESSION['message'] . "</div>";
+                    unset($_SESSION['message']); // Clear the error message
+                }
+            ?>
 
-            <!-- Recent Gigs -->
-            <h2 class="section-title mt-3">Your Recent Gigs</h2>
-            <div class="row gig-row">
-                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
-                    <h3 class="recent-gig-title">None</h3>
-                    <img src="../assets/images/bidding.png" alt="Bid for jobs now!">
-                    <p>Bid for jobs now!</p>
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs custom-nav-tabs" id="JobsTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="priority-tab" data-bs-toggle="tab" data-bs-target="#priority" type="button" role="tab">Priority</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">Pending</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab">Completed</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cancelled-tab" data-bs-toggle="tab" data-bs-target="#cancelled" type="button" role="tab">Cancelled</button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="JobsTabsContent">
+                <!-- Priority Tab -->
+                <div class="tab-pane fade show active mb-3" id="priority" role="tabpanel" aria-labelledby="priority-tab">
+                    <h5 class="mt-3 mb-3">Priority Jobs</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover priority-Jobs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='0'");
+                                $detail_check->execute();
+                                $detail_result = $detail_check->get_result();
+
+                                while ($user_row = $detail_result->fetch_assoc()) {
+                                    echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
-                    <h3></h3>
+
+                <div class="tab-pane fade mb-3" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                    <h5 class="mt-3 mb-3">Pending Jobs</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover priority-Jobs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $detail_check = $conn->prepare("SELECT
+                                                                    t.task_id,
+                                                                    t.task_title,
+                                                                    t.task_description,
+                                                                    t.task_date,
+                                                                    t.task_location,
+                                                                    (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ) AS related_user_ids
+                                                                FROM
+                                                                    task t
+                                                                WHERE
+                                                                    t.task_status = 1 AND FIND_IN_SET(?, (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ));");
+                                $detail_check->bind_param("i", $user_id);
+                                $detail_check->execute();
+                                $detail_result = $detail_check->get_result();
+
+                                while ($user_row = $detail_result->fetch_assoc()) {
+                                    echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 gig-card">
-                    <h3></h3>
+
+                <div class="tab-pane fade mb-3" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                    <h5 class="mt-3 mb-3">Completed Jobs</h5>
+                    <div class="table-responsive">
+                        <table class="table priority-Jobs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                $detail_check = $conn->prepare("SELECT
+                                                                    t.task_id,
+                                                                    t.task_title,
+                                                                    t.task_description,
+                                                                    t.task_date,
+                                                                    t.task_location,
+                                                                    (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ) AS related_user_ids
+                                                                FROM
+                                                                    task t
+                                                                WHERE
+                                                                    t.task_status = 2 AND FIND_IN_SET(?, (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ));");
+                                $detail_check->bind_param("i", $user_id);
+                                $detail_check->execute();
+                                $detail_result = $detail_check->get_result();
+
+                                while ($user_row = $detail_result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade mb-3" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
+                    <h5 class="mt-3 mb-3">Cancelled Jobs</h5>
+                    <div class="table-responsive">
+                        <table class="table priority-Jobs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                $detail_check = $conn->prepare("SELECT
+                                                                    t.task_id,
+                                                                    t.task_title,
+                                                                    t.task_description,
+                                                                    t.task_date,
+                                                                    t.task_location,
+                                                                    (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ) AS related_user_ids
+                                                                FROM
+                                                                    task t
+                                                                WHERE
+                                                                    t.task_status = 3 AND FIND_IN_SET(?, (
+                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                                        FROM user u
+                                                                        LEFT JOIN job j ON u.user_id = j.user_id
+                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                                                    ));");
+                                $detail_check->bind_param("i", $user_id);
+                                $detail_check->execute();
+                                $detail_result = $detail_check->get_result();
+
+                                while ($user_row = $detail_result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

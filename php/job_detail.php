@@ -30,15 +30,31 @@ $userName=$_SESSION['username'];
         $id = $_GET['task_id'];
         $user_id = $_SESSION['user_id'];
 
-        $detail_check = $conn->prepare("SELECT * FROM task 
-                                        WHERE task_status = '1' AND user_id = ?;");
-        
-        $detail_check->bind_param("i", $user_id);
-        $detail_check->execute();
-        $detail_result = $detail_check->get_result();
+        $detail_check = $conn->prepare("SELECT
+                                            *,
+                                            (
+                                                SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                FROM user u
+                                                LEFT JOIN job j ON u.user_id = j.user_id
+                                                LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                            ) AS related_user_ids
+                                        FROM
+                                            task t
+                                        WHERE
+                                            t.task_status = 1 AND FIND_IN_SET(?, (
+                                                SELECT GROUP_CONCAT(DISTINCT u.user_id)
+                                                FROM user u
+                                                LEFT JOIN job j ON u.user_id = j.user_id
+                                                LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
+                                                WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
+                                            ));");
+            $detail_check->bind_param("i", $user_id);
+            $detail_check->execute();
+            $detail_result = $detail_check->get_result();
 
-        while ($user_row = $detail_result->fetch_assoc()) {
-            echo "
+            while ($user_row = $detail_result->fetch_assoc()) {
+                echo "
             <main>
                 <div class='employee-dashboard pb-0'>            
                     <div class='container w-75'>
@@ -129,8 +145,14 @@ $userName=$_SESSION['username'];
                                     </div>
                                 </div>
                                 <div class='d-flex justify-content-center mt-5'>
-                                    <button type="button" class="btn btn-danger me-5" data-bs-toggle="modal" data-bs-target="#cancelJobModal">Cancel Job</button>
-                                    <button type="button" class="btn btn-success ms-5" data-bs-toggle="modal" data-bs-target="#completeJobModal">Mark job as complete</button>
+                                    <?php       
+                                        if($user_row['user_id'] == $user_id){
+                                            echo "<button type='button' class='btn btn-danger me-5' data-bs-toggle='modal' data-bs-target='#cancelJobModal'>Cancel Job</button>
+                                            <button type='button' class='btn btn-success ms-5' data-bs-toggle='modal' data-bs-target='#completeJobModal'>Mark job as complete</button>";
+                                        }else{
+                                            //Do nothing
+                                        }                                       
+                                    ?>
                                 </div>
 
                                 <div class='modal fade' id='cancelJobModal' tabindex='-1' aria-labelledby='cancelJobModalLabel' aria-hidden='true'>
