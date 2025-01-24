@@ -44,6 +44,11 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
 
                         <div class="form-row">
+                            <label for="taskphoto" class="form-label">Task Photo</label>
+                            <textarea class="form-control" name="taskphoto" id="taskphoto" rows="4" required></textarea>
+                        </div>
+
+                        <div class="form-row">
                             <label for="taskdate" class="form-label">Task Date</label>
                             <input type="date" class="form-control" name="taskdate" id="taskdate" required>
                         </div>
