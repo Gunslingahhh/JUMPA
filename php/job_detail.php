@@ -92,52 +92,56 @@ $userName=$_SESSION['username'];
                                                     <thead class="table-light">
                                                     </thead>
                                                     <tbody>
-                                                    <?php
-                                                        $sql = $conn->prepare("SELECT *
-                                                                                FROM user u
-                                                                                INNER JOIN job j ON j.user_id = u.user_id
-                                                                                INNER JOIN bidding b ON b.bidding_id = j.bidding_id
-                                                                                WHERE j.task_id=?");
+                                                <?php
+                                                    $sql = $conn->prepare("SELECT *
+                                                                            FROM user u
+                                                                            INNER JOIN job j ON j.user_id = u.user_id
+                                                                            INNER JOIN bidding b ON b.bidding_id = j.bidding_id
+                                                                            WHERE j.task_id=?");
 
-                                                        $sql->bind_param("i", $id);
-                                                        if ($sql->execute()) {
-                                                            $result = $sql->get_result();
-                                                            while ($row = $result->fetch_assoc()) {
-                                                                echo "<tr role='button' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>"; // Added onclick and style
-                                                                echo "
-                                                                <td>
-                                                                    <div class='rounded-circle' style='width: 40px; height: 40px; overflow: hidden; display: flex; justify-content: center; align-items: center;'>
-                                                                        <img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='40px' height='40px'>
-                                                                    </div>
-                                                                </td>";
-                                                                echo "<td>{$row['user_fullname']}</td>";
-                                                                echo "<td>RM {$row['bidding_amount']}</td>";
-                                                                echo "</tr>";
+                                                    $sql->bind_param("i", $id);
+                                                    if ($sql->execute()) {
+                                                        $result = $sql->get_result();
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<tr role='button' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>"; // Added onclick and style
+                                                            echo "
+                                                            <td>
+                                                                <div class='rounded-circle' style='width: 40px; height: 40px; overflow: hidden; display: flex; justify-content: center; align-items: center;'>
+                                                                    <img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='40px' height='40px'>
+                                                                </div>
+                                                            </td>";
+                                                            echo "<td>{$row['user_fullname']}</td>";
+                                                            echo "<td>RM {$row['bidding_amount']}</td>";
+                                                            echo "</tr>";
 
-                                                                echo "
-                                                                <div class='modal fade' id='" . $row['bidding_id'] . "' tabindex='-1' aria-labelledby='" . $row['bidding_id'] . "Label' aria-hidden='true'>
-                                                                    <div class='modal-dialog modal-dialog-centered'>
-                                                                        <div class='modal-content'>
-                                                                            <div class='modal-header text-center'>
-                                                                                <h1 class='modal-title fs-4 fw-bold' id='" . $row['bidding_id'] . "Label'>Employee detail</h1>
-                                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                                            </div>
-                                                                            <div class='modal-body'>
+                                                            echo "
+                                                            <div class='modal fade' id='" . $row['bidding_id'] . "' tabindex='-1' aria-labelledby='" . $row['bidding_id'] . "Label' aria-hidden='true'>
+                                                                <div class='modal-dialog modal-dialog-centered'>
+                                                                    <div class='modal-content'>
+                                                                        <div class='modal-header text-center'>
+                                                                            <h1 class='modal-title fs-4 fw-bold' id='" . $row['bidding_id'] . "Label'>Employee information</h1>
+                                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                                        </div>
+                                                                        <div class='modal-body'>
+                                                                            <div class='d-flex flex-column align-items-center'>
                                                                                 <img src='{$row['user_photo']}' id='modal-photo' class='rounded-circle mb-2'>
-                                                                                <p><span class='fw-bold'>Name:</span> {$row['user_fullname']}</p>
-                                                                                <p><span class='fw-bold'>Contact Number:</span> {$row['user_contactNumber']}</p>
-                                                                                <p><span class='fw-bold'>E-mail:</span> {$row['user_email']}</p>
-                                                                                <p><span class='fw-bold'>Gender:</span> {$row['user_gender']}</p>
-                                                                                <p><span class='fw-bold'>Age:</span> {$row['user_age']}</p>
-                                                                                <p><span class='fw-bold'>Bidding amount:</span> RM {$row['bidding_amount']}</p>
-                                                                                <p><span class='fw-bold'>Bidding time:</span> {$row['bidding_time']}</p>
+                                                                                <a href='https://wa.me/{$row['user_contactNumber']}' class='btn btn-success mt-3 mb-5 text-decoration-none'>Contact me on WhatsApp</a>
                                                                             </div>
+                                                                            <p><span class='fw-bold'>Name:</span> {$row['user_fullname']}</p>
+                                                                            <p><span class='fw-bold'>Contact Number:</span> {$row['user_contactNumber']}</p>
+                                                                            <p><span class='fw-bold'>E-mail:</span> {$row['user_email']}</p>
+                                                                            <p><span class='fw-bold'>Gender:</span> {$row['user_gender']}</p>
+                                                                            <p><span class='fw-bold'>Age:</span> {$row['user_age']}</p>
+                                                                            <p><span class='fw-bold'>Bidding amount:</span> RM {$row['bidding_amount']}</p>
+                                                                            <p><span class='fw-bold'>Bidding time:</span> {$row['bidding_time']}</p>
+                                                                            
                                                                         </div>
                                                                     </div>
-                                                                </div>";
-                                                            }
+                                                                </div>
+                                                            </div>";
                                                         }
-                                                        ?>
+                                                    }
+                                                    ?>
                                                     </tbody>
                                                 </table>
                                             </div>

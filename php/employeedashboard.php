@@ -31,7 +31,7 @@ include "connection.php";
     <main class="employee-dashboard">
         <div class="container">
             <!-- Page Title -->
-            <h4 class="mb-4 text-center">Job Board</h4>
+            <h4 class="mb-4 text-center">Dashboard</h4>
             <?php 
                 if (isset($_SESSION['error'])) {
                     echo "<div class='alert alert-danger mt-2 text-center'>" . $_SESSION['error'] . "</div>";

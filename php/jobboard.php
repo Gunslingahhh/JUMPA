@@ -44,27 +44,10 @@ include "connection.php";
                 }
             ?>
 
-            <!-- Tabs Navigation -->
-            <ul class="nav nav-tabs custom-nav-tabs" id="JobsTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="priority-tab" data-bs-toggle="tab" data-bs-target="#priority" type="button" role="tab">Priority</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">Pending</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab">Completed</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="cancelled-tab" data-bs-toggle="tab" data-bs-target="#cancelled" type="button" role="tab">Cancelled</button>
-                </li>
-            </ul>
-
             <!-- Tab Content -->
             <div class="tab-content" id="JobsTabsContent">
                 <!-- Priority Tab -->
                 <div class="tab-pane fade show active mb-3" id="priority" role="tabpanel" aria-labelledby="priority-tab">
-                    <h5 class="mt-3 mb-3">Priority Jobs</h5>
                     <div class="table-responsive">
                         <table class="table table-hover priority-Jobs-table">
                             <thead class="table-light">
@@ -77,179 +60,22 @@ include "connection.php";
                             </thead>
                             <tbody>
                                 <?php
-                                $detail_check = $conn->prepare("SELECT * FROM task WHERE task_status='0'");
+                                $detail_check = $conn->prepare("SELECT t.*
+                                                                FROM task t
+                                                                WHERE t.task_status=0;");
                                 $detail_check->execute();
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
+                                    $taskOwner="";
+                                    if ($user_row['user_id'] == $user_id){
+                                        $taskOwner = " (Your post)";
+                                    }else{
+                                        $taskOwner = "";
+                                    }
                                     echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade mb-3" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                    <h5 class="mt-3 mb-3">Pending Jobs</h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover priority-Jobs-table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $detail_check = $conn->prepare("SELECT
-                                                                    t.task_id,
-                                                                    t.task_title,
-                                                                    t.task_description,
-                                                                    t.task_date,
-                                                                    t.task_location,
-                                                                    (
-                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
-                                                                        FROM user u
-                                                                        LEFT JOIN job j ON u.user_id = j.user_id
-                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
-                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
-                                                                    ) AS related_user_ids
-                                                                FROM
-                                                                    task t
-                                                                WHERE
-                                                                    t.task_status = 1 AND FIND_IN_SET(?, (
-                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
-                                                                        FROM user u
-                                                                        LEFT JOIN job j ON u.user_id = j.user_id
-                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
-                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
-                                                                    ));");
-                                $detail_check->bind_param("i", $user_id);
-                                $detail_check->execute();
-                                $detail_result = $detail_check->get_result();
-
-                                while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade mb-3" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-                    <h5 class="mt-3 mb-3">Completed Jobs</h5>
-                    <div class="table-responsive">
-                        <table class="table priority-Jobs-table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                                $detail_check = $conn->prepare("SELECT
-                                                                    t.task_id,
-                                                                    t.task_title,
-                                                                    t.task_description,
-                                                                    t.task_date,
-                                                                    t.task_location,
-                                                                    (
-                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
-                                                                        FROM user u
-                                                                        LEFT JOIN job j ON u.user_id = j.user_id
-                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
-                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
-                                                                    ) AS related_user_ids
-                                                                FROM
-                                                                    task t
-                                                                WHERE
-                                                                    t.task_status = 2 AND FIND_IN_SET(?, (
-                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
-                                                                        FROM user u
-                                                                        LEFT JOIN job j ON u.user_id = j.user_id
-                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
-                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
-                                                                    ));");
-                                $detail_check->bind_param("i", $user_id);
-                                $detail_check->execute();
-                                $detail_result = $detail_check->get_result();
-
-                                while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade mb-3" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
-                    <h5 class="mt-3 mb-3">Cancelled Jobs</h5>
-                    <div class="table-responsive">
-                        <table class="table priority-Jobs-table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                                $detail_check = $conn->prepare("SELECT
-                                                                    t.task_id,
-                                                                    t.task_title,
-                                                                    t.task_description,
-                                                                    t.task_date,
-                                                                    t.task_location,
-                                                                    (
-                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
-                                                                        FROM user u
-                                                                        LEFT JOIN job j ON u.user_id = j.user_id
-                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
-                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
-                                                                    ) AS related_user_ids
-                                                                FROM
-                                                                    task t
-                                                                WHERE
-                                                                    t.task_status = 3 AND FIND_IN_SET(?, (
-                                                                        SELECT GROUP_CONCAT(DISTINCT u.user_id)
-                                                                        FROM user u
-                                                                        LEFT JOIN job j ON u.user_id = j.user_id
-                                                                        LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
-                                                                        WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
-                                                                    ));");
-                                $detail_check->bind_param("i", $user_id);
-                                $detail_check->execute();
-                                $detail_result = $detail_check->get_result();
-
-                                while ($user_row = $detail_result->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "<span class='fw-bold'>" . $taskOwner . "</span>" . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
                                     echo "</tr>";

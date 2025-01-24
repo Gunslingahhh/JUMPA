@@ -12,15 +12,46 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['bidding_id']) && isset($
     $jobInsert->bind_param("iii", $user_id, $task_id, $bidding_id);
 
     if ($jobInsert->execute()){
-        $statusUpdate = $conn->prepare("UPDATE task SET task_status='1' WHERE task_id=?");
-        $statusUpdate->bind_param("i", $task_id);
+        $taskPax = $conn->prepare("SELECT t.task_pax
+                                FROM job j
+                                INNER JOIN task t ON t.task_id = j.task_id
+                                WHERE t.task_id=?");
+        $taskPax->bind_param("i", $task_id);
+        if($taskPax->execute()){
+            $taskResult=$taskPax->get_result();
+            if ($pax = $taskResult->fetch_assoc()) {
+                $paxLimit = $pax['task_pax'];
+            
+                $countTask = $conn->prepare("SELECT COUNT(task_id) AS task_count FROM job WHERE task_id = ?"); // Corrected SQL
+                $countTask->bind_param("i", $task_id);
+            
+                if ($countTask->execute()) {
+                    $countTaskResult = $countTask->get_result();
+                    if ($countRow = $countTaskResult->fetch_assoc()) { // Fetch the count
+                        $taskCount = $countRow['task_count'];
+                        $slotLeft = $paxLimit - $taskCount;
+            
+                        if ($slotLeft == 0){
+                            $statusUpdate = $conn->prepare("UPDATE task SET task_status='1' WHERE task_id=?");
+                            $statusUpdate->bind_param("i", $task_id);
 
-        if($statusUpdate->execute()){
-            $_SESSION["message"] = "You have accepted the employee.";
-            header("Location: jobboard.php");
-        }else{
-            $_SESSION["error"] = "There is something wrong with your request. Please try again.";
-            header("Location: jobboard.php");
+                            if ($statusUpdate->execute()){
+                                $_SESSION['message']="Full user for the task";
+                                header("Location: jobboard.php");
+                            }
+                        }
+                    $_SESSION['message']="You have accepted an employee for your job.";
+                    header("Location: jobboard.php");
+                    } else {
+                        echo "Error fetching task count."; // Handle no count case
+                    }
+                    $countTask->close(); // Close the statement
+                } else {
+                    echo "Error executing count query: " . $countTask->error; // Handle query error
+                }
+            } else {
+                echo "No task found or no pax value for this task."; // Handle no pax case
+            }
         }
     }else{
         //Do nothing

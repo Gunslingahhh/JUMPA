@@ -63,7 +63,7 @@ $userName=$_SESSION['username'];
                 <!-- Task Details -->
                 <div class="row full-height">
                     <!-- Task Details Column -->
-                    <div class="col-12 mb-4">
+                    <div class="col-12 mb-0">
                         <div class="container task-details-card">
                             <h5 class="mb-4">Task Details</h5>
                             <div class="row details-p">
@@ -132,8 +132,8 @@ $userName=$_SESSION['username'];
                     ?>
 
                     <!-- Bidding Information Column -->
-                    <div class="col-12 mb-4">
-                        <div class="bidding-info-card">
+                    <div class="col-12 mb-0">
+                        <div class="p-4 bidding-info-card">
                             <h5 class="mb-3">Bidding Information</h5>
                             <table class="table">
                                 <thead>
@@ -146,10 +146,11 @@ $userName=$_SESSION['username'];
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT b.bidding_id, u.user_photo, u.user_fullname, u.user_contactNumber, u.user_email, u.user_gender, u.user_age, b.bidding_amount, b.bidding_time, u.user_id
+                                    $sql = "SELECT u.user_photo, u.user_fullname, b.bidding_amount, b.bidding_id, u.user_contactNumber, u.user_email, u.user_gender, u.user_age, b.bidding_time, u.user_id
                                             FROM bidding b
-                                            INNER JOIN user u ON b.user_id = u.user_id
-                                            WHERE b.task_id = ?";
+                                            LEFT JOIN job j ON b.bidding_id = j.bidding_id
+                                            INNER JOIN user u ON u.user_id = b.user_id
+                                            WHERE j.bidding_id IS NULL AND b.task_id=?";
                                     $stmt = $conn->prepare($sql);
                                     $stmt->bind_param("i", $id);
                                     if ($stmt->execute()) {
@@ -174,6 +175,9 @@ $userName=$_SESSION['username'];
                                                         </div>
                                                         <div class='modal-body'>
                                                             <img src='{$row['user_photo']}' id='modal-photo' class='rounded-circle mb-2'>
+                                                            <div class='d-flex justify-content-center'>
+                                                                <a href='https://wa.me/{$row['user_contactNumber']}' class='btn btn-success mt-3 mb-5 text-decoration-none'>Contact me on WhatsApp</a>
+                                                            </div>
                                                             <p><span class='fw-bold'>Name:</span> {$row['user_fullname']}</p>
                                                             <p><span class='fw-bold'>Contact Number:</span> {$row['user_contactNumber']}</p>
                                                             <p><span class='fw-bold'>E-mail:</span> {$row['user_email']}</p>
@@ -181,6 +185,7 @@ $userName=$_SESSION['username'];
                                                             <p><span class='fw-bold'>Age:</span> {$row['user_age']}</p>
                                                             <p><span class='fw-bold'>Bidding amount:</span> RM {$row['bidding_amount']}</p>
                                                             <p><span class='fw-bold'>Bidding time:</span> {$row['bidding_time']}</p>
+                                                            
                                                         </div>
                                                         <div class='modal-footer justify-content-center'>
                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancel</button>
@@ -196,6 +201,73 @@ $userName=$_SESSION['username'];
                             </table>
                         </div>
                     </div>
+
+                    <?php 
+                    if ($_SESSION['user_id'] == $userid){
+                        echo "
+                        <div class='col-12'>
+                            <div class='p-4 bidding-form-card'>
+                                <h5>Employee</h5>
+                                <table class='table table-hover'>
+                                    <thead class='table-light'>
+                                    </thead>
+                                    <tbody>";
+                                    $sql = $conn->prepare("SELECT *
+                                    FROM user u
+                                    INNER JOIN job j ON j.user_id = u.user_id
+                                    INNER JOIN bidding b ON b.bidding_id = j.bidding_id
+                                    WHERE j.task_id=?");
+
+                                    $sql->bind_param("i", $id);
+                                    if ($sql->execute()) {
+                                        $result = $sql->get_result();
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr role='button' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>"; // Added onclick and style
+                                            echo "
+                                            <td>
+                                                <div class='rounded-circle' style='width: 40px; height: 40px; overflow: hidden; display: flex; justify-content: center; align-items: center;'>
+                                                    <img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='40px' height='40px'>
+                                                </div>
+                                            </td>";
+                                            echo "<td>{$row['user_fullname']}</td>";
+                                            echo "<td>RM {$row['bidding_amount']}</td>";
+                                            echo "</tr>";
+
+                                            echo "
+                                                            <div class='modal fade' id='" . $row['bidding_id'] . "' tabindex='-1' aria-labelledby='" . $row['bidding_id'] . "Label' aria-hidden='true'>
+                                                                <div class='modal-dialog modal-dialog-centered'>
+                                                                    <div class='modal-content'>
+                                                                        <div class='modal-header text-center'>
+                                                                            <h1 class='modal-title fs-4 fw-bold' id='" . $row['bidding_id'] . "Label'>Employee information</h1>
+                                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                                        </div>
+                                                                        <div class='modal-body'>
+                                                                            <div class='d-flex flex-column align-items-center'>
+                                                                                <img src='{$row['user_photo']}' id='modal-photo' class='rounded-circle mb-2'>
+                                                                                <a href='https://wa.me/{$row['user_contactNumber']}' class='btn btn-success mt-3 mb-5 text-decoration-none'>Contact me on WhatsApp</a>
+                                                                            </div>
+                                                                            <p><span class='fw-bold'>Name:</span> {$row['user_fullname']}</p>
+                                                                            <p><span class='fw-bold'>Contact Number:</span> {$row['user_contactNumber']}</p>
+                                                                            <p><span class='fw-bold'>E-mail:</span> {$row['user_email']}</p>
+                                                                            <p><span class='fw-bold'>Gender:</span> {$row['user_gender']}</p>
+                                                                            <p><span class='fw-bold'>Age:</span> {$row['user_age']}</p>
+                                                                            <p><span class='fw-bold'>Bidding amount:</span> RM {$row['bidding_amount']}</p>
+                                                                            <p><span class='fw-bold'>Bidding time:</span> {$row['bidding_time']}</p>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>";
+                                        }
+                                    }
+                            echo
+                                    "</tbody>
+                                </table>
+                            </div>
+                        </div>
+                        ";
+                    }
+                    ?>
 
                     <!-- Bidding Form Column -->
                     <?php 
@@ -221,8 +293,20 @@ $userName=$_SESSION['username'];
                                     <div class="col-md-6 mb-3">
                                         <div class="latest-bid-card">
                                             <div class="latest-bid-card-body text-center">
-                                                <h6>Latest Bid</h6>
-                                                <p>RM <?php echo($price); ?></p>
+                                                <h6>Highest Bid</h6>
+                                                <?php
+                                                    $highestPriceStmt = $conn->prepare("SELECT MAX(bidding_amount) AS highest_bid FROM bidding WHERE task_id = ?");
+                                                    $highestPriceStmt->bind_param("i",$id);
+
+                                                    if($highestPriceStmt->execute()){
+                                                        $highestPrice = $highestPriceStmt->get_result();
+                                                        while($row = $highestPrice->fetch_assoc()){
+                                                            echo"RM " . $row['highest_bid'];
+                                                        }
+                                                    }else{
+                                                        //Do nothing
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
