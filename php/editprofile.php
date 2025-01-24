@@ -76,7 +76,7 @@
                     </div>
                     <div class="editprofile-row">
                         <label for="user_age">Age:</label>
-                        <input id="user_age" name="user_age" type="text" class="form-control" value="<?php echo $user_age; ?>" disabled>
+                        <input id="user_age" name="user_age" type="number" class="form-control" value="<?php echo $user_age; ?>" disabled>
                     </div>
                     <div class="editprofile-row">
                         <label for="user_contactNumber">Contact Number:</label>
