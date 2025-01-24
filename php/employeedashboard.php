@@ -74,6 +74,7 @@ include "connection.php";
                             <tbody>
                                 <?php
                                 $detail_check = $conn->prepare("SELECT
+                                                                    t.user_id,
                                                                     t.task_id,
                                                                     t.task_title,
                                                                     t.task_description,
@@ -101,9 +102,15 @@ include "connection.php";
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
+                                    $taskOwner="";
+                                    if ($user_row['user_id'] == $user_id){
+                                        $taskOwner = " (Your post)";
+                                    }else{
+                                        $taskOwner = "";
+                                    }
                                     echo "<tr onclick='window.location.href = \"job_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "<span class='fw-bold'>" . $taskOwner . "</span>" . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
                                     echo "</tr>";
@@ -129,6 +136,7 @@ include "connection.php";
                             <tbody>
                             <?php
                                 $detail_check = $conn->prepare("SELECT
+                                                                    t.user_id,
                                                                     t.task_id,
                                                                     t.task_title,
                                                                     t.task_description,
@@ -156,9 +164,15 @@ include "connection.php";
                                 $detail_result = $detail_check->get_result();
 
                                 while ($user_row = $detail_result->fetch_assoc()) {
+                                    $taskOwner="";
+                                    if ($user_row['user_id'] == $user_id){
+                                        $taskOwner = " (Your post)";
+                                    }else{
+                                        $taskOwner = "";
+                                    }
                                     echo "<tr>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "<span class='fw-bold'>" . $taskOwner . "</span>" . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
                                     echo "</tr>";
@@ -184,6 +198,7 @@ include "connection.php";
                             <tbody>
                             <?php
                                 $detail_check = $conn->prepare("SELECT
+                                                                    t.user_id,
                                                                     t.task_id,
                                                                     t.task_title,
                                                                     t.task_description,
@@ -213,7 +228,7 @@ include "connection.php";
                                 while ($user_row = $detail_result->fetch_assoc()) {
                                     echo "<tr>";
                                     echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($user_row['task_description']) . "<span class='fw-bold'>" . $taskOwner . "</span>" . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
                                     echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
                                     echo "</tr>";
