@@ -45,7 +45,7 @@ if (!isset($_SESSION['user_id'])) {
 
                         <div class="form-row">
                             <label for="taskphoto" class="form-label">Task Photo</label>
-                            <img id="task-photo-container" class="border-1" role="button" width="120px" height="120px" src="<?php echo $user_photo; ?>">
+                            <img id="task-photo-container" class="p-0 form-control" height="200px" role="button">
                             <input type="file" id="task-photo" name="user-photo-filename" accept="image/jpeg, image/png, image/jpg" style="display: none;">
                         </div>
 
