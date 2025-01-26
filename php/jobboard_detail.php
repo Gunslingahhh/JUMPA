@@ -68,6 +68,9 @@ $userName=$_SESSION['username'];
                             <h5 class="mb-4">Task Details</h5>
                             <div class="row details-p">
                                 <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <img src="<?php $user_row['task_photo']  ?>">
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12">
                                     <p><strong>Title:</strong> <?php echo($tasktitle) ?></p>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-sm-12">

@@ -65,6 +65,7 @@ $userName=$_SESSION['username'];
                                     <h5 class='mb-4 text-center'>Task Details</h5>
                                     <div class='row details-p'>
                                         <div class='col-lg-3 col-md-6 col-sm-12'>
+                                            <img src=" . htmlspecialchars($user_row['task_photo']) . ">
                                             <p><strong>Title:</strong> " . htmlspecialchars($user_row['task_title']) . "</p>
                                             <p><strong>Description:</strong> " . htmlspecialchars($user_row['task_description']) . "</p>
                                             <p><strong>Date:</strong> " . htmlspecialchars($user_row['task_date']) . "</p>
