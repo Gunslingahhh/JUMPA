@@ -32,7 +32,7 @@ if (!isset($_SESSION['user_id'])) {
                         }
                     ?>
                 <div class="profile-form mt-3">
-                    <form id="profileForm" action="createpost_process.php" method="post" class="createpost-form">
+                    <form id="profileForm" action="createpost_process.php" method="post" enctype="multipart/form-data" class="createpost-form">
                         <div class="form-row">
                             <label for="tasktitle" class="form-label">Task Title</label>
                             <input type="text" class="form-control" name="tasktitle" id="tasktitle" required>
@@ -45,8 +45,8 @@ if (!isset($_SESSION['user_id'])) {
 
                         <div class="form-row">
                             <label for="taskphoto" class="form-label">Task Photo</label>
-                            <img id="task-photo-container" class="p-0 form-control" height="200px" role="button">
-                            <input type="file" id="task-photo" name="user-photo-filename" accept="image/jpeg, image/png, image/jpg" style="display: none;">
+                            <img id="task-photo-container" class="p-0 form-control" role="button">
+                            <input type="file" id="task-photo" name="task-photo" accept="image/jpeg, image/png, image/jpg" style="display: none;">
                         </div>
 
                         <div class="form-row">

@@ -1172,6 +1172,12 @@ h4, h5 {
     height: 100px;
 }
 
+#task-photo-container{
+    object-fit: cover;
+    background-color: white;
+    height: 200px;
+}
+
 /* Media Queries */
 
 /* Extra small devices (phones, 600px and down) */
