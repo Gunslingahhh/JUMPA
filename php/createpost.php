@@ -45,7 +45,8 @@ if (!isset($_SESSION['user_id'])) {
 
                         <div class="form-row">
                             <label for="taskphoto" class="form-label">Task Photo</label>
-                            <textarea class="form-control" name="taskphoto" id="taskphoto" rows="4" required></textarea>
+                            <img id="task-photo-container" class="border-1" role="button" width="120px" height="120px" src="<?php echo $user_photo; ?>">
+                            <input type="file" id="task-photo" name="user-photo-filename" accept="image/jpeg, image/png, image/jpg" style="display: none;">
                         </div>
 
                         <div class="form-row">
@@ -124,8 +125,5 @@ if (!isset($_SESSION['user_id'])) {
 
             </section>
         </main>
-
-        <script src="../assets/js/app.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -114,6 +114,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Task photo functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const taskPhoto = document.getElementById("task-photo");
+    const taskPhotoContainer = document.getElementById("task-photo-container");
+
+    if (taskPhoto && taskPhotoContainer) {
+        taskPhotoContainer.addEventListener("click", function () {
+            taskPhoto.click();
+        });
+
+        taskPhoto.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+
+            if (!file.type.match('image.*')) {
+                alert("Please select an image file.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                taskPhotoContainer.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        });
+    } else {
+        console.error("Task photo not found!");
+    }
+});
+
 // Navbar and click outside functionality
 document.addEventListener("DOMContentLoaded", function () {
     // Select the necessary elements
