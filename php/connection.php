@@ -1,11 +1,11 @@
 <?php
-    $servername = "localhost";
+    /* $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = ""; */
 
-    /* $servername = "localhost:3306";
+    $servername = "localhost:3306";
     $username = "JUMPA_admin";
-    $password = "2Ys0!2eo1"; */
+    $password = "2Ys0!2eo1";
     
   // Create connection
     $conn = mysqli_connect($servername, $username, $password, "jumpa");
