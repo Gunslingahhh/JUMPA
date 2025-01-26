@@ -32,7 +32,7 @@ session_start();
                     <label for="confirmpassword">Confirm Password</label>
                 </div>
                 <button type="submit" name="signup-submit" class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5">Sign Up</button>
-                <p class="text-center mt-2">Or sign up with:</p>
+                <!-- <p class="text-center mt-2">Or sign up with:</p>
                 <div class="external-signin-links">
                     <div class="google-img">
                         <img src="assets/images/1298745_google_brand_branding_logo_network_icon.svg" alt="google-image">
@@ -40,7 +40,7 @@ session_start();
                     <div class="facebook-img">
                         <img src="assets/images/5296499_fb_facebook_facebook logo_icon.svg" alt="facebook-image">
                     </div>
-                </div>
+                </div> -->
                 <div class="mt-2 text-center">
                     <a href="index.php">Already have an account? Log in</a>
                 </div>

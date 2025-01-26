@@ -31,7 +31,7 @@
 
                     <!-- Signing in with google - under construction -->
 
-                    <p class="text-center sign-in-p">Or sign in with:</p>
+                    <!-- <p class="text-center sign-in-p">Or sign in with:</p>
                     <div class="external-signin-links">
                         <div class="google-img">
                             <img src="assets/images/1298745_google_brand_branding_logo_network_icon.svg" alt="google-image">
@@ -39,7 +39,7 @@
                         <div class="facebook-img">
                             <img src="assets/images/5296499_fb_facebook_facebook logo_icon.svg" alt="facebook-image">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="mt-2 text-center">
                         <a href="signup.php">Don't have an account? Sign up</a>
                     </div>
