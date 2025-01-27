@@ -44,33 +44,34 @@
             task_transportProvision, 
             user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        //Handle file upload
+        // Handle file upload
         $allowed_types = array('jpg', 'png', 'jpeg');
-
-        if (($_FILES["task-photo"]["tmp_name"]) == ""){
-            $taskphoto = "";
-        }else{
-            //Get file extension
+        if (empty($_FILES["task-photo"]["tmp_name"])) {
+            $taskphoto = ""; // Set to default or handle as needed
+        } else {
             $file_extension = strtolower(pathinfo($_FILES['task-photo']['name'], PATHINFO_EXTENSION));
             $newfilename = "taskPhoto_user_" . $user_id . "_" . $image_createdAt . "." . $file_extension;
 
             if (!in_array($file_extension, $allowed_types)) {
                 $_SESSION['message'] = "Invalid file type. Only JPG and PNG are allowed.";
                 header("Location: createpost.php");
-            }
-            else{
-                //Set target directory and filename
+                exit();
+            } else {
                 $target_dir = "../assets/uploads/task_photo/";
                 $target_file = $target_dir . $newfilename;
 
-                if (!move_uploaded_file($_FILES['task-photo']['tmp_name'], $target_file)){
+                if (!move_uploaded_file($_FILES['task-photo']['tmp_name'], $target_file)) {
                     $_SESSION['message'] = "Error uploading file.";
+                    error_log("File upload failed for: " . $_FILES['task-photo']['tmp_name']);
                     header("Location: createpost.php");
-                }else{
+                    exit();
+                } else {
                     $taskphoto = $target_file;
+                    error_log("File uploaded successfully: " . $taskphoto);
                 }
             }
         }
+
 
         $stmt->bind_param("sssssssiisssssiii",
                             $tasktitle, 
