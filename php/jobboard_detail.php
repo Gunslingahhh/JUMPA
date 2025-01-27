@@ -37,6 +37,7 @@ $userName=$_SESSION['username'];
         while ($user_row = $detail_result->fetch_assoc()) {
             $tasktitle = $user_row['task_title'];
             $taskdescription = $user_row['task_description'];
+            $taskphoto = $user_row['task_photo'];
             $taskdate = $user_row['task_date'];
             $taskduration = $user_row['task_duration'];
             $tasklocation = $user_row['task_location'];
@@ -47,9 +48,9 @@ $userName=$_SESSION['username'];
             $gender = $user_row['task_gender'];
             $nationality = $user_row['task_nationality'];
             $agerange = $user_row['task_ageRange'];
-            $muslimfriendly = $user_row['task_muslimFriendly'];
-            $foodProvision = $user_row['task_foodProvision'];
-            $transportProvision = $user_row['task_transportProvision'];
+            $muslimfriendly = ($user_row['task_muslimFriendly'] == 1 ? "Yes" : "No");
+            $foodProvision = ($user_row['task_foodProvision'] == 1 ? "Yes" : "No");
+            $transportProvision = ($user_row['task_transportProvision'] == 1 ? "Yes" : "No");
             $userid = $user_row['user_id'];
         }
     ?>
@@ -65,58 +66,63 @@ $userName=$_SESSION['username'];
                     <!-- Task Details Column -->
                     <div class="col-12 mb-0">
                         <div class="container task-details-card">
-                            <h5 class="mb-4">Task Details</h5>
-                            <div class="row details-p">
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <img src="<?php $user_row['task_photo']  ?>">
+                            <!-- Title -->
+                            <div class="col-12 mb-3">
+                                <h2 class="text-center"><?php echo($tasktitle); ?></h2>
+                            </div>
+
+                            <!-- Picture -->
+                            <div class="col-12 mb-4 text-center">
+                                <div class="container form-control w-50 h-25">
+                                    <img id="task-photo-container" src="<?php echo($taskphoto); ?>" class="img-fluid rounded shadow" alt="Task Photo">
                                 </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Title:</strong> <?php echo($tasktitle) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Description:</strong> <?php echo($taskdescription) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Date:</strong> <?php echo($taskdate) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Duration:</strong> <?php echo($taskduration) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Location:</strong> <?php echo($tasklocation) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Tools Required:</strong> <?php echo($toolsrequired) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Pax:</strong> <?php echo($pax) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Price:</strong> RM <?php echo($price) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Dress Code:</strong> <?php echo($dresscode) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Gender:</strong> <?php echo($gender) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Nationality:</strong> <?php echo($nationality) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Age Range:</strong> <?php echo($agerange) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Muslim Friendly:</strong> <?php echo($muslimfriendly) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Food Provided:</strong> <?php echo($foodProvision) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>Transport Provided:</strong> <?php echo($transportProvision) ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <p><strong>User ID:</strong> <?php echo($userid) ?></p>
+                            </div>
+
+                            <!-- Information -->
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Description:</strong> <?php echo($taskdescription); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Date:</strong> <?php echo($taskdate); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Duration:</strong> <?php echo($taskduration); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Location:</strong> <?php echo($tasklocation); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Tools Required:</strong> <?php echo($toolsrequired); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Pax:</strong> <?php echo($pax); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Price:</strong> RM <?php echo($price); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Dress Code:</strong> <?php echo($dresscode); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Gender:</strong> <?php echo($gender); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Nationality:</strong> <?php echo($nationality); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Age Range:</strong> <?php echo($agerange); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Muslim Friendly:</strong> <?php echo($muslimfriendly); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Food Provided:</strong> <?php echo($foodProvision); ?></p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mb-3">
+                                        <p><strong>Transport Provided:</strong> <?php echo($transportProvision); ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

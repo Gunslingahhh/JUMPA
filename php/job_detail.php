@@ -62,25 +62,63 @@ $userName=$_SESSION['username'];
                         <div class='row full-height'>
                             <div class='col-12 mb-4'>
                                 <div class='container task-details-card'>
-                                    <h5 class='mb-4 text-center'>Task Details</h5>
-                                    <div class='row details-p'>
-                                        <div class='col-lg-3 col-md-6 col-sm-12'>
-                                            <img src=" . htmlspecialchars($user_row['task_photo']) . ">
-                                            <p><strong>Title:</strong> " . htmlspecialchars($user_row['task_title']) . "</p>
-                                            <p><strong>Description:</strong> " . htmlspecialchars($user_row['task_description']) . "</p>
-                                            <p><strong>Date:</strong> " . htmlspecialchars($user_row['task_date']) . "</p>
-                                            <p><strong>Duration:</strong> " . htmlspecialchars($user_row['task_duration']) . "</p>
-                                            <p><strong>Location:</strong> " . htmlspecialchars($user_row['task_location']) . "</p>
-                                            <p><strong>Tools Required:</strong> " . htmlspecialchars($user_row['task_toolsRequired']) . "</p>
-                                            <p><strong>Pax:</strong> " . htmlspecialchars($user_row['task_pax']) . "</p>
-                                            <p><strong>Price: </strong> RM " . htmlspecialchars($user_row['task_price']) . "</p>
-                                            <p><strong>Dress Code:</strong> " . htmlspecialchars($user_row['task_dressCode']) . "</p>
-                                            <p><strong>Gender:</strong> " . htmlspecialchars($user_row['task_gender']) . "</p>
-                                            <p><strong>Nationality:</strong> " . htmlspecialchars($user_row['task_nationality']) . "</p>
-                                            <p><strong>Age Range:</strong> " . htmlspecialchars($user_row['task_ageRange']) . "</p>
-                                            <p><strong>Muslim Friendly:</strong> " . htmlspecialchars($user_row['task_muslimFriendly'] == 1 ? "Yes" : "No") . "</p>
-                                            <p><strong>Food Provided?:</strong> " . htmlspecialchars($user_row['task_foodProvision'] == 1 ? "Yes" : "No") . "</p>
-                                            <p><strong>Transport Provided?:</strong> " . htmlspecialchars($user_row['task_transportProvision'] == 1 ? "Yes" : "No") . "</p>
+                                    <!-- Title -->
+                                    <div class='col-12 mb-3'>
+                                        <h2 class='text-center'> " . htmlspecialchars($user_row['task_title']) . "</h2>
+                                    </div>
+
+                                    <!-- Picture -->
+                                    <div class='col-12 mb-4 text-center'>
+                                        <div class='container form-control w-50 h-25'>
+                                            <img id='task-photo-container' src=" . htmlspecialchars($user_row['task_photo']) . " class='img-fluid rounded shadow' alt='Task Photo'>
+                                        </div>
+                                    </div>
+
+                                    <!-- Information -->
+                                    <div class='col-12'>
+                                        <div class='row'>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Description:</strong>" . htmlspecialchars($user_row['task_description']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Date:</strong>" . htmlspecialchars($user_row['task_date']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Duration:</strong>" . htmlspecialchars($user_row['task_duration']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Location:</strong>" . htmlspecialchars($user_row['task_location']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Tools Required:</strong>" . htmlspecialchars($user_row['task_toolsRequired']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Pax:</strong>" . htmlspecialchars($user_row['task_pax']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Price:</strong>RM " . htmlspecialchars($user_row['task_price']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Dress Code:</strong>" . htmlspecialchars($user_row['task_dressCode']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Gender:</strong>" . htmlspecialchars($user_row['task_gender']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Nationality:</strong>" . htmlspecialchars($user_row['task_nationality']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Age Range:</strong>" . htmlspecialchars($user_row['task_ageRange']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Muslim Friendly:</strong>" . htmlspecialchars($user_row['task_muslimFriendly']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Food Provided:</strong>" . htmlspecialchars($user_row['task_foodProvision']) . "</p>
+                                            </div>
+                                            <div class='col-lg-6 col-md-12 mb-3'>
+                                                <p><strong>Transport Provided:</strong>" . htmlspecialchars($user_row['task_transportProvision']) . "</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>"; ?>
