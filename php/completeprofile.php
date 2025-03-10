@@ -18,49 +18,6 @@
     </head>
 
     <body>
-        <header class="py-2 border-bottom">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-evenly nav-content mx-5 py-2">
-                    <!-- Logo -->
-                    <div class="col-auto">
-                            <div class="logo">
-                                <img src="../assets/images/jumpa-logo.png" alt="Jumpa Logo" class="jumpa-logo" />
-                            </div>
-                    </div>
-                    
-                    <!-- Search Bar -->
-                    <div class="col-md col-sm-12 d-flex align-items-center justify-content-end pr-1">
-                        <div class="nav-search-bar">
-                            <input type="text" class="form-control" name="nav-search-bar" id="nav-search" placeholder="How can we help?">
-                        </div>
-                    </div>
-                    
-                    <!-- Notifications, Messages, User Info -->
-                    <div class="col-auto">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="nav-notifications">
-                                <img src="../assets/images/icons8-bell.png" alt="Notifications Icon" width="32">
-                            </div>
-                            <div class="nav-messages">
-                                <img src="../assets/images/icons8-messages.png" alt="Messages Icon" width="32">
-                            </div>
-
-                            <div class="navbar mr-3 px-2 nav-bar-dropdown">
-                                <div class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle no-arrow" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php echo $_SESSION['username'];?>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item logout-link text-dark dropdown-profile" href="logout.php">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
         <main id="profilemainid">
             <section class="createprofilemain">
                 <h1 class="createprofiletitle">
