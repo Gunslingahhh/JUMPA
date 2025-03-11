@@ -15,6 +15,7 @@ $userName=$_SESSION['username'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +24,16 @@ $userName=$_SESSION['username'];
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
+
 <body>
     <?php
         include "topnav.php";
 
-        $id = $_GET['task_id'];
+        $id = isset($_GET['task_id']) ? intval($_GET['task_id']) : 0;
         $user_id = $_SESSION['user_id'];
 
-        $detail_check = $conn->prepare("SELECT * FROM task WHERE task_id = $id");
+        $detail_check = $conn->prepare("SELECT * FROM task WHERE task_id = ?");
+        $detail_check->bind_param("i", $id);
         $detail_check->execute();
         $detail_result = $detail_check->get_result();
 
@@ -56,7 +59,7 @@ $userName=$_SESSION['username'];
     ?>
     <!-- Main Content -->
     <main>
-        <div class="employee-dashboard">            
+        <div class="employee-dashboard">
             <div class="container">
                 <!-- Page Title -->
                 <h4 class="mb-4 text-center">Job Details & Bidding</h4>
@@ -74,7 +77,8 @@ $userName=$_SESSION['username'];
                             <!-- Picture -->
                             <div class="col-12 mb-4 text-center">
                                 <div class="container form-control w-50 h-25">
-                                    <img id="task-photo-container" src="<?php echo($taskphoto); ?>" class="img-fluid rounded shadow" alt="Task Photo">
+                                    <img id="task-photo-container" src="<?php echo($taskphoto); ?>"
+                                        class="img-fluid rounded shadow" alt="Task Photo">
                                 </div>
                             </div>
 
@@ -325,7 +329,8 @@ $userName=$_SESSION['username'];
                                                 <h6>Your Bid</h6>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text">RM</span>
-                                                    <input type="number" class="form-control" name="bidding_amount" min="<?php echo($price); ?>" value="<?php echo($price); ?>">
+                                                    <input type="number" class="form-control" name="bidding_amount"
+                                                        min="<?php echo($price); ?>" value="<?php echo($price); ?>">
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Place Your Bid</button>
                                             </div>
@@ -349,4 +354,5 @@ $userName=$_SESSION['username'];
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
