@@ -29,7 +29,7 @@ include "connection.php";
 
     <main class="employee-dashboard">
         <div class="container">
-            <h4 class="mb-4 text-center">Dashboard</h4>
+            <h4 class="my-4 text-center">Dashboard</h4>
 
             <?php
             if (isset($_SESSION['error'])) {

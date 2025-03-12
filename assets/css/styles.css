@@ -1,7 +1,7 @@
 :root {
     --color-primary: #691c1c;
     --color-secondary: lightgray;
-    --color-light: #f1f0ee;
+    --color-light: #f1f0ee9e;
     --color-dark: #333;
     --color-white: #ffffff;
     --color-muted: #777777;
@@ -275,14 +275,15 @@ main {
     padding: 20px;
 }
 
-.main-banner h1 {
-    font-size: 3rem;
+.main-banner p {
+    font-size: 4rem;
     margin: 15px 0;
 }
 
 .jumpa-xxl-logo {
     width: 16rem;
     height: auto;
+    background-color: transparent;
 }
 
 .hire-skilled-worker, .do-work-get-paid, .security, .verification {
@@ -748,13 +749,14 @@ button {
 
 /* Employee Dashboard */
 .employee-dashboard {
+    padding-top: 2.5rem;
     background-color: var(--color-light);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 80vh;
-    padding: 3rem;
+    padding: 1rem;
 }
 
 .section-title, .recommended-gig-title, .recent-gig-title {

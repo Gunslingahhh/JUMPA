@@ -23,7 +23,8 @@ if (session_status() == PHP_SESSION_NONE) {
                 <a class="navbar-brand" href="home.php">
                     <img src="../assets/images/jumpa-logo.png" alt="Jumpa Logo" class="jumpa-logo" />
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarContent">
@@ -58,7 +59,8 @@ if (session_status() == PHP_SESSION_NONE) {
                         <!-- <img src="../assets/images/icons8-bell.png" alt="Notifications Icon" width="32" class="notifications-img">
                         <img src="../assets/images/icons8-messages.png" alt="Messages Icon" width="32" class="messages-img"> -->
                         <div class="nav-item dropdown profile-dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <?php echo $_SESSION['username']; ?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

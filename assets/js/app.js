@@ -70,26 +70,4 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error("Task photo elements not found!");
     }
-
-    // Adjust navigation items for small screens
-    function adjustNavItems() {
-        const profileItem = document.createElement('li');
-        profileItem.className = 'nav-item';
-        profileItem.innerHTML = '<a class="nav-link" href="editprofile.php">Profile</a>';
-
-        const logoutItem = document.createElement('li');
-        logoutItem.className = 'nav-item';
-        logoutItem.innerHTML = '<a class="nav-link" href="logout.php">Log out</a>';
-
-        if (window.innerWidth < 992) {
-            if (!navList.contains(profileItem)) navList.appendChild(profileItem);
-            if (!navList.contains(logoutItem)) navList.appendChild(logoutItem);
-        } else {
-            if (navList.contains(profileItem)) navList.removeChild(profileItem);
-            if (navList.contains(logoutItem)) navList.removeChild(logoutItem);
-        }
-    }
-
-    adjustNavItems();
-    window.addEventListener('resize', adjustNavItems);
 });

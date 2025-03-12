@@ -33,7 +33,7 @@ include "connection.php";
     <main class="employee-dashboard">
         <div class="container">
             <!-- Page Title -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center my-4">
                 <h4 class="mx-5 text-center">Job Posts</h4>
                 <div class="createpost-div-link mx-5">
                     <a href="createpost.php" class="btn btn-outline-success px-4 py-2">Create Post</a>

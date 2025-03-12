@@ -15,23 +15,23 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/styles.css?v=1">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
 <body>
     <?php
-            include 'topnav.php'
-        ?>
+    include 'topnav.php'
+    ?>
 
     <main id="profilemainid">
         <h4 class="mt-3 mb-4 text-center">Post a Task</h4>
         <section class="container mt-4 w-75 bg-white rounded">
             <?php
-                        if (isset($_SESSION['message'])) {
-                            echo "<div class='alert alert-primary mt-3'>" . $_SESSION['message'] . "</div>";
-                            unset($_SESSION['message']);
-                        }
-                    ?>
+            if (isset($_SESSION['message'])) {
+                echo "<div class='alert alert-primary mt-3'>" . $_SESSION['message'] . "</div>";
+                unset($_SESSION['message']);
+            }
+            ?>
             <div class="profile-form mt-3">
                 <form id="profileForm" action="createpost_process.php" method="post" enctype="multipart/form-data"
                     class="createpost-form">
@@ -157,29 +157,29 @@ if (!isset($_SESSION['user_id'])) {
     </main>
 </body>
 <script>
-const form = document.getElementById("profileForm");
-const confirmClearButton = document.getElementById("confirmClearForm");
-const taskPhotoContainer = document.getElementById("task-photo-container");
-const taskPhotoInput = document.getElementById("task-photo");
+    const form = document.getElementById("profileForm");
+    const confirmClearButton = document.getElementById("confirmClearForm");
+    const taskPhotoContainer = document.getElementById("task-photo-container");
+    const taskPhotoInput = document.getElementById("task-photo");
 
-confirmClearButton.addEventListener("click", function() {
-    // Reset the form
-    form.reset();
+    confirmClearButton.addEventListener("click", function() {
+        // Reset the form
+        form.reset();
 
-    // Clear image preview
-    if (taskPhotoContainer) {
-        taskPhotoContainer.src = "";
-    }
+        // Clear image preview
+        if (taskPhotoContainer) {
+            taskPhotoContainer.src = "";
+        }
 
-    // Clear the file input (to prevent reselecting the same file)
-    if (taskPhotoInput) {
-        taskPhotoInput.value = "";
-    }
+        // Clear the file input (to prevent reselecting the same file)
+        if (taskPhotoInput) {
+            taskPhotoInput.value = "";
+        }
 
-    // Close the modal after clearing
-    const modal = bootstrap.Modal.getInstance(document.getElementById("clearFormModal"));
-    modal.hide();
-});
+        // Close the modal after clearing
+        const modal = bootstrap.Modal.getInstance(document.getElementById("clearFormModal"));
+        modal.hide();
+    });
 </script>
 
 </html>

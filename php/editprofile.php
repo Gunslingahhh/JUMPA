@@ -28,7 +28,7 @@ $user_photo = !empty($row['user_photo']) ? $row['user_photo'] : '../assets/image
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/styles.css?v=1">
+    <link rel="stylesheet" href="../assets/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -39,10 +39,10 @@ $user_photo = !empty($row['user_photo']) ? $row['user_photo'] : '../assets/image
             aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
-                    <?php if (isset($_SESSION['message'])) { 
-                    echo $_SESSION['message']; 
-                    unset($_SESSION['message']); // Clear session message after displaying
-                } ?>
+                    <?php if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
+                        unset($_SESSION['message']); // Clear session message after displaying
+                    } ?>
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                     aria-label="Close"></button>
@@ -132,58 +132,58 @@ $user_photo = !empty($row['user_photo']) ? $row['user_photo'] : '../assets/image
     </main>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const fileInput = document.getElementById("user-photo-filename");
-        const uploadButton = document.getElementById("upload-button");
-        const profilePicture = document.getElementById("user-photo");
-        const formInputs = document.querySelectorAll("form input:not([disabled])");
-        const submitButton = document.querySelector("button[type='submit']");
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById("user-photo-filename");
+            const uploadButton = document.getElementById("upload-button");
+            const profilePicture = document.getElementById("user-photo");
+            const formInputs = document.querySelectorAll("form input:not([disabled])");
+            const submitButton = document.querySelector("button[type='submit']");
 
-        uploadButton.disabled = true; // Ensure it's disabled on page load
-        submitButton.disabled = true; // Disable submit button initially
+            uploadButton.disabled = true; // Ensure it's disabled on page load
+            submitButton.disabled = true; // Disable submit button initially
 
-        // Enable the file input when clicking on the image
-        profilePicture.addEventListener("click", function() {
-            fileInput.click();
-        });
+            // Enable the file input when clicking on the image
+            profilePicture.addEventListener("click", function() {
+                fileInput.click();
+            });
 
-        // Handle profile picture change
-        fileInput.addEventListener("change", function(event) {
-            const file = event.target.files[0];
+            // Handle profile picture change
+            fileInput.addEventListener("change", function(event) {
+                const file = event.target.files[0];
 
-            if (!file || !file.type.match("image.*")) {
-                alert("Please select a valid image file.");
-                uploadButton.disabled = true;
-                return;
+                if (!file || !file.type.match("image.*")) {
+                    alert("Please select a valid image file.");
+                    uploadButton.disabled = true;
+                    return;
+                }
+
+                // Show preview before uploading
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePicture.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+
+                uploadButton.disabled = false; // Enable button when a file is selected
+            });
+
+            // Enable the submit button if any form field is changed
+            formInputs.forEach(input => {
+                input.addEventListener("input", function() {
+                    submitButton.disabled = false;
+                });
+            });
+
+            // Show the toast for 3 seconds
+            const toastEl = document.getElementById('profileUpdateToast');
+            if (toastEl && toastEl.querySelector('.toast-body').textContent.trim() !== '') {
+                var toast = new bootstrap.Toast(toastEl, {
+                    autohide: true,
+                    delay: 3000 // 3 seconds
+                });
+                toast.show();
             }
-
-            // Show preview before uploading
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                profilePicture.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-
-            uploadButton.disabled = false; // Enable button when a file is selected
         });
-
-        // Enable the submit button if any form field is changed
-        formInputs.forEach(input => {
-            input.addEventListener("input", function() {
-                submitButton.disabled = false;
-            });
-        });
-
-        // Show the toast for 3 seconds
-        const toastEl = document.getElementById('profileUpdateToast');
-        if (toastEl && toastEl.querySelector('.toast-body').textContent.trim() !== '') {
-            var toast = new bootstrap.Toast(toastEl, {
-                autohide: true,
-                delay: 3000 // 3 seconds
-            });
-            toast.show();
-        }
-    });
     </script>
 
 </body>
