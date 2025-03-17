@@ -60,7 +60,7 @@ if (!isset($_SESSION['user_id'])) {
 
                     <div class="form-row">
                         <label for="taskduration" class="form-label">Task Duration</label>
-                        <input type="text" class="form-control" name="taskduration" id="taskduration" required>
+                        <input type="text" class="form-control" name="taskduration" id="taskduration" placeholder="hrs" required>
                     </div>
 
                     <div class="form-row">
