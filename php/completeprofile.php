@@ -16,9 +16,11 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+
 </head>
 
 <body>
+    <?php include 'topnav.php'; ?>
     <main id="profilemainid">
         <section class="createprofilemain">
             <h1 class="createprofiletitle">
@@ -28,13 +30,16 @@ if (!isset($_SESSION['user_id'])) {
                 <form id="profileForm" action="completeprofile_process.php" method="post">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                            required>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">IC / Passport Number</label>
-                        <input type="text" class="form-control" id="icnumber" name="icnumber" aria-describedby="emailHelp" required>
-                        <div id="icHelp" class="form-text">Your identity number will be used for admin users only in case of criminal activity. This data will be protected by the rights of PDPA Act 2010.</div>
+                        <input type="text" class="form-control" id="icnumber" name="icnumber"
+                            aria-describedby="emailHelp" required>
+                        <div id="icHelp" class="form-text">Your identity number will be used for admin users only in
+                            case of criminal activity. This data will be protected by the rights of PDPA Act 2010.</div>
                     </div>
 
                     <div class="mb-3">

@@ -4,22 +4,24 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - JUMPA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+
 </head>
 
 <body>
     <div class="signup-container">
         <div class="signup-form-container">
-                <a href="../index.php">
-                    <div class="login-img">
-                        <img src="../assets/images/jumpa-logo-with-word.png" alt="Jumpa Logo" class="login-logo">
-                    </div>
-                </a>
+            <a href="../index.php">
+                <div class="login-img">
+                    <img src="../assets/images/jumpa-logo-with-word.png" alt="Jumpa Logo" class="login-logo">
+                </div>
+            </a>
             <form action="signup_process.php" method="post">
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
@@ -58,4 +60,5 @@ session_start();
         <div class="signup-image-container"></div>
     </div>
 </body>
+
 </html>

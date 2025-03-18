@@ -130,6 +130,16 @@ body {
     font-size: 14px;
 }
 
+a {
+    text-decoration: none;
+}
+
+.forgot {
+    color: black !important;
+
+
+}
+
 .sub-navbar a {
     color: var(--color-dark);
     font-size: 16px;
@@ -260,14 +270,11 @@ main {
 
 .main-banner-header-p, .simple-quick-secure {
     font-family: var(--font-secondary), serif;
+    font-size: .9rem;
 }
 
 .main-banner-header-p, .simple-quick-secure, .jumpa-xxl-logo {
     z-index: 2;
-}
-
-.simple-quick-secure {
-    font-size: 1.2rem;
 }
 
 .main-banner-header-p {
@@ -276,7 +283,7 @@ main {
 }
 
 .main-banner p {
-    font-size: 4rem;
+    font-size: 1rem;
     margin: 15px 0;
 }
 
@@ -337,6 +344,8 @@ main {
     text-transform: uppercase;
     font-weight: 700;
     cursor: pointer;
+    color:rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }
 
 .hire-button {

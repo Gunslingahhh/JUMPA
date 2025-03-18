@@ -18,6 +18,7 @@ if (!isset($_SESSION['username'])) {
     <title>Employee Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+
 </head>
 
 <body>
@@ -41,7 +42,7 @@ if (!isset($_SESSION['username'])) {
                 <p>Whatever task you need!</p>
                 <p>Our gig platform is designed to help connecting people together to get a task done. We make hiring
                     the right person for your needs quick, easy, and safe.</p>
-                <button class="hire-button">Learn more</button>
+                <a href="employeedashboard.php" class="hire-button">Learn more</a>
             </div>
 
             <div class="hire-skilled-worker-images">
@@ -61,7 +62,7 @@ if (!isset($_SESSION['username'])) {
                 <h2 class="work-get-paid-h2">Do work, get paid</h2>
                 <p>Earn up to Rm500 per day</p>
                 <p>Choose between a variety of gigs available and earn cash per job</p>
-                <button class="work-pay-button">Learn more</button>
+                <a href="employeedashboard.php" class="work-pay-button">Learn more</a>
             </div>
         </section>
 
