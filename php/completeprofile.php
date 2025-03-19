@@ -82,7 +82,7 @@ if (!isset($_SESSION['user_id'])) {
                         <input type="text" class="form-control" id="language" name="language" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-primary-style">Submit</button>
                 </form>
 
                 <?php

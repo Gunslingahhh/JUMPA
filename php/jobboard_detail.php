@@ -339,7 +339,7 @@ $userName = $_SESSION['username'];
                                                         <input type="number" class="form-control" name="bidding_amount"
                                                             min="<?php echo ($price); ?>" value="<?php echo ($price); ?>">
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Place Your Bid</button>
+                                                    <button type="submit" class="btn btn-primary btn-primary-style">Place Your Bid</button>
                                                 </div>
                                             </div>
                                         </div>

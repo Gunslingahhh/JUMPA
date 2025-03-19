@@ -11,7 +11,7 @@ include "connection.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JUMPA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=1.0">
 
 </head>
 
@@ -24,23 +24,22 @@ include "connection.php";
                 </div>
             </a>
             <form action="signin_process.php" method="POST" id="sign-in">
-                <div class="form-floating mb-2">
+                <div class="form-floating mb-4">
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username"
                         required>
                     <label for="username">Username</label>
                 </div>
-                <div class="form-floating mb-2">
+                <div class="form-floating mb-1">
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password"
                         required>
                     <label for="password">Password</label>
                 </div>
-                <div class="my-1 text-left">
+                <div class="text-left">
                     <!-- Modified Forgot Password link to trigger modal -->
                     <a href="#" class="forgot" data-bs-toggle="modal" data-bs-target="#whatsappModal">Forgot
                         password?</a>
                 </div>
-                <button type="submit"
-                    class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5 sign-in-button">Sign
+                <button type="submit" class="sign-in-button">Sign
                     In</button>
 
                 <!-- Signing in with google - under construction -->
@@ -79,16 +78,18 @@ include "connection.php";
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="whatsappModalLabel">Reset Password via WhatsApp</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                    <p>You will be redirected to WhatsApp to reset your password using this number:</p>
-                    <p class="text-center fw-bold">+60107190645</p>
+                    <p class="text-center">You will be redirected to WhatsApp to reset your password using this
+                        number:</p>
+                    <p class=" text-center fw-bold phone-number-modal">+60107190645</p>
                     <p>Are you sure you want to proceed?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="redirectToWhatsApp()">Yes, Proceed</button>
+                    <button type="button" onclick="redirectToWhatsApp()">Yes,
+                        Proceed</button>
                 </div>
             </div>
         </div>
@@ -97,11 +98,11 @@ include "connection.php";
     <!-- Bootstrap JS and custom script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function redirectToWhatsApp() {
-            const phoneNumber = "+60107190645";
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=I%20need%20to%20reset%20my%20password`;
-            window.location.href = whatsappUrl;
-        }
+    function redirectToWhatsApp() {
+        const phoneNumber = "+60107190645";
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=I%20need%20to%20reset%20my%20password`;
+        window.location.href = whatsappUrl;
+    }
     </script>
 </body>
 

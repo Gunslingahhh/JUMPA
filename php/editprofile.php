@@ -73,7 +73,7 @@ $user_photo = !empty($row['user_photo']) ? $row['user_photo'] : '../assets/image
                         </div>
                         <input type="file" id="user-photo-filename" name="user-photo-filename"
                             accept="image/jpeg, image/png, image/jpg" hidden>
-                        <button type="submit" class="btn btn-primary" id="upload-button" disabled>Upload</button>
+                        <button type="submit" class="btn btn-primary btn-primary-style" id="upload-button" disabled>Upload</button>
                     </form>
                 </div>
             </div>

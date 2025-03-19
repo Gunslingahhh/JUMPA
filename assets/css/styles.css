@@ -77,6 +77,24 @@ body {
     margin-top: var(--gap-medium);
 }
 
+button {
+    width: fit-content;
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 5px 10px;
+    background-color: var(--color-primary);
+    border-color: transparent;
+    color: white;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: var(--color-primary);
+    border-color: transparent;
+}
+
 
 /* Navigation */
 
@@ -125,19 +143,24 @@ body {
 
 .login a, .log-out a, .signup-p a {
     text-decoration: none;
-    color: var(--color-primary);
     font-weight: 500;
-    font-size: 14px;
+    font-size: .9rem;
+}
+
+.login a:hover, .log-out a:hover, .signup-p a:hover {
+    color: var(--color-primary);
 }
 
 a {
     text-decoration: none;
+
 }
 
 .forgot {
     color: black !important;
-
-
+    padding-left: 1rem;
+    font-size: .8rem;
+    font-style: italic;
 }
 
 .sub-navbar a {
@@ -176,6 +199,26 @@ a {
 .dropdown-item:hover {
     background-color: #fff;
     width: inherit;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.phone-number-modal {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    width: fit-content;
+    color: var(--color-dark);
+}
+
+.btn-primary-style {
+    background-color: var(--color-primary);
 }
 
 .sub-navbar a:hover {
@@ -569,6 +612,14 @@ footer .footer-container {
     height: auto;
 }
 
+.follow-links {
+    color: #fff;
+}
+
+footer > a:hover {
+    color: var(--color-light);
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .footer-container {
@@ -734,11 +785,11 @@ legend {
     color: var(--color-dark);
 }
 
-button {
+/* button {
     padding: var(--gap-small) var(--gap-medium);
     font-size: 1rem;
     border-radius: var(--border-radius-base);
-}
+} */
 
 /* Responsive Design */
 @media (max-width: 767px) {

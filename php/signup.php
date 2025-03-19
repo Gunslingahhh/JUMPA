@@ -23,19 +23,23 @@ session_start();
                 </div>
             </a>
             <form action="signup_process.php" method="post">
-                <div class="form-floating mb-2">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                        required>
                     <label for="username">Username</label>
                 </div>
-                <div class="form-floating mb-2">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                        required>
                     <label for="password">Password</label>
                 </div>
                 <div class="form-floating mb-2">
-                    <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
+                    <input type="password" class="form-control" id="confirmpassword" name="confirmpassword"
+                        placeholder="Confirm Password" required>
                     <label for="confirmpassword">Confirm Password</label>
                 </div>
-                <button type="submit" name="signup-submit" class="btn btn-danger w-full d-flex justify-content-center mx-auto px-5">Sign Up</button>
+                <button type="submit" class="sign-in-button">Sign
+                    Up</button>
                 <!-- <p class="text-center mt-2">Or sign up with:</p>
                 <div class="external-signin-links">
                     <div class="google-img">
