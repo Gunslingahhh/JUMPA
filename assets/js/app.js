@@ -54,7 +54,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Task photo upload
     const taskPhoto = document.getElementById("task-photo");
-    const taskPhotoPreview = document.getElementById("task-photo-preview");
+    const taskPhotoPreview = document.getElementById("task-photo-container");
+
+    // Enable the file input when clicking on the image
+    taskPhotoPreview.addEventListener("click", function() {
+        taskPhoto.click();
+    });
 
     if (taskPhoto && taskPhotoPreview) {
         taskPhoto.addEventListener("change", function (event) {
