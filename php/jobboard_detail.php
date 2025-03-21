@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 include "connection.php";
 
-$userName=$_SESSION['username'];
+$userName = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -23,39 +23,40 @@ $userName=$_SESSION['username'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+
 </head>
 
 <body>
     <?php
-        include "topnav.php";
+    include "topnav.php";
 
-        $id = isset($_GET['task_id']) ? intval($_GET['task_id']) : 0;
-        $user_id = $_SESSION['user_id'];
+    $id = isset($_GET['task_id']) ? intval($_GET['task_id']) : 0;
+    $user_id = $_SESSION['user_id'];
 
-        $detail_check = $conn->prepare("SELECT * FROM task WHERE task_id = ?");
-        $detail_check->bind_param("i", $id);
-        $detail_check->execute();
-        $detail_result = $detail_check->get_result();
+    $detail_check = $conn->prepare("SELECT * FROM task WHERE task_id = ?");
+    $detail_check->bind_param("i", $id);
+    $detail_check->execute();
+    $detail_result = $detail_check->get_result();
 
-        while ($user_row = $detail_result->fetch_assoc()) {
-            $tasktitle = $user_row['task_title'];
-            $taskdescription = $user_row['task_description'];
-            $taskphoto = $user_row['task_photo'];
-            $taskdate = $user_row['task_date'];
-            $taskduration = $user_row['task_duration'];
-            $tasklocation = $user_row['task_location'];
-            $toolsrequired = $user_row['task_toolsRequired'];
-            $pax = $user_row['task_pax'];
-            $price = $user_row['task_price'];
-            $dresscode = $user_row['task_dressCode'];
-            $gender = $user_row['task_gender'];
-            $nationality = $user_row['task_nationality'];
-            $agerange = $user_row['task_ageRange'];
-            $muslimfriendly = ($user_row['task_muslimFriendly'] == 1 ? "Yes" : "No");
-            $foodProvision = ($user_row['task_foodProvision'] == 1 ? "Yes" : "No");
-            $transportProvision = ($user_row['task_transportProvision'] == 1 ? "Yes" : "No");
-            $userid = $user_row['user_id'];
-        }
+    while ($user_row = $detail_result->fetch_assoc()) {
+        $tasktitle = $user_row['task_title'];
+        $taskdescription = $user_row['task_description'];
+        $taskphoto = $user_row['task_photo'];
+        $taskdate = $user_row['task_date'];
+        $taskduration = $user_row['task_duration'];
+        $tasklocation = $user_row['task_location'];
+        $toolsrequired = $user_row['task_toolsRequired'];
+        $pax = $user_row['task_pax'];
+        $price = $user_row['task_price'];
+        $dresscode = $user_row['task_dressCode'];
+        $gender = $user_row['task_gender'];
+        $nationality = $user_row['task_nationality'];
+        $agerange = $user_row['task_ageRange'];
+        $muslimfriendly = ($user_row['task_muslimFriendly'] == 1 ? "Yes" : "No");
+        $foodProvision = ($user_row['task_foodProvision'] == 1 ? "Yes" : "No");
+        $transportProvision = ($user_row['task_transportProvision'] == 1 ? "Yes" : "No");
+        $userid = $user_row['user_id'];
+    }
     ?>
     <!-- Main Content -->
     <main>
@@ -71,7 +72,7 @@ $userName=$_SESSION['username'];
                         <div class="container task-details-card">
                             <!-- Title -->
                             <div class="col-12 mb-3">
-                                <h4 class="text-center"><?php echo($tasktitle); ?></h4>
+                                <h4 class="text-center"><?php echo ($tasktitle); ?></h4>
                             </div>
 
                             <div class="container">
@@ -79,7 +80,7 @@ $userName=$_SESSION['username'];
                                     <!-- Picture -->
                                     <div class="col-12 mb-4 text-center">
                                         <div class="container form-control w-100 h-25 border-0">
-                                            <img id="task-photo-container" src="<?php echo($taskphoto); ?>"
+                                            <img id="task-photo-container" src="<?php echo ($taskphoto); ?>"
                                                 class="img-fluid rounded shadow" alt="Task Photo">
                                         </div>
                                     </div>
@@ -88,47 +89,47 @@ $userName=$_SESSION['username'];
                                     <div class="col-12">
                                         <div class="row row-cols-1 row-cols-lg-3 g-3">
                                             <div class="col">
-                                                <p><strong>Description:</strong> <?php echo($taskdescription); ?></p>
+                                                <p><strong>Description:</strong> <?php echo ($taskdescription); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Date:</strong> <?php echo($taskdate); ?></p>
+                                                <p><strong>Date:</strong> <?php echo ($taskdate); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Duration:</strong> <?php echo($taskduration); ?></p>
+                                                <p><strong>Duration:</strong> <?php echo ($taskduration); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Location:</strong> <?php echo($tasklocation); ?></p>
+                                                <p><strong>Location:</strong> <?php echo ($tasklocation); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Tools Required:</strong> <?php echo($toolsrequired); ?></p>
+                                                <p><strong>Tools Required:</strong> <?php echo ($toolsrequired); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Pax:</strong> <?php echo($pax); ?></p>
+                                                <p><strong>Pax:</strong> <?php echo ($pax); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Price:</strong> RM <?php echo($price); ?></p>
+                                                <p><strong>Price:</strong> RM <?php echo ($price); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Dress Code:</strong> <?php echo($dresscode); ?></p>
+                                                <p><strong>Dress Code:</strong> <?php echo ($dresscode); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Gender:</strong> <?php echo($gender); ?></p>
+                                                <p><strong>Gender:</strong> <?php echo ($gender); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Nationality:</strong> <?php echo($nationality); ?></p>
+                                                <p><strong>Nationality:</strong> <?php echo ($nationality); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Age Range:</strong> <?php echo($agerange); ?></p>
+                                                <p><strong>Age Range:</strong> <?php echo ($agerange); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Muslim Friendly:</strong> <?php echo($muslimfriendly); ?></p>
+                                                <p><strong>Muslim Friendly:</strong> <?php echo ($muslimfriendly); ?></p>
                                             </div>
                                             <div class="col">
-                                                <p><strong>Food Provided:</strong> <?php echo($foodProvision); ?></p>
+                                                <p><strong>Food Provided:</strong> <?php echo ($foodProvision); ?></p>
                                             </div>
                                             <div class="col">
                                                 <p><strong>Transport Provided:</strong>
-                                                    <?php echo($transportProvision); ?></p>
+                                                    <?php echo ($transportProvision); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +148,7 @@ $userName=$_SESSION['username'];
                     if (isset($_SESSION['message'])) {
                         echo "<div class='alert alert-success mt-2 text-center'>" . $_SESSION['message'] . "</div>";
                         unset($_SESSION['message']); // Clear the error message
-                        }
+                    }
                     ?>
 
                     <!-- Bidding Information Column -->
@@ -179,7 +180,7 @@ $userName=$_SESSION['username'];
                                             echo "<td><img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='30px' height='30px'></td>";
                                             echo "<td>{$row['user_fullname']}</td>";
                                             echo "<td>RM {$row['bidding_amount']}</td>";
-                                            if ($_SESSION['user_id'] == $userid){
+                                            if ($_SESSION['user_id'] == $userid) {
                                                 echo "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>Accept</button></td>";
                                             }
                                             echo "</tr>";
@@ -221,8 +222,8 @@ $userName=$_SESSION['username'];
                         </div>
                     </div>
 
-                    <?php 
-                    if ($_SESSION['user_id'] == $userid){
+                    <?php
+                    if ($_SESSION['user_id'] == $userid) {
                         echo "
                         <div class='col-12'>
                             <div class='p-4 bidding-form-card'>
@@ -231,28 +232,28 @@ $userName=$_SESSION['username'];
                                     <thead class='table-light'>
                                     </thead>
                                     <tbody>";
-                                    $sql = $conn->prepare("SELECT *
+                        $sql = $conn->prepare("SELECT *
                                     FROM user u
                                     INNER JOIN job j ON j.user_id = u.user_id
                                     INNER JOIN bidding b ON b.bidding_id = j.bidding_id
                                     WHERE j.task_id=?");
 
-                                    $sql->bind_param("i", $id);
-                                    if ($sql->execute()) {
-                                        $result = $sql->get_result();
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo "<tr role='button' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>"; // Added onclick and style
-                                            echo "
+                        $sql->bind_param("i", $id);
+                        if ($sql->execute()) {
+                            $result = $sql->get_result();
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr role='button' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>"; // Added onclick and style
+                                echo "
                                             <td>
                                                 <div class='rounded-circle' style='width: 40px; height: 40px; overflow: hidden; display: flex; justify-content: center; align-items: center;'>
                                                     <img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='40px' height='40px'>
                                                 </div>
                                             </td>";
-                                            echo "<td>{$row['user_fullname']}</td>";
-                                            echo "<td>RM {$row['bidding_amount']}</td>";
-                                            echo "</tr>";
+                                echo "<td>{$row['user_fullname']}</td>";
+                                echo "<td>RM {$row['bidding_amount']}</td>";
+                                echo "</tr>";
 
-                                            echo "
+                                echo "
                                                             <div class='modal fade' id='" . $row['bidding_id'] . "' tabindex='-1' aria-labelledby='" . $row['bidding_id'] . "Label' aria-hidden='true'>
                                                                 <div class='modal-dialog modal-dialog-centered'>
                                                                     <div class='modal-content'>
@@ -277,10 +278,10 @@ $userName=$_SESSION['username'];
                                                                     </div>
                                                                 </div>
                                                             </div>";
-                                        }
-                                    }
-                            echo
-                                    "</tbody>
+                            }
+                        }
+                        echo
+                        "</tbody>
                                 </table>
                             </div>
                         </div>
@@ -289,66 +290,66 @@ $userName=$_SESSION['username'];
                     ?>
 
                     <!-- Bidding Form Column -->
-                    <?php 
+                    <?php
                     $biddingForm = $conn->prepare("SELECT bidding_id FROM bidding WHERE user_id=? AND task_id=?");
                     $biddingForm->bind_param("ii", $user_id, $id);
                     $biddingForm->execute();
                     $biddingFormResult = $biddingForm->get_result();
 
-                    if ($user_id != $userid && $biddingFormResult->num_rows < 1) {?>
-                    <div class="col-12">
-                        <div class="bidding-form-card">
-                            <h5 class="mb-3">Place Your Bid</h5>
-                            <form method="POST" action="place_bid.php?task_id=<?php echo htmlspecialchars($id); ?>">
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <div class="starting-bid-card">
-                                            <div class="starting-bid-card-body text-center">
-                                                <h6>Starting Bid</h6>
-                                                <p>RM <?php echo($price); ?></p>
+                    if ($user_id != $userid && $biddingFormResult->num_rows < 1) { ?>
+                        <div class="col-12">
+                            <div class="bidding-form-card">
+                                <h5 class="mb-3">Place Your Bid</h5>
+                                <form method="POST" action="place_bid.php?task_id=<?php echo htmlspecialchars($id); ?>">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="starting-bid-card">
+                                                <div class="starting-bid-card-body text-center">
+                                                    <h6>Starting Bid</h6>
+                                                    <p>RM <?php echo ($price); ?></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="latest-bid-card">
-                                            <div class="latest-bid-card-body text-center">
-                                                <h6>Highest Bid</h6>
-                                                <?php
+                                        <div class="col-md-6 mb-3">
+                                            <div class="latest-bid-card">
+                                                <div class="latest-bid-card-body text-center">
+                                                    <h6>Highest Bid</h6>
+                                                    <?php
                                                     $highestPriceStmt = $conn->prepare("SELECT MAX(bidding_amount) AS highest_bid FROM bidding WHERE task_id = ?");
-                                                    $highestPriceStmt->bind_param("i",$id);
+                                                    $highestPriceStmt->bind_param("i", $id);
 
-                                                    if($highestPriceStmt->execute()){
+                                                    if ($highestPriceStmt->execute()) {
                                                         $highestPrice = $highestPriceStmt->get_result();
-                                                        while($row = $highestPrice->fetch_assoc()){
-                                                            echo"RM " . $row['highest_bid'];
+                                                        while ($row = $highestPrice->fetch_assoc()) {
+                                                            echo "RM " . $row['highest_bid'];
                                                         }
-                                                    }else{
+                                                    } else {
                                                         //Do nothing
                                                     }
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="your-bid-card">
-                                            <div class="your-bid-card-body text-center">
-                                                <h6>Your Bid</h6>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text">RM</span>
-                                                    <input type="number" class="form-control" name="bidding_amount"
-                                                        min="<?php echo($price); ?>" value="<?php echo($price); ?>">
+                                                    ?>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Place Your Bid</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="your-bid-card">
+                                                <div class="your-bid-card-body text-center">
+                                                    <h6>Your Bid</h6>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">RM</span>
+                                                        <input type="number" class="form-control" name="bidding_amount"
+                                                            min="<?php echo ($price); ?>" value="<?php echo ($price); ?>">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary btn-primary-style">Place Your Bid</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    <?php }else{
+                    <?php } else {
                         //Do nothing
-                    }?>
+                    } ?>
                 </div>
             </div>
         </div>

@@ -4,6 +4,12 @@ $username = "JUMPA_admin";
 $password = "2Ys0!2eo1";
 $dbname = "jumpa";
 
+// For coding on personal device purposes
+/* $servername = "localhost"; 
+$username = "root";
+$password = "";
+$dbname = "jumpa"; */
+
 // Create connection
 $conn = new mysqli($servername, $username, $password);
 

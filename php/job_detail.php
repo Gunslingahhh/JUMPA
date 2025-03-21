@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 include "connection.php";
 
-$userName=$_SESSION['username'];
+$userName = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -23,16 +23,17 @@ $userName=$_SESSION['username'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+
 </head>
 
 <body>
     <?php
-        include "topnav.php";
+    include "topnav.php";
 
-        $id = $_GET['task_id'];
-        $user_id = $_SESSION['user_id'];
+    $id = $_GET['task_id'];
+    $user_id = $_SESSION['user_id'];
 
-        $detail_check = $conn->prepare("SELECT
+    $detail_check = $conn->prepare("SELECT
                                             *,
                                             (
                                                 SELECT GROUP_CONCAT(DISTINCT u.user_id)
@@ -51,12 +52,12 @@ $userName=$_SESSION['username'];
                                                 LEFT JOIN task task_inner ON u.user_id = task_inner.user_id
                                                 WHERE j.task_id = t.task_id OR task_inner.task_id = t.task_id
                                             ));");
-            $detail_check->bind_param("i", $user_id);
-            $detail_check->execute();
-            $detail_result = $detail_check->get_result();
+    $detail_check->bind_param("i", $user_id);
+    $detail_check->execute();
+    $detail_result = $detail_check->get_result();
 
-            while ($user_row = $detail_result->fetch_assoc()) {
-                echo "
+    while ($user_row = $detail_result->fetch_assoc()) {
+        echo "
             <main>
                 <div class='employee-dashboard pb-0'>            
                     <div class='container'>
@@ -124,38 +125,38 @@ $userName=$_SESSION['username'];
                                         </div>
                                     </div>
                                 </div>"; ?>
-    <div class="container task-details-card">
-        <h5 class="mb-4 text-center">Employee</h5>
-        <div class="row details-p">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="table-light">
-                        </thead>
-                        <tbody>
-                            <?php
-                                                    $sql = $conn->prepare("SELECT *
+        <div class="container task-details-card">
+            <h5 class="mb-4 text-center">Employee</h5>
+            <div class="row details-p">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sql = $conn->prepare("SELECT *
                                                                             FROM user u
                                                                             INNER JOIN job j ON j.user_id = u.user_id
                                                                             INNER JOIN bidding b ON b.bidding_id = j.bidding_id
                                                                             WHERE j.task_id=?");
 
-                                                    $sql->bind_param("i", $id);
-                                                    if ($sql->execute()) {
-                                                        $result = $sql->get_result();
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo "<tr role='button' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>"; // Added onclick and style
-                                                            echo "
+                                $sql->bind_param("i", $id);
+                                if ($sql->execute()) {
+                                    $result = $sql->get_result();
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr role='button' data-bs-toggle='modal' data-bs-target='#" . $row['bidding_id'] . "'>"; // Added onclick and style
+                                        echo "
                                                             <td>
                                                                 <div class='rounded-circle' style='width: 40px; height: 40px; overflow: hidden; display: flex; justify-content: center; align-items: center;'>
                                                                     <img src='{$row['user_photo']}' id='user-photo' alt='Profile Picture' class='rounded-circle' width='40px' height='40px'>
                                                                 </div>
                                                             </td>";
-                                                            echo "<td>{$row['user_fullname']}</td>";
-                                                            echo "<td>RM {$row['bidding_amount']}</td>";
-                                                            echo "</tr>";
+                                        echo "<td>{$row['user_fullname']}</td>";
+                                        echo "<td>RM {$row['bidding_amount']}</td>";
+                                        echo "</tr>";
 
-                                                            echo "
+                                        echo "
                                                             <div class='modal fade' id='" . $row['bidding_id'] . "' tabindex='-1' aria-labelledby='" . $row['bidding_id'] . "Label' aria-hidden='true'>
                                                                 <div class='modal-dialog modal-dialog-centered'>
                                                                     <div class='modal-content'>
@@ -180,73 +181,73 @@ $userName=$_SESSION['username'];
                                                                     </div>
                                                                 </div>
                                                             </div>";
-                                                        }
-                                                    }
-                                                    ?>
-                        </tbody>
-                    </table>
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class='d-flex justify-content-center mt-5'>
-        <?php       
-                                        if($user_row['user_id'] == $user_id){
-                                            echo "<button type='button' class='btn btn-danger me-5' data-bs-toggle='modal' data-bs-target='#cancelJobModal'>Cancel Job</button>
+        <div class='d-flex justify-content-center mt-5'>
+            <?php
+            if ($user_row['user_id'] == $user_id) {
+                echo "<button type='button' class='btn btn-danger me-5' data-bs-toggle='modal' data-bs-target='#cancelJobModal'>Cancel Job</button>
                                             <button type='button' class='btn btn-success ms-5' data-bs-toggle='modal' data-bs-target='#completeJobModal'>Mark job as complete</button>";
-                                        }else{
-                                            //Do nothing
-                                        }                                       
-                                    ?>
-    </div>
-
-    <div class='modal fade' id='cancelJobModal' tabindex='-1' aria-labelledby='cancelJobModalLabel' aria-hidden='true'>
-        <div class='modal-dialog modal-dialog-centered'>
-            <div class='modal-content'>
-                <div class='modal-header'>
-                    <h5 class='modal-title' id='cancelJobModalLabel'>Cancel this job?</h5>
-                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                </div>
-                <div class='modal-body'>
-                    <p>Are you sure you want to cancel this job?</p>
-                    <p class="text-danger">This action cannot be undone!</p>
-                </div>
-                <div class='modal-footer justify-content-center'>
-                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>
-                    <a href='cancel_job.php?task_id=<?php echo htmlspecialchars($id); ?>' class='btn btn-danger'>Yes,
-                        cancel this job.</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class='modal fade' id='completeJobModal' tabindex='-1' aria-labelledby='completeJobModalLabel'
-        aria-hidden='true'>
-        <div class='modal-dialog modal-dialog-centered'>
-            <div class='modal-content'>
-                <div class='modal-header'>
-                    <h5 class='modal-title' id='completeJobModalLabel'>Mark job as complete?</h5>
-                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                </div>
-                <div class='modal-body'>
-                    <p>Are you sure you want to mark this job as complete?</p>
-                </div>
-                <div class='modal-footer justify-content-center'>
-                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>
-                    <a href='complete_job.php?task_id=<?php echo htmlspecialchars($id); ?>' class='btn btn-success'>Yes,
-                        mark as complete.</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </main>
-    <?php 
+            } else {
+                //Do nothing
             }
-        ?>
+            ?>
+        </div>
+
+        <div class='modal fade' id='cancelJobModal' tabindex='-1' aria-labelledby='cancelJobModalLabel' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h5 class='modal-title' id='cancelJobModalLabel'>Cancel this job?</h5>
+                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                    </div>
+                    <div class='modal-body'>
+                        <p>Are you sure you want to cancel this job?</p>
+                        <p class="text-danger">This action cannot be undone!</p>
+                    </div>
+                    <div class='modal-footer justify-content-center'>
+                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>
+                        <a href='cancel_job.php?task_id=<?php echo htmlspecialchars($id); ?>' class='btn btn-danger'>Yes,
+                            cancel this job.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='modal fade' id='completeJobModal' tabindex='-1' aria-labelledby='completeJobModalLabel'
+            aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h5 class='modal-title' id='completeJobModalLabel'>Mark job as complete?</h5>
+                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                    </div>
+                    <div class='modal-body'>
+                        <p>Are you sure you want to mark this job as complete?</p>
+                    </div>
+                    <div class='modal-footer justify-content-center'>
+                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>
+                        <a href='complete_job.php?task_id=<?php echo htmlspecialchars($id); ?>' class='btn btn-success'>Yes,
+                            mark as complete.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </main>
+    <?php
+    }
+    ?>
 
     <?php include 'footer.php'; ?>
 
