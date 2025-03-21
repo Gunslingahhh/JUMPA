@@ -92,17 +92,30 @@ if (!isset($_SESSION['user_id'])) {
 
                     <div class="form-row">
                         <label for="gender" class="form-label">Gender</label>
-                        <input type="text" class="form-control" name="gender" id="gender" required>
+                        <select class="form-control" name="gender" id="gender" required>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Others</option>
+                        </select>
                     </div>
 
                     <div class="form-row">
                         <label for="nationality" class="form-label">Nationality</label>
-                        <input type="text" class="form-control" name="nationality" id="nationality" required>
+                        <select class="form-control" name="nationality" id="nationality" required>
+                            <option>Malaysian</option>
+                            <option>Non-Malaysian</option>
+                        </select>
                     </div>
 
                     <div class="form-row">
                         <label for="agerange" class="form-label">Age Range</label>
-                        <input type="text" class="form-control" name="agerange" id="agerange" required>
+                        <div class="d-flex">
+                            <input type="number" class="form-control w-25 me-2" name="age_min" id="age_min" min="16" required placeholder="Min Age">
+                            <div class="d-flex">
+                                <p class="form-label pe-2">to</p>
+                            </div>
+                            <input type="number" class="form-control w-25" name="age_max" id="age_max" min="16" required placeholder="Max Age">
+                        </div>
                     </div>
 
                     <fieldset class="form-group">
