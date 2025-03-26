@@ -77,13 +77,13 @@ include "connection.php";
                                     while ($user_row = $detail_result->fetch_assoc()) {
                                         $taskOwner = "";
                                         if ($user_row['user_id'] == $user_id) {
-                                            $taskOwner = " (Your post)";
+                                            $taskOwner = "Your post";
                                         } else {
                                             $taskOwner = "";
                                         }
                                         echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
                                         echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($user_row['task_description']) . " " . "<span class='fw-bold bg-danger text-white rounded'>" . $taskOwner . "</span>" . "</td>";
+                                        echo "<td>" . htmlspecialchars($user_row['task_description']) . " " . "<span class='bg-danger text-white py-1 rounded fw-bold'>" . $taskOwner . "</span>" . "</td>";
                                         echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
                                         echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
                                         echo "</tr>";
