@@ -52,7 +52,7 @@ session_start();
                         placeholder="Confirm Password" required>
                     <label for="confirmpassword">Confirm Password</label>
                 </div>
-                <button type="submit" class="sign-in-button">Sign
+                <button type="submit" class="sign-in-button" name="signup-submit">Sign
                     Up</button>
                 <!-- <p class="text-center mt-2">Or sign up with:</p>
                 <div class="external-signin-links">
