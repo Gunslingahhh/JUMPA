@@ -12,7 +12,7 @@
         // Validate password confirmation
         if ($password !== $confirmpassword) {
             $_SESSION['error'] = "Passwords do not match.";
-            header("Location: ../index.php");
+            header("Location: login.php");
             exit();
         }
 
@@ -23,7 +23,7 @@
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $_SESSION['error'] = "Username already exists.";
-            header("Location: ../index.php");
+            header("Location: login.php");
             exit();
         }
 
@@ -32,11 +32,11 @@
         $stmt->bind_param("ssss", $username, $password, $salt, $icnumber);
         if ($stmt->execute()) {
             $_SESSION['message'] = "Registration successful!";
-            header("Location: ../index.php");
+            header("Location: login.php");
             exit();
         } else {
             $_SESSION['error'] = "Error registering user: " . $stmt->error;
-            header("Location: ../index.php");
+            header("Location: login.php");
             exit();
         }
 
