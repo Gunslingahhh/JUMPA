@@ -46,13 +46,13 @@ if ($result->num_rows > 0) {
     }
     else{
         $_SESSION['error'] = 'Incorrect username or password. Please try again.';
-        header("Location: ../index.php");
+        header("Location: login.php");
         exit();
     }
 } else {
     // Credentials are invalid, set an error message and redirect back to the login page
     $_SESSION['error'] = 'Incorrect username or password. Please try again.';
-    header("Location: ../index.php");
+    header("Location: login.php");
     exit();
 }
 
