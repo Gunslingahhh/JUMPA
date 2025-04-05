@@ -34,7 +34,6 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <?php include 'topnav.php'; ?>
     <main id="profilemainid">
         <section class="createprofilemain">
             <h1 class="createprofiletitle">
@@ -79,7 +78,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="mb-3">
                         <label for="contact" class="form-label">Contact Number</label>
                             <div class="d-flex">
-                            <input type="tel" class="form-control w-auto me-2" value="+60" disabled>
+                            <input type="text" class="form-control w-auto me-2" value="+60" disabled>
                             <input type="tel" class="form-control flex-grow-1" id="contact" name="contact" pattern="[0-9]{9,11}" minlength="9" maxlength="11" required>
                         </div>
                     </div>
