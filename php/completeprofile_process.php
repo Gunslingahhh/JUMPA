@@ -8,11 +8,21 @@
         $fullname = $_POST['fullname'];
         $gender = $_POST['gender'];
         $age = (int)$_POST['age'];
-        $contact = $_POST['contact'];
         $race = $_POST['race'];
         $religion = $_POST['religion'];
         $language = $_POST['language'];
         $icnumber = hash('sha256',$_POST['icnumber']);
+        $contact = $_POST['contact'] ?? '';
+
+        // Sanitize: Remove all non-digit characters
+        $contact = preg_replace('/\D/', '', $contact);
+
+        // If it starts with "0", remove it and prepend "+60"
+        if (substr($contact, 0, 1) === '0') {
+            $contact = '+60' . substr($contact, 1);
+        } else {
+            $contact = '+60' . $contact;
+        }
 
         // Check if IC Number already exists
         $icCheckerStmt = $conn->prepare("SELECT user_ic FROM user WHERE user_ic = ?");
