@@ -20,6 +20,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $user_id = $row['user_id'];
     $user_ic = $row['user_ic'];
+    $user_age = $row['user_age'];
     $salt = $row['user_salt'];
     $password = hash('sha256',$_POST['password'] . $salt);
 
@@ -32,6 +33,7 @@ if ($result->num_rows > 0) {
     if ($credentialresult->num_rows >0){
         $_SESSION['username'] = $username;
         $_SESSION['user_id'] = $user_id;
+        $_SESSION['user_age'] = $user_age;
 
         if ($user_ic == ""){
             // Redirect to the welcome page
