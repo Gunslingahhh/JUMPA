@@ -65,7 +65,9 @@ $userName = $_SESSION['username'];
         $dresscode = $user_row['task_dressCode'];
         $gender = $user_row['task_gender'];
         $nationality = $user_row['task_nationality'];
-        $agerange = $user_row['task_ageRange'];
+        $minAge = $user_row['task_minAge'];
+        $maxAge = $user_row['task_maxAge'];
+        $agerange = $user_row['task_minAge'] . " to " . $user_row['task_maxAge'];
         $muslimfriendly = ($user_row['task_muslimFriendly'] == 1 ? "Yes" : "No");
         $foodProvision = ($user_row['task_foodProvision'] == 1 ? "Yes" : "No");
         $transportProvision = ($user_row['task_transportProvision'] == 1 ? "Yes" : "No");
@@ -310,7 +312,7 @@ $userName = $_SESSION['username'];
                     $biddingForm->execute();
                     $biddingFormResult = $biddingForm->get_result();
 
-                    if ($user_id != $userid && $biddingFormResult->num_rows < 1) { ?>
+                    if ($user_id != $userid && $biddingFormResult->num_rows < 1 && $_SESSION['user_age'] >= $minAge && $_SESSION['user_age'] <= $maxAge) { ?>
                         <div class="col-12">
                             <div class="bidding-form-card">
                                 <h5 class="mb-3">Place Your Bid</h5>
