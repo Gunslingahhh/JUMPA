@@ -85,17 +85,27 @@ if (!isset($_SESSION['user_id'])) {
 
                     <div class="mb-3">
                         <label for="race" class="form-label">Race</label>
-                        <input type="text" class="form-control" id="race" name="race" required>
+                        <select class="form-control" id="race" name="race" required>
+                            <option value="Malaysian">Malaysian</option>
+                            <option value="Non-Malaysian">Non-Malaysian</option>
+                        </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="religion" class="form-label">Religion</label>
-                        <input type="text" class="form-control" id="religion" name="religion" required>
+                        <select class="form-control" id="religion" name="religion" required>
+                            <option value="Muslim">Muslim</option>
+                            <option value="Non-Muslim">Non-Muslim</option>
+                        </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="language" class="form-label">Language</label>
-                        <input type="text" class="form-control" id="language" name="language" required>
+                        <select class="form-control" id="language" name="language" required>
+                            <option value="Malay">Malay</option>
+                            <option value="English">English</option>
+                            <option value="Mandarin">Mandarin</option>
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-primary-style">Submit</button>
