@@ -68,45 +68,39 @@ include "connection.php";
 
                 <!-- Tab Content -->
                 <div class="tab-content" id="JobsTabsContent">
-                    <!-- Priority Tab -->
-                    <div class="tab-pane fade show active mb-3" id="priority" role="tabpanel"
-                        aria-labelledby="priority-tab">
-                        <div class="table-responsive">
-                            <table class="table table-hover priority-Jobs-table">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Location</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $detail_check = $conn->prepare("SELECT t.*
-                                                                    FROM task t
-                                                                    WHERE t.task_status=0;");
-                                    $detail_check->execute();
-                                    $detail_result = $detail_check->get_result();
+                    <div class="row">
+                        <?php
+                        $detail_check = $conn->prepare("SELECT t.* FROM task t WHERE t.task_status=0;");
+                        $detail_check->execute();
+                        $detail_result = $detail_check->get_result();
 
-                                    while ($user_row = $detail_result->fetch_assoc()) {
-                                        $taskOwner = "";
-                                        if ($user_row['user_id'] == $user_id) {
-                                            $taskOwner = "Your post";
-                                        } else {
-                                            $taskOwner = "";
-                                        }
-                                        echo "<tr onclick='window.location.href = \"jobboard_detail.php?task_id=" . $user_row['task_id'] . "\"' style='cursor: pointer;'>";
-                                        echo "<td>" . htmlspecialchars($user_row['task_title']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($user_row['task_description']) . " " . "<span class='bg-danger text-white py-1 rounded fw-bold'>" . $taskOwner . "</span>" . "</td>";
-                                        echo "<td>" . htmlspecialchars($user_row['task_date']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($user_row['task_location']) . "</td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        while ($user_row = $detail_result->fetch_assoc()) {
+                            $taskOwner = "";
+                            if ($user_row['user_id'] == $user_id) {
+                                $taskOwner = "Your post";
+                            } else {
+                                $taskOwner = "";
+                            }
+                            echo '<div class="col-xs-12 col-md-4 col-lg-3 pb-3">';
+                            echo '    <div class="card h-100">'; // h-100 to ensure equal height inside grid
+                            echo '        <div class="w-100" style="height: 190px; background-image: url(\'' . htmlspecialchars($user_row['task_photo']) . '\'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>';
+                            echo '        <div class="card-body d-flex flex-column justify-content-between">';
+                            echo '            <div>';
+                            echo '                <h5 class="card-title truncate-multiline">' . htmlspecialchars($user_row['task_title']) . '</h5>';
+                            echo '                <p class="card-text truncate-multiline">' . htmlspecialchars($user_row['task_description']) . '</p>';
+                            echo '            </div>';
+                            echo '            <div class="d-flex justify-content-between align-items-center mt-2">';
+                            echo '                <a href="jobboard_detail.php?task_id=' . $user_row['task_id'] . '" class="btn btn-outline-primary btn-sm">View Details &nbsp;<i class="fas fa-arrow-right"></i></a>';
+                                if ($user_row['user_id'] == $_SESSION['user_id']) {
+                                    echo '<a href="editpost.php?task_id=' . $user_row['task_id'] . '" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit"></i>&nbsp;Edit</a>';
+                                }
+                            echo '            </div>';
+                            echo '        </div>';
+                            echo '    </div>';
+                            echo '</div>';
+                            
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
