@@ -11,6 +11,7 @@
     --gap-medium: 2rem;
     --gap-large: 4rem;
     --padding-base: 1.5rem;
+    --padding-small: .5rem;
     --margin-base: 1.5rem;
     --border-radius-base: 10px;
     --shadow-base: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -26,6 +27,15 @@ body {
     font-family:var(--font-primary);
     line-height: 1.6;
     background-color: #fff;
+}
+
+.truncate-multiline {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* LOGIN */
