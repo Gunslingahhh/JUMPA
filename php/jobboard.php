@@ -50,7 +50,7 @@ include "connection.php";
                 <div class="d-flex justify-content-between align-items-center my-4">
                     <h4 class="mx-5 text-center">Job Posts</h4>
                     <div class="createpost-div-link mx-5">
-                        <a href="createpost.php" class="btn btn-outline-success px-4 py-2">Create Post</a>
+                        <a href="createpost.php" class="btn btn-outline-success px-4 py-2">Create Post &nbsp; <i class="fas fa-plus"></i></a>
                     </div>
 
                 </div>
