@@ -15,7 +15,8 @@
         $dresscode = $_POST['dresscode'];
         $gender = $_POST['gender'];
         $nationality = $_POST['nationality'];
-        $agerange = $_POST['agerange'];
+        $minAge = $_POST['minAge'];
+        $maxAge = $_POST['maxAge'];
         $muslimfriendly = $_POST['muslimfriendly'];
         $foodProvision = $_POST['foodprovision'];
         $transportProvision = $_POST['transportprovision'];
@@ -38,11 +39,12 @@
             task_dressCode,
             task_gender,
             task_nationality, 
-            task_ageRange, 
+            task_minAge, 
+            task_maxAge, 
             task_muslimFriendly, 
             task_foodProvision, 
             task_transportProvision, 
-            user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         // Handle file upload
         $allowed_types = array('jpg', 'png', 'jpeg');
@@ -73,7 +75,7 @@
         }
 
 
-        $stmt->bind_param("sssssssiisssssiii",
+        $stmt->bind_param("sssssssiissssssiii",
                             $tasktitle, 
                             $taskdescription, 
                             $taskphoto,
@@ -81,12 +83,13 @@
                             $taskduration, 
                             $tasklocation, 
                             $toolsrequired, 
-                            $pax, 
-                            $price, 
-                            $dresscode, 
-                            $gender, 
-                            $nationality, 
-                            $agerange, 
+                            $pax,
+                            $price,
+                            $dresscode,
+                            $gender,
+                            $nationality,
+                            $minAge,
+                            $maxAge,
                             $muslimfriendly,
                             $foodProvision,
                             $transportProvision,
