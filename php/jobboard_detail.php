@@ -95,9 +95,9 @@ $userName = $_SESSION['username'];
                                 <div class="row">
                                     <!-- Picture -->
                                     <div class="col-12 mb-4 text-center">
-                                        <div class="container form-control w-100 h-25 border-0">
+                                        <div class="container form-control w-100 border-0">
                                             <img id="task-photo-container" src="<?php echo ($taskphoto); ?>"
-                                                class="img-fluid rounded shadow" alt="Task Photo">
+                                                class="img-fluid rounded shadow w-50" alt="Task Photo">
                                         </div>
                                     </div>
 

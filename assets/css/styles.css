@@ -31,7 +31,8 @@ body {
 
 .truncate-multiline {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp:2;
+    line-clamp: 2;
     /* Number of lines to show */
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -1260,7 +1261,7 @@ h4, h5 {
 #task-photo-container{
     object-fit: cover;
     background-color: white;
-    height: 200px;
+    height: 300px;
 }
 
 /* Media Queries */
