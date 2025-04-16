@@ -1259,7 +1259,7 @@ h4, h5 {
 }
 
 #task-photo-container{
-    object-fit: cover;
+    object-fit: contain;
     background-color: white;
     height: 300px;
 }
