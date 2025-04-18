@@ -187,7 +187,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Hidden input for task_id -->
             <input type="hidden" name="task_id" value="<?= $task_id ?>">
             <div class="my-1">
-              <img id="task-photo" class="rounded border border-secondary" width="500" height="300"
+              <img id="task-photo" class="rounded border border-secondary" style="object-fit: contain; background-color: white;" width="500" height="300"
                 src="<?= $taskphoto ?>" role="button">
             </div>
             <input type="file" id="task-photo-filename" name="task-photo-filename" accept="image/jpeg, image/png, image/jpg" hidden>
